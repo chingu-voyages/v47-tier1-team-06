@@ -1,0 +1,16 @@
+h1 {
+  color: black;
+}
+
+h2 {
+  color:blueviolet;
+  border: 2px solid black;
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  align-items: baseline;
+  min-height: 800px;
+  position: relative;
+  border-radius: 25px; 
+}

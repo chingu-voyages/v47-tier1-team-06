@@ -180,31 +180,91 @@ const tasks = [
 		]
 	}
 ];
-//get root div id
-const root = document.getElementById("root");
-//insert text to root div
-root.innerHTML = "Catagory Names:";
-//append new element to root div function
-const genElement = (element)=> root.appendChild(element);
-//get all tasks object
-const getTasks = ()=> tasks;
-console.log(getTasks());
-//get task per index
-const getTask = (id)=> getTasks()[id];
-console.log(getTask(0));
-//iterate through each index catagory name and lower case
-const categoryName = getTasks().map((t)=> t);
-console.log(categoryName);
-//const categoryNames = getTasks().map((t)=> '<li>' + `${t.categoryName.toLowerCase()}` + '</li>');
-//console.log(categoryNames);
-//generate new div element
-const tasksClass = document.createElement("ul");
-//append class name to new div tag
-tasksClass.className = 'tasksClass';
-//apply catagory names to div element
-tasksClass.innerHTML = categoryName;
-//render the element on the page
-genElement(tasksClass);
+
+const test = (t)=> {
+	try{
+		console.log(t);
+	}catch(error){
+		console.log(error);
+	};
+};
+
+function hideAll(){
+	const forms = document.getElementsByClassName("forms");
+	
+	test(forms.style);
+};
+function showAdd() {
+	console.log('inside showAdd');
+	// const addForm = document.getElementsByClassName("addForm");
+	// const show = ()=>addForm[0].style.visibility = "visible";
+	// show(addForm);
+	hideAll();
+}
+
+const showEdit = ()=> {
+	console.log('edit button clicked')
+
+};
+
+const showDelete = ()=> {
+	console.log('delete button clicked')
+
+};
+
+function addTask(){
+	console.log('inside task note');
+	addElement();
+
+};
+
+function addElement(){
+	console.log('inside addElement');
+	const tasks = document.querySelector(".tasks");
+	const task = document.createElement("div");
+	task.className="task";
+	tasks.appendChild(task);
+    test(task);
+};
 
 
 
+
+
+/*
+try{
+	//get root div id
+	const root = document.getElementById("root");
+	//insert text to root div
+	root.innerHTML = "Catagory Names:";
+	//append new element to root div function
+	const genElement = (element)=> root.appendChild(element);
+	//get all tasks object
+	const getTasks = ()=> tasks.slice().map((t)=> t.categoryName);
+	const categoryName = getTasks();
+	//console.log(categoryName);
+	//get task per index
+	const getTask = (id)=> getTasks()[id];
+	//iterate through each index catagory name and lower case
+	const categoryNames = categoryName.map((t)=> '<li>' + `${t.categoryName.toLowerCase()}` + '</li>');
+	//console.log(categoryNames);
+	//generate new div element
+	const tasksClass = document.createElement("ul");
+	//append class name to new div tag
+	tasksClass.className = 'tasksClass';
+	//apply catagory names to div element
+	tasksClass.innerHTML = categoryNames;
+	//render the element on the page
+	//genElement(tasksClass);
+	
+	
+	// function generateTaskElement(){
+	// 	console.log('inside generateTaksElement function');
+	// }
+	
+	
+
+}catch(error){
+	console.log(error)
+};
+*/

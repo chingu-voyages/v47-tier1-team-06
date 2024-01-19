@@ -1,0 +1,40 @@
+.forms{
+    visibility: hidden;
+}
+.container{
+    
+    width: 600px;
+    height: 600px;
+}
+
+.taskColom{
+    margin-left: auto;
+    margin-right: auto;
+    width: 220px;
+    height: 500px;
+}
+.formColom{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(204, 206, 215);
+    width: 220px;
+    height: 500px;
+}
+.tasks{
+    height: 460px;
+    width: max-width;
+    background-color: rgb(204, 206, 215);
+}
+.task{
+    height: 60px;
+    width: max-width;
+    background-color: rgb(94, 108, 170);
+}
+.addForm{
+    width: max-width;
+    /* background-color: blueviolet; */
+    visibility: hidden;
+}
+#tNameInput{
+    width: max-width;
+}

@@ -1,92 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Task App</title>
-
-    <!--JQUERY LIBRARY -->
-    <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
-
-    <!-- FONTAWSOME -->
-    <!-- <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script> -->
-
-    <!-- BOOTSTRAP CSS -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Tasks App</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
     />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <!-- <link rel="stylesheet"href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.2/css/bootstrap.min.css" > -->
+    <link rel="stylesheet" href="style.css" />
 
-    <!-- branch: maya-work -->
-    <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
-    <!-- branch: maya-work -->
-    <script defer src="./src/js/main.js"></script>
-    
   </head>
-
+  
   <body>
-    <!-- branch maya-work prototype -->
-    <div class="container p-5 my-5 bg-dark text-white">
-      <div class="row">
-        <div class="taskColom col-sm-8 bg-light text-dark">
-          taskColom
-          <div class="tasks"></div>
-        </div>
-        <div class="formColom col-sm-8 text-dark">
-          formColom
-          <div class="menu">
-            <nav class="navbar navbar-expand-sm bg-light navbar-light">
-              <div class="container-fluid">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
-                    <a class="nav-link" onClick="showAdd()" href="#">Add</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" onClick="showEdit()" href="#">Edit</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" onClick="showDelete()" href="#"
-                      >Delete</a
-                    >
-                  </li>
-                </ul>
-              </div>
-            </nav>
-            <div class="addForm forms">
-              <div class="mb-3 mt-3">
-                <label for="text" class="form-label">Title</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="tname"
-                  placeholder="Write the title"
-                  name="tname"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="text" class="form-label">Note</label>
-                <textarea
-                  class="form-control"
-                  rows="5"
-                  id="tnote"
-                  name="tnote"
-                  placeholder="Write your important note"
-                  style="resize: none"
-                ></textarea>
-              </div>
-              <button
-                onClick="addTask()"
-                id="addTask"
-                class="btn btn-light"
-                placeholder="6 sets of 12 reps"
-              >
-                Save
-              </button>
-            </div>
-          </div>
-        </div>
+    <div class="header">
+      <h1>Daily Task App</h1>
+      <button>Add Event</button>
+    </div>
+    <div class="times">
+      <div class="col-2">
+        <ul class="list-unstyled">
+          <li class="mb-5">Time</li>
+          <li class="mb-5">12:00 PM</li>
+          <li class="mb-5">1:00 PM</li>
+          <li class="mb-5">2:00 PM</li>
+          <li class="mb-5">3:00 PM</li>
+          <li class="mb-5">4:00 PM</li>
+          <li class="mb-5">5:00 PM</li>
+          <li class="mb-5">6:00 PM</li>
+          <li class="mb-5">7:00 PM</li>
+          <li class="mb-5">8:00 PM</li>
+          <li class="mb-5">9:00 PM</li>
+          <li class="mb-5">10:00 PM</li>
+          <li class="mb-5">11:00 PM</li>
+          <li class="mb-5">12:00 AM</li>
+          <li class="mb-5">1:00 AM</li>
+          <li class="mb-5">2:00 AM</li>
+          <li class="mb-5">3:00 AM</li>
+          <li class="mb-5">4:00 AM</li>
+          <li class="mb-5">5:00 AM</li>
+          <li class="mb-5">6:00 AM</li>
+          <li class="mb-5">7:00 AM</li>
+          <li class="mb-5">8:00 AM</li>
+          <li class="mb-5">9:00 AM</li>
+          <li class="mb-5">10:00 AM</li>
+          <li class="mb-5">11:00 AM</li>
+        </ul>
       </div>
     </div>
-    <!-- end of prototype-->
+
+    <ul class="weekdays">
+      <li>Mon</li>
+      <li>Tues</li>
+      <li>Weds</li>
+      <li>Thurs</li>
+      <li>Fri</li>
+      <li>Sat</li>
+      <li>Sun</li>
+    </ul>
+
   </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"
+  ></script>
 </html>

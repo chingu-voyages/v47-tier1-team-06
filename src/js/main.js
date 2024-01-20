@@ -162,16 +162,15 @@ const test = (t) => {
 };
 
 function hideAll() {
-  const forms = document.getElementsByClassName("forms");
 
-  test(forms.style);
 }
+
 function showAdd() {
   console.log("inside showAdd");
-  // const addForm = document.getElementsByClassName("addForm");
-  // const show = ()=>addForm[0].style.visibility = "visible";
-  // show(addForm);
-  hideAll();
+  const addForm = document.getElementsByClassName("addForm");
+  const show = ()=>addForm[0].style.visibility = "visible";
+  show(addForm);
+
 }
 
 const showEdit = () => {

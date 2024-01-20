@@ -1,16 +1,45 @@
 h1 {
   color: black;
+  text-align: center;
+  padding-top: 20px;
 }
 
-h2 {
+.header {
+  text-align: center;
+  
+}
+
+button {
+  margin-top: 2em;
+  width: 8%;
+
+}
+
+.weekdays {
+  padding: 5em;
+  
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13%;
+  text-align: center;
   color:blueviolet;
   border: 2px solid black;
-  margin: 100px;
-  display: flex;
-  flex-direction: column;
-  width: 15%;
-  align-items: baseline;
-  min-height: 800px;
-  position: relative;
+  height: 1805px;
   border-radius: 25px; 
 }
+
+
+
+.col-2 {
+  float: left;
+  border: 2px solid black;
+  color:blueviolet;
+  width: 6%;
+  border-radius: 25px;
+  text-align: center;
+  margin-top: 4.9em;
+  margin-left: 5em;
+}
+

@@ -20,12 +20,12 @@
   height: 500px;
 }
 .tasks {
-  height: 460px;
+  height: 100px;
   width: max-width;
-  background-color: rgb(204, 206, 215);
+  /* background-color: rgb(204, 206, 215); */
 }
 .task {
-  height: 60px;
+  height: auto;
   width: max-width;
   background-color: rgb(94, 108, 170);
 }
@@ -36,4 +36,23 @@
 }
 #tNameInput {
   width: max-width;
+}
+
+.card{
+  height: auto;
+}
+.card-body{
+  padding-left: 0px;
+  padding-top: 10px;
+  line-height: 0.0;
+}
+.card-title{
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: auto;
+}
+.card-text{
+  font-size: 10px;
+  font-weight: 300;
+  margin-bottom: auto;
 }

@@ -183,16 +183,46 @@ const showDelete = () => {
 
 function addTask() {
   console.log("inside task note");
-  addElement();
+  save();
 }
 
-function addElement() {
-  console.log("inside addElement");
-  const tasks = document.querySelector(".tasks");
-  const task = document.createElement("div");
-  task.className = "task";
-  tasks.appendChild(task);
-  test(task);
+function form(){
+  const name = document.getElementById("tname").value;
+  const note = document.getElementById("tnote").value;
+  const date = "01/19/2024";
+  const time = "10:18PM";
+  addElement(name, note, date, time);
+};
+
+function save(){
+  console.log("save button clicked");
+  form();
+};
+
+function addElement(name,note,date,time) {
+  console.log("inside add element function");
+  
+  const data1 = 
+        "<h1 class='card-title'>"+`${name}`+
+        "</h1><p class='card-text'>"+`${note}`+
+        "</p><p class='card-text'>"+`${date}`+
+        "</p><p class='card-text'>"+`${time}`+
+        "</p>";
+
+  const data2 = 
+  "<h1 class='card-title'>"+`${name} ${date} ${time}`+
+  "</h1><p class='card-text'>"+`${note}`+"</p>";
+
+  const [tasksDiv] = document.getElementsByClassName('tasks');
+  const card = document.createElement('div');
+  card.className = "card";
+  tasksDiv.appendChild(card);
+
+  const cardBody = document.createElement('div');
+  cardBody.className = "card-body";
+  card.appendChild(cardBody);
+  card.innerHTML = data2;
+
 }
 
 /*

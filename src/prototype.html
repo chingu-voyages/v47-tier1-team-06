@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task App</title>
+
+    <!--JQUERY LIBRARY -->
+    <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
+
+    <!-- FONTAWSOME -->
+    <!-- <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script> -->
+
+    <!-- BOOTSTRAP CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- branch: maya-work -->
+    <link rel="stylesheet" type="text/css" href="./src/style/style.css" />
+    <!-- branch: maya-work -->
+    <script defer src="./src/js/main.js"></script>
+  </head>
+
+  <body>
+    <!-- branch maya-work prototype -->
+    <div class="container p-5 my-5 bg-dark text-white">
+      <div class="row">
+        <div class="taskColom col-sm-8 bg-light text-dark">
+          taskColom
+          <div class="tasks"></div>
+        </div>
+        <div class="formColom col-sm-8 text-dark">
+          formColom
+          <div class="menu">
+            <nav class="navbar navbar-expand-sm bg-light navbar-light">
+              <div class="container-fluid">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" onClick="showAdd()" href="#">Add</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" onClick="showEdit()" href="#">Edit</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" onClick="showDelete()" href="#"
+                      >Delete</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <div class="addForm forms">
+              <div class="mb-3 mt-3">
+                <label for="text" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="tname"
+                  placeholder="Write the title"
+                  name="tname"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="text" class="form-label">Note</label>
+                <textarea
+                  class="form-control"
+                  rows="5"
+                  id="tnote"
+                  name="tnote"
+                  placeholder="Write your important note"
+                  style="resize: none"
+                ></textarea>
+              </div>
+              <button
+                onClick="addTask()"
+                id="addTask"
+                class="btn btn-light"
+                placeholder="6 sets of 12 reps"
+              >
+                Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of prototype-->
+  </body>
+</html>

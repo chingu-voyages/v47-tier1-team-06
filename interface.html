@@ -9,7 +9,7 @@
     <!-- <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> -->
 
     <!-- FONTAWSOME -->
-    <!-- <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script> -->
+    <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script>
 
     <!-- BOOTSTRAP CSS -->
     <!-- <link
@@ -22,7 +22,40 @@
     <script defer src="interface.js"></script>
   </head>
   <body>
+    <main class="app">
+        <section class="topOption_menu">
+            <p>top option menu</p>
+        </section>
 
+        <section class="addTask_menu">
+            <p>calender and add task button</p>
+        </section>
+
+        <section class="calender_menu">
+            <p>calender area</p>
+        </section>
+
+        <section class="task_list">
+            <p>Task</p>
+            <div class="list" id="todo-list">
+                <div class="todo-item done">
+                    <label>
+                        <i class="fa-solid fa-thumbtack fa-2xs" style="color: #1e3050;"></i>
+                        <input type="text" value="hit the gym" readonly />
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <section class="bottomOption_menu">
+            <p>bottom option menu</p>
+            <i class="fa-solid fa-house fa-2xs"></i>
+            <i class="fa-regular fa-calendar-days fa-2xs"></i>
+            <i class="fa-regular fa-bell fa-2xs"></i>
+            <i class="fa-solid fa-magnifying-glass fa-2xs"></i>
+        </section>
+
+    </main>
     
   </body>
 </html>

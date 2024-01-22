@@ -1,45 +1,54 @@
-h1 {
-  color: black;
-  text-align: center;
-  padding-top: 20px;
-}
-
-.header {
-  text-align: center;
-  
-}
 
 button {
-  margin-top: 2em;
-  width: 8%;
-
-}
-
-.weekdays {
-  padding: 5em;
+  color:#F15454; 
+  padding-top: 20px;
   
-}
+ }
 
-.weekdays li {
-  display: inline-block;
-  width: 13%;
-  text-align: center;
-  color:blueviolet;
+ .firstbox {
+  color: #F15454;
   border: 2px solid black;
-  height: 1805px;
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  align-items: baseline;
+  min-height: 800px;
+  position: relative;
   border-radius: 25px; 
+  text-align: center;
+  /* background-color: ; */
+ }
+h3{
+  padding-top: 100px ;
+}
+h4{
+  color: white;
+  padding-top: 30px;
+}
+ 
+.list{
+  padding-top: 30px;
 }
 
+p{
 
-
-.col-2 {
-  float: left;
+}
+.secondbox{
+  color:white;
   border: 2px solid black;
-  color:blueviolet;
-  width: 6%;
-  border-radius: 25px;
+  margin: 100px;
+  /* display: block;
+  flex-direction: row; */
+  width: 30%;
+  align-items: baseline;
+  min-height: 800px;
+  /* position: relative; */
+  border-radius: 25px; 
   text-align: center;
-  margin-top: 4.9em;
-  margin-left: 5em;
+  margin-left: 900px;
+  margin-bottom: 2000px;
+  background-color: #F15454;
+  
 }
 

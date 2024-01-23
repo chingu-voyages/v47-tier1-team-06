@@ -1,8 +1,18 @@
 
 button {
   color:#F15454; 
-  padding-top: 20px;
+  padding-top: 40px;
+  margin-left: 300px;
+padding-top: 50px;
   
+  
+ }
+
+ .btn-group {
+  color: #F15454;
+  background-color: #F15454;
+  border-top-left-radius: 10;
+border-bottom-left-radius: 10;
  }
 
  .firstbox {
@@ -14,10 +24,14 @@ button {
   width: 30%;
   align-items: baseline;
   min-height: 800px;
-  position: relative;
+  /* position: relative; */
   border-radius: 25px; 
   text-align: center;
   /* background-color: ; */
+ }
+
+ h1{
+  padding-top: 45px;
  }
 h3{
   padding-top: 100px ;
@@ -30,6 +44,13 @@ h4{
 .list{
   padding-top: 30px;
 }
+
+.pagination > li > a {
+ color:#F15454 ;
+ margin-top: 30px;
+ 
+}
+
 
 p{
 

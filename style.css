@@ -16,7 +16,7 @@ border-bottom-left-radius: 10;
  }
 
  .firstbox {
-  color: #F15454;
+  color: black;
   border: 2px solid black;
   margin: 100px;
   display: flex;
@@ -31,6 +31,7 @@ border-bottom-left-radius: 10;
  }
 
  h1{
+  color: #F15454;
   padding-top: 45px;
  }
 h3{
@@ -52,9 +53,7 @@ h4{
 }
 
 
-p{
 
-}
 .secondbox{
   color:white;
   border: 2px solid black;
@@ -73,3 +72,63 @@ p{
   
 }
 
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 20px;
+}
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.calendar-day {
+  border: 1px solid #ddd;
+  background-color:white;
+  /* box-shadow: 0 0 10px #F4AFAF; */
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.task-container {
+
+  max-width: 200px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0 0 10px  #F4AFAF;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.task-date {
+  font-size: 16px;
+  font-weight: bold;
+  color: #BCBCBC;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+.calendar-day:hover {
+  background-color: #F15454; /* Change color on hover */
+}
+
+
+.task-item {
+  cursor: pointer;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-name {
+  flex-grow: 1;
+}

@@ -14,7 +14,9 @@
     <div class="firstbox">
     
      <h1>January 2024</h1>
-     <div><button type="button" class="btn btn-primary" color="#F15454">Add task</button> </div>
+     <div>
+      <button type="button" class="btn btn-primary"  color="#F15454" onclick="addNewTask()">Add task</button>
+ </div>
      <!--button for calendar scroll-->
      <!-- <div class="btn-group">
         <button type="button" class="btn btn-primary">Apple</button>
@@ -24,17 +26,14 @@
       
       <ul class="pagination" class="rounded-4">
         <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 1</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 2</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Jan 3</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 1')">Jan 1</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 2')">Jan 2</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 3')">Jan 3</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 4')">Jan 4</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 5')">Jan 5</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 6')">Jan 6</a></li>
         <li class="page-item"><a class="page-link" href="#">Next</a></li>
       </ul>
-
-      
-    
      <h3>Task</h3>
      <ul className='list'>
         <li>
@@ -60,6 +59,6 @@
     </div>
     
   
-
+<script src="App.js"></script>
   </body>
 </html>

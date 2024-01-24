@@ -1,4 +1,7 @@
-
+function showTaskDetails(taskName, taskDate) {
+    const detailsContainer = document.getElementById('taskDetails');
+    detailsContainer.innerHTML = `<p>Task: ${taskName}</p><p>Date: ${taskDate}</p>`;
+}
 function addNewTask() {
     const task = prompt("Enter a new task");
     if (task) {
@@ -19,3 +22,4 @@ function addTaskForDate(date) {
         addTaskToList(task + " - " + date);
     }
 }
+

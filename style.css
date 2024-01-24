@@ -1,26 +1,22 @@
-
-button {
-  color:#F15454; 
-  padding-top: 40px;
+.btn-primary {
+  background-color:#F15454;
+  /* padding-top: 40px; */
   margin-left: 300px;
-padding-top: 50px;
-  
-  
- }
-
- .btn-group {
-  color: #F15454;
-  background-color: #F15454;
-  border-top-left-radius: 10;
-border-bottom-left-radius: 10;
- }
+/* margin-bottom: 80px; */
+border: #F15454;
+height: 40px;
+font-size: small;
+  }
+  .btn-primary:hover {
+    background-color: #F15454;
+  }
 
  .firstbox {
   color: black;
   border: 2px solid black;
   margin: 100px;
-  display: flex;
-  flex-direction: column;
+  /* display: flex;
+  flex-direction: column; */
   width: 30%;
   align-items: baseline;
   min-height: 800px;
@@ -32,8 +28,12 @@ border-bottom-left-radius: 10;
 
  h1{
   color: #F15454;
-  padding-top: 45px;
+/* padding-top: 200px; */
+  font-size: large;
+  padding-right: 300px;
+  padding-top: 30px;
  }
+
 h3{
   padding-top: 100px ;
 }
@@ -44,12 +44,6 @@ h4{
  
 .list{
   padding-top: 30px;
-}
-
-.pagination > li > a {
- color:#F15454 ;
- margin-top: 30px;
- 
 }
 
 
@@ -84,6 +78,7 @@ body {
   gap: 10px;
   max-width: 600px;
   margin: 0 auto;
+  padding-top: 30px;
 }
 
 .calendar-day {

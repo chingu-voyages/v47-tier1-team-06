@@ -9,14 +9,36 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <body>
   
     <div class="firstbox">
-     <button type="button" class="btn btn-primary" color="#F15454">Add task</button>
+    
      <h1>January 2024</h1>
-     <h2>Jan 13 Jan 14 Jan 15</h2>
+     <div>
+      <button type="button" class="btn btn-primary"  color="#F15454" onclick="addNewTask()">Add task</button>
+ </div>
+     <!--button for calendar scroll-->
+     <!-- <div class="btn-group">
+        <button type="button" class="btn btn-primary">Apple</button>
+        <button type="button" class="btn btn-primary">Samsung</button>
+        <button type="button" class="btn btn-primary">Sony</button>
+      </div> -->
+      
+      <!--Begems -->
+      <!-- <ul class="pagination" class="rounded-4">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 1')">Jan 1</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 2')">Jan 2</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 3')">Jan 3</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 4')">Jan 4</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 5')">Jan 5</a></li>
+        <li class="page-item"><a class="page-link" href="#" onclick="addTaskForDate('Jan 6')">Jan 6</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
      <h3>Task</h3>
-     <ul className='list'>
+     <ul class='list'>
         <li>
           &#10003; Task 1
         </li>
@@ -26,22 +48,70 @@
         <li>
           &#10003; Task 3
         </li>
-      </ul>
-<!--      
-      <div class="secondbox">
-        <h2>Create new stask</h2>
-        <h3>Title</h3>
-        <h4>Description</h4>
-        <h5>Date</h5>
-        <p>January 21</p>
+      </ul> -->
 
-    </div>
-  -->
+      <div class="calendar-container">
+        <div class="calendar-day" onclick="showTaskDetails('Work out', '23 January')">
+            <p class="task-date">23rd Tue</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
+        <!-- Repeat for other days... -->
+    
+        <!-- Example for empty day -->
+        <div class="calendar-day" onclick="showTaskDetails('Dinner with mom', '24th January')">
+            <p class="task-date">24 Wed</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
+        <div class="calendar-day" onclick="showTaskDetails('Study, pick up dry cleaning', '25th January')">
+            <p class="task-date">25 Thu</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
+        <div class="calendar-day" onclick="showTaskDetails('Go swimming', '26th January')">
+            <p class="task-date">26 Fri</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
+        <div class="calendar-day" onclick="showTaskDetails('Work', '27th January')">
+            <p class="task-date">27 Sat</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
+        <div class="calendar-day" onclick="showTaskDetails('Study, pick up dry cleaning', '28th January')">
+            <p class="task-date">28 Sun</p>
+            <ul class="task-list">
+                <li class="task-item">
+                    <span class="task-name">Show</span>
+                </li>
+            </ul>
+        </div>
     </div>
     
-  <section class="container">
+    <div id="taskDetails"></div>
     
-  </section>
-
+    
+    
+   
+    </div>
+    
+  
+<script src="App.js"></script>
   </body>
 </html>

@@ -4,7 +4,7 @@
   --primary: #f15454;
   --lightPink: #f4afaf;
   --light: #e5e5e5;
-  --whiteBg: #fff;
+  --background: #FFF;
   --grey: #888;
   --hover: #2d984c;
   --dark: #313154;
@@ -84,7 +84,8 @@ i {
 }
 
 .addtask .addButton {
-  height: 3rem;
+  height: 4rem;
+  width: 7rem;
   border-radius: 0.5rem;
   margin-right: 0.5rem;
   padding-left: 0.5rem;
@@ -95,6 +96,7 @@ i {
 .addButton {
   color: #fff;
   cursor: pointer;
+  font-size: 18px;
 }
 
 .addButton button {
@@ -106,8 +108,6 @@ i {
 
 .calender_menu {
   display: flex;
-  margin-top: 0;
-  padding-top: 0;
   flex-direction: column;
   align-items: center;
   justify-content: center;

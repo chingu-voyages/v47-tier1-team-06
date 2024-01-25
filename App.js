@@ -1,7 +1,11 @@
+
 function showTaskDetails(taskName, taskDate) {
     const detailsContainer = document.getElementById('taskDetails');
-    detailsContainer.innerHTML = `<p>Task: ${taskName}</p><p>Date: ${taskDate}</p>`;
+    const taskItem = document.querySelector('#resizableInput');
+    taskItem.value = "Task: " + `${taskName}` + " Date: " + `${taskDate}`;
+    
 }
+
 function addNewTask() {
     const task = prompt("Enter a new task");
     if (task) {

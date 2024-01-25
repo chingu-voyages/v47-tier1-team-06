@@ -1,3 +1,4 @@
+
 /* color variables */
 :root {
   --primary: #f15454;
@@ -127,7 +128,6 @@ i {
   max-width: 600px;
   margin: 0 auto;
   padding-top: 1px;
-}
 
 .calendar-day {
   border: 1px solid #ddd;
@@ -220,7 +220,6 @@ textarea {
   background-color: var(--primary);
   border-radius: 50%;
   color: #fff;
-}
 
 .footer {
   position: fixed;

@@ -18,9 +18,7 @@
     /> -->
 
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script defer src="interface.js"></script>
-    <script defer src="App.js"></script>
-    
+
   </head>
 
   <body>
@@ -33,13 +31,14 @@
                 <i class="fa-solid fa-magnifying-glass fa-xl"></i>
             </div>
         </section>
-
         <section class="addTask_menu">
             <div class="currentMonth">
-                <h1>January 2024</h1>
-            </div>
+    <button id="prevWeek" onclick="navigateWeek(-1)">&lt;</button>
+    <h1 id="currentMonthYear">January 2024</h1>
+    <button id="nextWeek" onclick="navigateWeek(1)">&gt;</button>
+      </div>
             <div class="addtask">
-                <button class="addButton" onclick="addNewTask()">+ add task</button>
+            <button class="addButton" onclick="addNewTask()">+ add task</button>
             </div>
         </section>
 
@@ -94,10 +93,8 @@
                         </li>
                     </ul>
                 </div>
-            
             </div>
         </section>
-
         <section class="task_list">
             <h2>Task</h2>
                 <div class="todo-item done">
@@ -107,15 +104,16 @@
                     </label>
                 </div>
         </section>
-
+  </main>   
         <footer class="footer">
             <section class="bottomOption_menu">
                 <div class="home bottomOption">
                     <i class="fa-solid fa-house fa-xl"></i>
                 </div>
-                <div class="calendar bottomOption">
-                    <i class="fa-regular fa-calendar-days fa-xl"></i>
-                </div>
+               <div class="calendar bottomOption" onclick="document.getElementById('datePicker').click();">
+            <i class="fa-regular fa-calendar-days fa-xl"></i>
+        </div>
+
                 <div class="alerts bottomOption">
                     <i class="fa-regular fa-bell fa-xl"></i>
                 </div>
@@ -124,8 +122,7 @@
                 </div>
             </section>
         </footer>
-
-    </main>   
-
+ <input type="date" id="datePicker"  onchange="datePicked(this)">
+ <script defer src="App.js"></script>
   </body>
 </html>

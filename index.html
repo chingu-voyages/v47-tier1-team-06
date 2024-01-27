@@ -22,6 +22,31 @@
   </head>
 
   <body>
+    <script>
+        jQuery(document).ready(function(){
+            jQuery("#addTask").click(function(){
+                jQuery("#popup").css({display: "block"});
+            });
+        });
+        
+        function jsfunction() {
+            alert("jsfunction");
+        }
+    </script>
+    <main class="app" style="position: relative">
+        <div id="popup" style="display: none; position: absolute; top: 0; left: 0; width: 300px; height:500px; margin-left: 100px; border-radius:7px;margin-top: 300px; background-color: #f15454; " >
+       <h2 style="color: aliceblue; margin-left: 45px;">Create New task</h2>
+       <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Tile</p>
+       <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;"> Discription</p>
+       <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Date</p>
+        </div>
+        <section class="topOption_menu">
+            <div class="backArrow">
+                <i class="fa-solid fa-arrow-left fa-xl"></i>
+            </div>
+            <div class="search">
+                <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+            </div>
     <main class="app">
         <section class="topOption_menu">
             <div class="backArrow">

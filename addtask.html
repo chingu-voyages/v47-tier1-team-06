@@ -31,7 +31,6 @@
             });
         });
 
-
         function jsfunction() {
             alert("jsfunction");
         }
@@ -42,16 +41,9 @@
         <div id="popup"
             style="display: none; position: absolute; top: 0; left: 0; width: 300px; height:500px; margin-left: 100px; border-radius:7px;margin-top: 300px; background-color: #f15454; ">
             <h2 style="color: aliceblue; margin-left: 45px;">Create New task</h2>
-                <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Tile</p>
-                    <label for="title">
-                        <input type="text" id="title" class="title" name="title">
-                    </label>
-                <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;"> Discription</p>
-                    <label for="title">
-                        <input type="text" id="title" class="title" name="title">
-                    </label>
-                <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Date</p>
-                    <!-- PLACE CALENDAR HERE-->
+            <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Tile</p>
+            <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;"> Discription</p>
+            <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Date</p>
                 <button type="button" class="btn"
                 style="color: white;margin-top: 70px; margin-left: 40px; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 3px;   border: 1px solid white; font-size: x-large;border-radius: 7px; width: 80px;">Edit</button>
                 <button type="button" class="btn"
@@ -60,7 +52,6 @@
                 style="color: white;margin-top: 80px; margin-left: 70px; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; border: 1px solid white; font-size: xx-large; border-radius: 7px;">Add Task</button>
         </div>
         
-
         <section class="topOption_menu">
             <div class="backArrow">
                 <i class="fa-solid fa-arrow-left fa-xl"></i>
@@ -71,15 +62,12 @@
         </section>
         <section class="addTask_menu">
             <div class="currentMonth">
-
-
-                <button id="prevWeek" onclick="navigateWeek(-1)"></button>
+                <button id="prevWeek" onclick="navigateWeek(-1)">&lt;</button>
                 <h1 id="currentMonthYear">January 2024</h1>
-                <button id="nextWeek" onclick="navigateWeek(1)"></button>
+                <button id="nextWeek" onclick="navigateWeek(1)">&gt;</button>
             </div>
             <div class="addtask">
                 <button id="addTask" class="addButton">+ add task</button>
-
             </div>
         </section>
 
@@ -145,7 +133,6 @@
                 </label>
             </div>
         </section>
-
     </main>
     <footer class="footer">
         <section class="bottomOption_menu">

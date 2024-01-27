@@ -256,4 +256,11 @@ textarea {
   margin-right: auto;
 }
 
+#popup input {
+  background-color: white;
+  margin-left: 1rem;
+  margin-top: 1rem;
+  height: 2rem;
+  font-size: large;
+}
 

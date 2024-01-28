@@ -269,11 +269,3 @@ function updateCurrentMonthDisplay() {
     }
     // ----------------------------------------------------------------------------------------------------
 
-    let test = new allTasks();
-    test.addTask("test1", "this is a test", 2024, 7, 13, 1230, 1240);
-    test.addTask("test2", "this is a test", 2024, 7, 13, 1240, 1240);
-    test.addTask("test3", "this is a test", 2024, 7, 13, 1100, 1240);
-    test.addTask("test4", "this is a test", 2024, 7, 13, 940, 1240);
-    test.organizeTasks(2024, 7, 13);
-    let testing = test.getTasks(2024, 7, 13);
-    console.log(testing);

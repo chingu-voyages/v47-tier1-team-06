@@ -48,15 +48,15 @@
                     </label>
                 <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;"> Discription</p>
                     <label for="title">
-                        <input type="text" id="title" class="title" name="title">
+                        <input type="text" id="description" class="description" name="description">
                     </label>
-                <p style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Date</p>
+                <p class="date" style="color: aliceblue; padding-top: 30px; padding-left: 20px;">Date</p>
                     <!-- PLACE CALENDAR HERE-->
-                <button type="button" class="btn"
+                <button type="button" class="edit_btn"
                 style="color: white;margin-top: 70px; margin-left: 40px; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 3px;   border: 1px solid white; font-size: x-large;border-radius: 7px; width: 80px;">Edit</button>
-                <button type="button" class="btn"
+                <button type="button" class="delete_btn"
                 style="color: white;margin-top: 50px; margin-left: 45px; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-top: 3px; border: 1px solid white; font-size: x-large;border-radius: 7px">Delete</button>
-                <button type="button" class="btn"
+                <button type="button" class="taskAdd"
                 style="color: white;margin-top: 80px; margin-left: 70px; padding-top: 5px; padding-left: 10px; padding-right: 10px; padding-bottom: 5px; border: 1px solid white; font-size: xx-large; border-radius: 7px;">Add Task</button>
         </div>
         
@@ -74,7 +74,7 @@
 
 
                 <button id="prevWeek" onclick="navigateWeek(-1)"></button>
-                <h1 id="currentMonthYear">January 2024</h1>
+                <h1 id="currentMonthYear"></h1>
                 <button id="nextWeek" onclick="navigateWeek(1)"></button>
             </div>
             <div class="addtask">
@@ -136,8 +136,8 @@
                 </div>
             </div>
         </section>
-        <section class="task_list">
-            <h2>Task</h2>
+        <section>
+            <h2 id="task_list">Task</h2>
             <div class="todo-item done">
                 <label class="label">
                     <i class="fa-solid fa-thumbtack fa-xl"></i>

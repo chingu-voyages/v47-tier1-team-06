@@ -81,5 +81,35 @@ function updateCurrentMonthDisplay() {
 }
 
 
+// popup addtask btn
+    document.querySelector(".taskAdd").addEventListener("click", function() {
+        const title = document.getElementById("title").value;
+        const description = document.getElementById("description").value;
+       
 
+        var newTask = document.createElement("div");
+        newTask.innerHTML = `
+            <h3>${title}</h3>
+            <p>${description}</p>
+          
+        `;
 
+        document.getElementById("task_list").appendChild(newTask);
+        document.getElementById('popup').style.display = 'none';
+
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+    });
+// popup delete btn
+    document.querySelector(".delete_btn").addEventListener("click", function() {
+        document.getElementById("title").value = "";
+        document.getElementById("description").value = "";
+    });
+
+// updating current month and year on the main page
+    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    const d = new Date();
+    let mnth = month[d.getMonth()];
+    let year = d.getFullYear();
+    document.getElementById("currentMonthYear").innerHTML = mnth + " " + year;

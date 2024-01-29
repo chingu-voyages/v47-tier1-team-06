@@ -237,11 +237,22 @@ function updateCurrentMonthDisplay() {
         }
 
         // addTask: add task
+
         addTask(title, description, dates, startTime, endTime) {
             this.#addTaskYear(this.taskYear, title, description, dates, startTime, endTime);
         }
 
        
+
+       
+        
+
+        // getTasks: get all tasks on a given day
+        // return value: an array of task objects
+        getTasks(year, month, day) {
+            return this.taskYear.get(year).get(month).get(day);
+        }
+
 
         // organizes tasks based on start time, the earlier the task, the closer it is to the start
         // of the array
@@ -284,6 +295,3 @@ function updateCurrentMonthDisplay() {
     // ----------------------------------------------------------------------------------------------------
 
 
-  
-
-  

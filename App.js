@@ -4,7 +4,7 @@ let baseDate = new Date(); // Initialize with the current date
 
 // Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
-    generateCalendarDays(); // Generate the calendar days on page load
+    
     updateCurrentMonthDisplay(); // Update the display to show the current month and year
 
     // Click event listener for the calendar icon
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function datePicked(input) {
     const selectedDate = new Date(input.value);
     baseDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
-    generateCalendarDays();
+    
 }
 function updateCurrentMonthDisplay() {
     const currentMonthYear = document.getElementById('currentMonthYear');
@@ -82,16 +82,22 @@ function updateCurrentMonthDisplay() {
 
 
 // popup addtask btn
-    document.querySelector(".taskAdd").addEventListener("click", function() {
+    document.querySelector(".save").addEventListener("click", function() {
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
-       
+        const dates = document.getElementById("datePicker").value;
+        const startTime = document.getElementById("appt").value;
+        const endTime = document.getElementById("appt_1").value;
+        
+        
 
-        var newTask = document.createElement("div");
+        const newTask = document.createElement("div");
         newTask.innerHTML = `
-            <h3>${title}</h3>
+            <h1>${title}</h1>
             <p>${description}</p>
-          
+            <p>${dates}</p>
+            <p>${startTime}</p>
+            <p>${endTime}</p>
         `;
 
         document.getElementById("task_list").appendChild(newTask);
@@ -99,11 +105,23 @@ function updateCurrentMonthDisplay() {
 
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
+        document.getElementById("datePicker").value = "";
+        document.getElementById("appt").value = "";
+        document.getElementById("appt_1").value = "";
+
+        
     });
-// popup delete btn
+        
+ 
+
+// popup cancel btn
     document.querySelector(".delete_btn").addEventListener("click", function() {
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
+        document.getElementById("datePicker").value = "";
+        document.getElementById("appt").value = "";
+        document.getElementById("appt_1").value = "";
+        document.getElementById('popup').style.display = 'none';
     });
 
 // updating current month and year on the main page
@@ -113,3 +131,159 @@ function updateCurrentMonthDisplay() {
     let mnth = month[d.getMonth()];
     let year = d.getFullYear();
     document.getElementById("currentMonthYear").innerHTML = mnth + " " + year;
+
+
+// Task logic
+// ----------------------------------------------------------------------------------------------------
+    /* task class to store task information
+    Parameters:
+        title (string): title of task
+        description (string): description of task
+        startTime (integer): when the task starts. Please use military time (12:01 am = 0001, 
+            2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
+        endTime (integer): when the task ends. Please use military time (12:01 am = 0001, 
+            2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
+    */
+    class task {
+        // constructor
+        constructor(title, description, startTime, endTime) {
+            this.title = title;
+            this.description = description;
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+
+        // getStartTime: returns string of start time in 12 hour notation
+        getStartTime() {
+            return this.#convertTime(this.startTime);
+        }
+
+        // getEndTime: returns string of end time in 12 hour notation
+        getEndTime() {
+            return this.#convertTime(this.endTime);
+        }
+
+         // convertTime: private method of converting military time into 
+         // 12 hour notation
+         // returns string in format: 12:00 am
+        #convertTime(militaryTime) {
+            let time = militaryTime; // new time
+            let am = true; // whether the time is am or pm
+
+            // change military time into 12 our notation
+            if (time >= 1300) {
+                time = time - 1200;
+                am = false;
+            } else if (time >= 1200) {
+                am = false;
+            } else if (time < 100) {
+                time = time + 1200;
+            }
+
+            // add :
+            if (("" + time).length == 3) {
+                time = ("" + time).slice(0, 1) + ":" + ("" + time).slice(1);
+            } else {
+                time = ("" + time).slice(0, 2) + ":" + ("" + time).slice(2);
+            }
+
+            // add am/pm
+            if (am) {
+                time = time + " am";
+            } else {
+                time = time + " pm";
+            }
+
+            return time;
+        }
+    }
+
+    /* compareTasks: function to compare two tasks for sorting based on start time (0: task1 > task 2, 
+        1: task1 < task 2). Note that this only compares in hours and minutes. Make sure that they
+        are on the same day, month, and year first
+    
+    Parameters:
+        task1 (task): task being compared
+        task2 (task): task being compared
+    
+    */
+    function compareTasks( task1, task2 ) {
+        if ( task1.startTime < task2.startTime ){
+            return -1;
+        } else {
+            return 0;
+        }
+    } 
+
+    /* class containing all tasks. Contains a map of years as the key value. Each year contains 
+        a map of months as the key value. Each month contains a map of days as the key value. Each day
+        contains an array of tasks. yearMap[2024] = 2024Map. 2024Map[7] = julyOf2024Map. 
+        julyOf2024Map[9] = 9nth-OfJuly-In2024-Array. 9nth-OfJuly-In2024-Array[0] = FirstTaskOfTheDay;
+        Parameters:
+            title (string): title of task
+            description (string): description of task
+            year (integer): year of task (2024)
+            month (integer): month of task (use 7 for July)
+            day (integer): day of task
+            startTime (integer): when the task starts. Please use military time (12:01 am = 0001, 
+                2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
+            endTime (integer): when the task ends. Please use military time (12:01 am = 0001, 
+                2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
+        */
+    class allTasks {
+        // constructor
+        constructor() {
+            this.taskYear = new Map();
+        }
+
+        // addTask: add task
+        addTask(title, description, dates, startTime, endTime) {
+            this.#addTaskYear(this.taskYear, title, description, dates, startTime, endTime);
+        }
+
+       
+
+        // organizes tasks based on start time, the earlier the task, the closer it is to the start
+        // of the array
+        organizeTasks(year, month, day) {
+            let taskList = this.taskYear.get(year).get(month).get(day);
+            taskList.sort(compareTasks);
+        }
+
+        // addTask-: private methods for adding a task, helping method addTask
+        #addTaskYear(taskYear, title, description, year, month, day, startTime, endTime) {
+            if (!(taskYear.has(year))) {
+                taskYear.set(year, new Map());
+            }
+
+            this.#addTaskMonth(taskYear.get(year), title, description, month, day, startTime, endTime);
+        }
+
+        #addTaskMonth (year, title, description, month, day, startTime, endTime) {
+            if (!(year.has(month))) {
+                year.set(month, new Map());
+            }
+
+            this.#addTaskDay(year.get(month), title, description, day, startTime, endTime);
+        }
+
+        #addTaskDay(month, title, description, day, startTime, endTime) {
+            if (!(month.has(day))) {
+                month.set(day, new Array());
+            }
+
+            this.#addTaskTime(month.get(day), title, description, startTime, endTime);
+        }
+
+        #addTaskTime(day, title, description, startTime, endTime) {
+            let newTask = new task(title, description, startTime, endTime);
+
+            day.push(newTask);
+        }
+    }
+    // ----------------------------------------------------------------------------------------------------
+
+
+  
+
+  

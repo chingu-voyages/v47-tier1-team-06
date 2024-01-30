@@ -4,7 +4,7 @@ let baseDate = new Date(); // Initialize with the current date
 
 // Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
-    generateCalendarDays(); // Generate the calendar days on page load
+    
     updateCurrentMonthDisplay(); // Update the display to show the current month and year
 
     // Click event listener for the calendar icon
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function datePicked(input) {
     const selectedDate = new Date(input.value);
     baseDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
-    generateCalendarDays();
+    
 }
 function updateCurrentMonthDisplay() {
     const currentMonthYear = document.getElementById('currentMonthYear');
@@ -82,16 +82,22 @@ function updateCurrentMonthDisplay() {
 
 
 // popup addtask btn
-    document.querySelector(".taskAdd").addEventListener("click", function() {
+    document.querySelector(".save").addEventListener("click", function() {
         const title = document.getElementById("title").value;
         const description = document.getElementById("description").value;
-       
+        const dates = document.getElementById("datePicker").value;
+        const startTime = document.getElementById("appt").value;
+        const endTime = document.getElementById("appt_1").value;
+        
+        
 
-        var newTask = document.createElement("div");
+        const newTask = document.createElement("div");
         newTask.innerHTML = `
-            <h3>${title}</h3>
+            <h1>${title}</h1>
             <p>${description}</p>
-          
+            <p>${dates}</p>
+            <p>${startTime}</p>
+            <p>${endTime}</p>
         `;
 
         document.getElementById("task_list").appendChild(newTask);
@@ -99,11 +105,23 @@ function updateCurrentMonthDisplay() {
 
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
+        document.getElementById("datePicker").value = "";
+        document.getElementById("appt").value = "";
+        document.getElementById("appt_1").value = "";
+
+        
     });
-// popup delete btn
+        
+ 
+
+// popup cancel btn
     document.querySelector(".delete_btn").addEventListener("click", function() {
         document.getElementById("title").value = "";
         document.getElementById("description").value = "";
+        document.getElementById("datePicker").value = "";
+        document.getElementById("appt").value = "";
+        document.getElementById("appt_1").value = "";
+        document.getElementById('popup').style.display = 'none';
     });
 
 // updating current month and year on the main page
@@ -219,15 +237,22 @@ function updateCurrentMonthDisplay() {
         }
 
         // addTask: add task
-        addTask(title, description, year, month, day, startTime, endTime) {
-            this.#addTaskYear(this.taskYear, title, description, year, month, day, startTime, endTime);
+
+        addTask(title, description, dates, startTime, endTime) {
+            this.#addTaskYear(this.taskYear, title, description, dates, startTime, endTime);
         }
+
+       
+
+       
+        
 
         // getTasks: get all tasks on a given day
         // return value: an array of task objects
         getTasks(year, month, day) {
             return this.taskYear.get(year).get(month).get(day);
         }
+
 
         // organizes tasks based on start time, the earlier the task, the closer it is to the start
         // of the array
@@ -268,4 +293,5 @@ function updateCurrentMonthDisplay() {
         }
     }
     // ----------------------------------------------------------------------------------------------------
+
 

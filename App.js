@@ -82,36 +82,49 @@ function updateCurrentMonthDisplay() {
 
 
 // popup addtask btn
-    document.querySelector(".save").addEventListener("click", function() {
-        const title = document.getElementById("title").value;
-        const description = document.getElementById("description").value;
-        const dates = document.getElementById("datePicker").value;
-        const startTime = document.getElementById("appt").value;
-        const endTime = document.getElementById("appt_1").value;
-        
-        
 
-        const newTask = document.createElement("div");
-        newTask.innerHTML = `
-            <h1>${title}</h1>
-            <p>${description}</p>
-            <p>${dates}</p>
-            <p>${startTime}</p>
-            <p>${endTime}</p>
-        `;
+let taskContainer = [];
 
-        document.getElementById("task_list").appendChild(newTask);
-        document.getElementById('popup').style.display = 'none';
+document.querySelector(".save").addEventListener("click", function() {
+    const title = document.getElementById("title").value;
+    const description = document.getElementById("description").value;
+    const dates = document.getElementById("datePicker").value;
+    const startTime = document.getElementById("appt").value;
+    const endTime = document.getElementById("appt_1").value;
+    
+   
+    const newTask = {
+        title: title,
+        description: description,
+        dates: dates,
+        startTime: startTime,
+        endTime: endTime
+    };
 
-        document.getElementById("title").value = "";
-        document.getElementById("description").value = "";
-        document.getElementById("datePicker").value = "";
-        document.getElementById("appt").value = "";
-        document.getElementById("appt_1").value = "";
+    taskContainer.push(newTask)
 
-        
-    });
-        
+    
+    const newTaskElement = document.createElement("div");
+    newTaskElement.innerHTML = `
+        <h1>${title}</h1>
+        <p>${description}</p>
+        <p>${dates}</p>
+        <p>${startTime}</p>
+        <p>${endTime}</p>
+    `;
+
+    document.getElementById("task_list").appendChild(newTaskElement);
+    document.getElementById('popup').style.display = 'none';
+
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("datePicker").value = "";
+    document.getElementById("appt").value = "";
+    document.getElementById("appt_1").value = "";
+
+    
+});
+    
  
 
 // popup cancel btn
@@ -294,4 +307,56 @@ function updateCurrentMonthDisplay() {
     }
     // ----------------------------------------------------------------------------------------------------
 
+// Assuming the taskContainer is an array of tasks with a 'dates' property representing the task date
+document.addEventListener("DOMContentLoaded", function() {
+    const dateElements = document.querySelectorAll(".calendar-day .task-date"); // Get all the clickable date elements
+    dateElements.forEach(function(dateElement) {
+        dateElement.addEventListener("click", function(event) {
+            const clickedDateText = event.target.textContent.trim(); // Get the clicked date text
+            const [day, monthStr] = clickedDateText.split(' '); // Split the text into day and month parts
+            const year = 2024; // Replace with the actual year from the clicked date
+            const month = getMonthNumber(monthStr); // Convert month text to month number (e.g., "Jan" to 1)
+            const clickedDate = new Date(year, month, parseInt(day)); // Create a date object with the standard format
 
+            
+            const tasksForClickedDate = taskContainer.filter(function(task) {
+                const taskDate = new Date(task.dates); // Assuming the 'dates' property represents the task date
+                console.log("Task Date:", taskDate); // Log the task date
+                console.log("Clicked Date:", clickedDate); // Log the clicked date
+                return taskDate.toDateString() === clickedDate.toDateString(); // Compare the task date with the clicked date
+            });
+
+            // Display the filtered tasks
+            displayTasks(tasksForClickedDate);
+        });
+    });
+});
+
+// Function to display tasks
+// Function to display tasks
+function displayTasks(tasks) {
+    const taskList = document.getElementById("task_list");
+    if (taskList) {
+        taskList.innerHTML = ""; // Clear existing task list
+
+        tasks.forEach(function(task) {
+            const taskItem = document.createElement("div");
+            taskItem.innerHTML = `
+            <h1>${task.title}</h1>
+            <p>${task.description}</p>
+            <p>${task.dates}</p>
+            <p>${task.startTime}</p>
+            <p>${task.endTime}</p>
+        `;
+            taskList.appendChild(taskItem);
+        });
+    } else {
+        console.error("Task list element not found in the document");
+    }
+}
+
+// Function to get the month number from the month abbreviation
+function getMonthNumber(monthStr) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months.indexOf(monthStr)+1;
+}

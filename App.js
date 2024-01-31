@@ -5,6 +5,7 @@ let baseDate = new Date(); // Initialize with the current date
 // Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
     
+    
     updateCurrentMonthDisplay(); // Update the display to show the current month and year
 
     // Click event listener for the calendar icon

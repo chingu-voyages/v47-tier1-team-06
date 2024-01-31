@@ -56,11 +56,11 @@ h4 {
 }
 
 i {
-  cursor: pointer;
-  color: white;
-  padding: 1rem;
-  background-color: var(--primary);
-  border-radius: 50%;
+  /* cursor: pointer; */
+  color: var(--primary);
+  /* padding: 1rem; */
+  /* background-color: var(--primary); */
+  /* border-radius: 50%; */
 }
 
 .topOption_menu {

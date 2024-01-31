@@ -1,0 +1,51 @@
+/* color variables */
+:root {
+    --primary: #f15454;
+    --lightPink: #f4afaf;
+    --light: #e5e5e5;
+    --background: #fff;
+    --grey: #888;
+    --hover: #2d984c;
+    --dark: #313154;
+    --shadow: 0 1px 3px rbga(0, 0, 0, 0.1);
+  }  
+
+#top_menu {
+    visibility: hidden;
+}
+
+#top_month_addTask{
+    align-items: center;
+}
+
+#monthYear {
+  text-align: center;
+}
+
+#addTaskButton {
+  text-align: center;
+}
+
+#middle_taskList {
+  /* margin-bottom: 100%;
+    justify-content: center; */
+}
+
+#task_icon_list {
+}
+
+#task_details_items {
+  font-size: x-small;
+  margin: 0 auto;
+}
+
+#thumbtackIcon {
+  color: var(--primary);
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+}
+
+#bottom_menu {
+    visibility: hidden;
+  }

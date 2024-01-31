@@ -93,24 +93,14 @@ function updateCurrentMonthDisplay() {
         newTask.className= "task";
         newTask.innerHTML = `
             <i class="fa-solid fa-thumbtack fa-xl"></i>
-            <h1>${title}</h1>
-            <p>${dates}</p>
-            <p>${description}</p>
-            <p>${startTime}</p>
-            <p>${endTime}</p>
+            <p class="data">${title}
+            ${dates}
+            ${description}
+            ${startTime}
+            ${endTime}</p>
         `;
 
-        // const newTask = document.createElement("li");
-        console.log(newTask);
-
-
-        // const textInput = document.getElementById("resizableInput").value = 
-        // title + " " + description + " " + dates + " " + startTime + " " + endTime ;
-        // console.log(textInput);
-
-        // document.getElementById("task_list").appendChild(newTask);
         const task_list = document.querySelector(".task_list").appendChild(newTask);
-        console.log(task_list);
         
         document.getElementById('popup').style.display = 'none';
 

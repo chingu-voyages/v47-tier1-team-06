@@ -1,10 +1,9 @@
-
 /* color variables */
 :root {
   --primary: #f15454;
   --lightPink: #f4afaf;
   --light: #e5e5e5;
-  --background: #FFF;
+  --background: #fff;
   --grey: #888;
   --hover: #2d984c;
   --dark: #313154;
@@ -58,14 +57,15 @@ h4 {
 
 i {
   cursor: pointer;
+  color: white;
+  padding: 1rem;
+  background-color: var(--primary);
+  border-radius: 50%;
 }
 
 .topOption_menu {
   display: flex;
-}
-
-.backArrow {
-  margin-right: auto;
+  justify-content: center;
 }
 
 .addTask_menu {
@@ -73,10 +73,17 @@ i {
   align-items: center;
   justify-content: center;
   margin-bottom: 0;
+  /* background-color: red; */
+}
+
+.data {
+  padding-left: 1rem;
+  word-wrap: break-word;
+  word-spacing: 5cm;
 }
 
 .currentMonth {
-  margin-right: auto;
+  margin-right: 2rem;
 }
 
 .addButton {
@@ -132,8 +139,8 @@ i {
 
 .calendar-day {
   border: 1px solid #ddd;
-  background-color: #FFF;
-  box-shadow: 0 0 10px #F4AFAF;
+  background-color: #fff;
+  box-shadow: 0 0 10px #f4afaf;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
@@ -165,46 +172,23 @@ i {
   background-color: #f15454; /* Change color on hover */
 }
 
-.task-item {
-  cursor: pointer;
+/* .task-item { */
+/* cursor: pointer;
   padding: 10px 0;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-}
+  align-items: center; */
+/* } */
 
-.task-name {
-  flex-grow: 1;
-}
+/* .task-name { */
+/* flex-grow: 1; */
+/* } */
 
 /* ///////////////////////////////////////*/
-.task_list .list {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding: 0rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-}
 
-.todo-item {
-  display: block;
+.taskDiv {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-}
-
-.todo-item label {
-  display: flex;
-  cursor: pointer;
-}
-
-.task_list .todo-item ul {
-  display: inline-block;
-  width: 100%;
-  height: 50px;
-  /* padding-bottom: 1rem; */
 }
 
 #popup input {
@@ -215,89 +199,18 @@ i {
   font-size: large;
 }
 
-ul {
-  /* display: block;
-  text-align: center;
-  justify-content: center;
-  padding: 5px 5px 0 5px;
-  box-sizing: border-box;
-  resize: none;
-  overflow: auto; */
-}
-
-.todo-item {
-  /* display: block;
-  align-items: center;
-  justify-content: center; */
-}
-
-.todo-item i {
-  padding: 1rem;
-  margin-right: 0.50rem;
-  align-self: center;
-  background-color: var(--primary);
-  border-radius: 50%;
-  color: #fff;
-}
-
-.task_list{
+.task_list {
   display: block;
-  /* padding-top: 0.25rem; */
-  /* padding-bottom: 0.25rem; */
-  /* background-color: #313154; */
-  /* list-style: none; */
-  /* max-width: 100%; */
 }
 
-.task{
+.task {
   display: flex;
   max-width: auto;
-  /* color: #FFF; */
   align-items: center;
   justify-content: center;
-  /* overflow-x: hidden; */
-  /* flex-wrap:wrap; */
 }
 
-/* .taskText{
+.todo-item ul li {
   display: flex;
-  white-space: nowrap;
-  align-items: left;
-  justify-content: left;
-} */
-
-/* .footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-} */
-
-/* .bottomOption_menu {
-  display: flex;
-  height: 100%;
-} */
-
-/* .bottomOption_menu i {
-  color: var(--grey);
+  float: center;
 }
-
-.bottomOption_menu i:hover {
-  opacity: 0.75;
-  color: var(--hover);
-}
-
-.alerts {
-  margin-right: auto;
-}
-
-.calendar {
-  margin-right: auto;
-}
-
-.home {
-  margin-right: auto;
-} */
-
-
-

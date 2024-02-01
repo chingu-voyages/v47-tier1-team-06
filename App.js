@@ -1,8 +1,13 @@
 import {allTasks, task} from "./taskLogic.js"; /// import
  
 let taskContainer = new allTasks(); // container for all tasks
+taskContainer.initialize();
 
 let baseDate = new Date(); // Initialize with the current date
+
+window.onbeforeunload = function(event) {
+    taskContainer.save();
+}
 
 // ... rest of your functions (navigateWeek, generateCalendarDays, etc.) ...
 
@@ -121,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("datePicker").value = "";
         document.getElementById("appt").value = "";
         document.getElementById("appt_1").value = "";
-
         
     });
 

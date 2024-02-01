@@ -179,6 +179,59 @@
             return this.taskYear.get(year).get(month).get(day);
         }
 
+        // initialize: get saved tasks 
+        initialize() {
+            let savedTasksString = localStorage.getItem("allTasks");
+
+            // if the data exists
+            if (savedTasksString !== null) {
+                let savedTasks = JSON.parse(savedTasksString);
+
+                // the local storage cannot retrieve the
+                // data types so new objects is needed to be created
+                for (let savedTask of savedTasks) {
+                    this.addTask(savedTask.title, savedTask.description, savedTask.year,
+                        savedTask.month, savedTask.day, savedTask.startTime, savedTask.endTime);
+                }
+            } 
+
+            localStorage.removeItem("allTasks");
+        }
+
+        // save: save tasks
+        save() {
+            let allTaskSave = new Array();
+
+            // store all task data in an array (the local storage only stores in string format.
+            // Additionally, JSON.stringify cannot stringify hashmaps)
+            for (let [yearKey, monthMap] of this.taskYear) {
+                for (let [monthKey, dayMap] of monthMap) {
+                    for (let [dayKey, taskArray] of dayMap) {
+                        for (let taskSave of taskArray) {
+                            allTaskSave.push(this.#createSavableObject(yearKey, monthKey, dayKey, taskSave));
+                        }
+                    }
+                }
+            }
+
+            localStorage.setItem("allTasks", JSON.stringify(allTaskSave));
+        }
+
+        // store all task data into an object
+        #createSavableObject(year, month, day, taskObject) {
+            let savableTask = {
+                year: year,
+                month: month,
+                day: day, 
+                title: taskObject.title,
+                description: taskObject.description,
+                startTime: taskObject.startTime,
+                endTime: taskObject.endTime
+            };
+
+            return savableTask;
+        }
+
         // organizes tasks based on start time, the earlier the task, the closer it is to the start
         // of the array
         #organizeTasks(year, month, day) {

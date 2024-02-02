@@ -3,6 +3,8 @@ import {allTasks, task} from "./taskLogic.js"; /// import
 let taskContainer = new allTasks(); // container for all tasks
 taskContainer.initialize();
 
+
+
 let baseDate = new Date(); // Initialize with the current date
 
 window.onbeforeunload = function(event) {
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // add task
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
-
+        
         // clear task list shown since the task list has changed
         document.getElementById("allTasks").innerHTML = '';
 
@@ -109,14 +111,26 @@ document.addEventListener('DOMContentLoaded', function() {
         
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
+            newTask.classList.add("task"); 
             newTask.innerHTML = `
                 <h1>${aTask.title}</h1>
                 <p>${aTask.description}</p>
                 <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
             `;
+            let button = document.createElement("button");
+            button.classList.add("delete-button");
+            button.textContent = "Delete";
+            
+            // Append button to task div
+            newTask.appendChild(button);
 
             document.getElementById("allTasks").appendChild(newTask);
+          
+
         }
+
+
+
         // ------------------------------------------------------------------------------------------------
 
         document.getElementById('popup').style.display = 'none';
@@ -146,3 +160,35 @@ document.addEventListener('DOMContentLoaded', function() {
     let mnth = month[d.getMonth()];
     let year = d.getFullYear();
     document.getElementById("currentMonthYear").innerHTML = mnth + " " + year;
+    
+
+//----------------------------------------------------------------------------------------
+
+
+        
+
+        
+//==================================================
+// getting days in a month
+
+function daysInMonth(month, year) {
+
+    // Array of days in each month
+    const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  
+    // Check for February and leap year
+    if (month === 2 && isLeapYear(year)) {
+      return 29;
+    } else {
+      // Return days from array for other months
+      return daysInMonths[month - 1]; 
+    }
+  
+  }
+  
+  function isLeapYear(year) {
+    return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
+  }
+  
+
+  //console.log(daysInMonth(2, 2025)); 

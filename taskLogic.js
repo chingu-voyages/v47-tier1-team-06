@@ -177,7 +177,12 @@
         // getTasks: get all tasks on a given day
         // return value: an array of task objects
         getTasks(year, month, day) {
-            return this.taskYear.get(year).get(month).get(day);
+            if (this.taskYear.has(year) && this.taskYear.get(year).has(month) && 
+            this.taskYear.get(year).get(month).has(day)) {
+                return this.taskYear.get(year).get(month).get(day);
+            } else {
+                return null;
+            }
         }
 
         // initialize: get saved tasks 

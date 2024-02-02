@@ -106,6 +106,7 @@
         // constructor
         constructor() {
             this.taskYear = new Map();
+
         }
 
         // addTask: add task
@@ -200,7 +201,7 @@
                 }
             } 
 
-            localStorage.removeItem("allTasks");
+           
         }
 
         // save: save tasks

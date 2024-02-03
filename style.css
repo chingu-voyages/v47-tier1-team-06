@@ -1,3 +1,9 @@
+.topOption_menu{
+  display: none;
+}
+footer{
+  display: none;
+}
 
 /* color variables */
 :root {

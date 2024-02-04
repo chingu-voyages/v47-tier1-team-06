@@ -1,3 +1,11 @@
+.topOption_menu {
+  
+  display: none;
+}
+
+#bottom_menu{
+display: none;
+}
 
 /* color variables */
 :root {
@@ -224,6 +232,7 @@ textarea {
 }
 
 .footer {
+  display: none;
   position: fixed;
   left: 0;
   bottom: 0;

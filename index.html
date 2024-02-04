@@ -41,15 +41,10 @@
       <div
         id="popup"
         style="
+          z-index: 6;
           display: none;
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 300px;
-          height: 700px;
-          margin-left: 100px;
           border-radius: 7px;
-          margin-top: 130px;
           background-color: #f15454;
         "
       >
@@ -215,13 +210,38 @@
           </div>
         </div>
       </section>
-      <section>
+
+      <section class="task_list">
         <h2 id="task_list">Task</h2>
         <div id="allTasks"></div>
         <div class="todo-item done">
+
         </div>
       </section>
+      
     </main>
+
+    <footer class="footer">
+
+      <section class="bottomOption_menu">
+        <div class="home bottomOption">
+          <i class="fa-solid fa-house fa-xl"></i>
+        </div>
+        <div
+          class="calendar bottomOption"
+          onclick="document.getElementById('datePicker').click();">
+          <i class="fa-regular fa-calendar-days fa-xl"></i>
+        </div>
+
+        <div class="alerts bottomOption">
+          <i class="fa-regular fa-bell fa-xl"></i>
+        </div>
+        <div class="search bottomOption">
+          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+        </div>
+      </section>
+
+    </footer>
 
     <script defer type="module" src="App.js"></script>
   </body>

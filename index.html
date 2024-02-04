@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Task App</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>interface prototype</title>
 
-  <!--JQUERY LIBRARY -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--JQUERY LIBRARY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-  <!-- FONTAWSOME -->
-  <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script>
+    <!-- FONTAWSOME -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/df21ef76d6.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- BOOTSTRAP CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP CSS -->
+    <!-- <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    /> -->
 
-  <!-- LOCAL SOURCE -->
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <script defer type="module" src="App.js"></script>
-
+    <link rel="stylesheet" type="text/css" href="style.css" />
   </head>
 
   <body>
-    <!-- JQUERY CODE -->
     <script>
       jQuery(document).ready(function () {
         jQuery("#addTask").click(function () {
           jQuery("#popup").css({ display: "block" });
-          document.getElementById("title").focus();
         });
       });
 
@@ -36,21 +36,20 @@
         alert("jsfunction");
       }
     </script>
-    <!-- JQUERY CODE -->
 
     <main class="app" style="position: relative">
-
-      <!-- POPUP ELEMENT -->
       <div
         id="popup"
         style="
-          z-index: 4;
           display: none;
-          position: relative;
+          position: absolute;
+          top: 0;
           left: 0;
-          width: auto;
-          height: auto;
+          width: 300px;
+          height: 700px;
+          margin-left: 100px;
           border-radius: 7px;
+          margin-top: 130px;
           background-color: #f15454;
         "
       >
@@ -61,7 +60,7 @@
         </p>
 
         <label for="title">
-          <input type="text" id="title" class="title title_input" name="title" />
+          <input type="text" id="title" class="title" name="title" />
         </label>
         <p style="color: aliceblue; padding-top: 30px; padding-left: 20px">
           Discription
@@ -85,13 +84,16 @@
         <p
           class="time"
           class="date"
-          style="color: aliceblue; padding-top: 30px; padding-left: 20px">
+          style="color: aliceblue; padding-top: 30px; padding-left: 20px"
+        >
           Time
         </p>
-        <label for="appt"></label>Start
+        <label for="appt"></label>
         <input type="time" id="appt" name="appt" min="09:00" max="18:00" />
-        <label for="appt"></label>End
+        Start Time
+        <label for="appt"></label>
         <input type="time" id="appt_1" name="appt" min="09:00" max="18:00" />
+        End Time
         <button
           type="button"
           class="delete_btn"
@@ -131,30 +133,19 @@
           Save
         </button>
       </div>
-      <!-- END POPUP ELEMENT -->
 
-      <!-- TOP HIDEN MENU -->
-      <section class="topOption_menu hideContainer">
-        <div class="backArrow">
-          <i class="fa-solid fa-arrow-left fa-xl"></i>
-        </div>
-        <div class="search">
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-        </div>
-      </section>
-
-      <!-- ADD TASK MENU -->
-      <section class="addTask_menu hideContainer">
+      <section class="addTask_menu">
         <div class="currentMonth">
+          <button id="prevWeek" onclick="navigateWeek(-1)"></button>
           <h1 id="currentMonthYear"></h1>
+          <button id="nextWeek" onclick="navigateWeek(1)"></button>
         </div>
         <div class="addtask">
           <button id="addTask" class="addButton">+ add task</button>
         </div>
       </section>
 
-      <!-- CALENDAR MENU -->
-      <section class="calendar_menu hideContainer">
+      <section class="calender_menu">
         <div class="calendar-container">
           <div
             class="calendar-day"
@@ -224,37 +215,14 @@
           </div>
         </div>
       </section>
-
-      <!-- TASK TITLE SECTTION -->
-      <h2 id="task_list">Task</h2>
-
-      <!-- MIDDLE TASK LIST SECTION -->
-      <div class="col-sm-12 p-0 bg-white" id="middle_taskList">
-        <!-- JS GENERATED ELEMENTS -->
-      </div>
-    </main>
-
-    <!-- FOOTER SECTION HIDDEN-->
-    <footer class="footer">
-      <section class="bottomOption_menu">
-        <div class="home bottomOption">
-          <i class="fa-solid fa-house fa-xl"></i>
-        </div>
-        <div
-          class="calendar bottomOption"
-          onclick="document.getElementById('datePicker').click();"
-        >
-          <i class="fa-regular fa-calendar-days fa-xl"></i>
-        </div>
-
-        <div class="alerts bottomOption">
-          <i class="fa-regular fa-bell fa-xl"></i>
-        </div>
-        <div class="search bottomOption">
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+      <section>
+        <h2 id="task_list">Task</h2>
+        <div id="allTasks"></div>
+        <div class="todo-item done">
         </div>
       </section>
-    </footer>
+    </main>
 
+    <script defer type="module" src="App.js"></script>
   </body>
 </html>

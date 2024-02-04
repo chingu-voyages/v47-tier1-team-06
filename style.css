@@ -1,12 +1,3 @@
-.topOption_menu{
-  display: none;
-}
-footer{
-  display: none;
-}
-.hideContainer{
-  display: none;
-}
 
 /* color variables */
 :root {
@@ -70,7 +61,7 @@ i {
 }
 
 .topOption_menu {
-  display: none;
+  display: flex;
 }
 
 .backArrow {
@@ -115,7 +106,7 @@ i {
   transition: 0.2s ease-in-out;
 }
 
-.calendar_menu {
+.calender_menu {
   display: flex;
   flex-direction: column;
   align-items: center;

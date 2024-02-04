@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // popup save btn
     document.querySelector(".save").addEventListener("click", function() {
+        
         // get user input
         let title = document.getElementById("title").value;
         let description = document.getElementById("description").value;
@@ -95,13 +96,13 @@ document.addEventListener('DOMContentLoaded', function() {
         let day = parseInt(dates.slice(8));
         let startmilitaryTime = parseInt(startTime.slice(0,2) + startTime.slice(3));
         let endMilitaryTime = parseInt(endTime.slice(0,2) + endTime.slice(3));
-
+        
         // add task
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
         
         // clear task list shown since the task list has changed
-        document.getElementById("allTasks").innerHTML = '';
-
+        document.getElementById("middle_taskList").innerHTML = '';
+        
         // TO BE REMOVED AND/OR CHANGED-----------------------------------------------------------------
         // The current code currently does not have the means to get what day the user wants to see
         // so this program just displays the list of tasks on the same day as the task the user just added 
@@ -109,14 +110,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
         document.getElementById("task_list").textContent = `Tasks for ${dates}`;
         
+
         for (let aTask of tasksOnAGivenDay) {
-            let newTask = document.createElement("div");
-            newTask.classList.add("task"); 
-            newTask.innerHTML = `
-                <h1>${aTask.title}</h1>
-                <p>${aTask.description}</p>
-                <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
-            `;
+            let newTask = document.createElement("ul");
+            newTask.classList.add("list-group"); 
+            newTask.classList.add("list-group-horizontal"); 
+            newTask.classList.add("task_ul_list"); 
+            // newTask.innerHTML = `
+            //     <h1>${aTask.title}</h1>
+            //     <p>${aTask.description}</p>
+            //     <p>${aTask.getStartTime()} - ${aTask.getEndTime()}
+            //     </p>
+            // `;
+            newTask.innerHTML = `            
+                <li class="list-group-item" id="task_icon_list">
+                <i class="fa-solid fa-thumbtack fa-xl" id="thumbtackIcon"></i>
+                </li>
+                <li class="list-group-item" id="task_detail_list">
+                <ol class="list-group text-start task_ol_list" id="task_details_items">
+                
+                <li class="list-group-item">Title:${aTask.title}</li>
+                <li class="list-group-item">Discription:${aTask.description}</li>
+                <li class="list-group-item">Time:${aTask.getStartTime()} - ${aTask.getEndTime()}</li>
+                </ol>
+                </li>
+       `;
+
             let button = document.createElement("button");
             button.classList.add("delete-button");
             button.textContent = "Delete";
@@ -124,7 +143,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // Append button to task div
             newTask.appendChild(button);
 
-            document.getElementById("allTasks").appendChild(newTask);
+            document.getElementById("middle_taskList").appendChild(newTask);
+
+            //document.getElementById("allTasks").appendChild(newTask);
           
 
         }

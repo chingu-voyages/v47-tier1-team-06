@@ -4,6 +4,9 @@
 footer{
   display: none;
 }
+.hideContainer{
+  display: none;
+}
 
 /* color variables */
 :root {
@@ -67,7 +70,7 @@ i {
 }
 
 .topOption_menu {
-  display: flex;
+  display: none;
 }
 
 .backArrow {

@@ -15,16 +15,17 @@ window.onbeforeunload = function(event) {
 
 // Event listener for DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function() {
-    
+
     updateCurrentMonthDisplay(); // Update the display to show the current month and year
 
     // Click event listener for the calendar icon
-    document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-        const datePicker = document.getElementById('datePicker');
+    // document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
+    //     const datePicker = document.getElementById('datePicker');
         // Optional: You might want to toggle visibility or apply some style changes before clicking
-        datePicker.style.display = 'block'; // Make it visible if it's initially hidden
-        datePicker.click(); // Programmatically click the hidden date input
-    });
+        // datePicker.style.display = 'block'; // Make it visible if it's initially hidden
+        // datePicker.click(); // Programmatically click the hidden date input
+    // });
+
 });
 
 // Function to handle date picking from the date input
@@ -72,22 +73,23 @@ function getOrdinalSuffix(day) {
       default: return "th";
     }
 }
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-        const datePicker = document.getElementById('datePicker');
-        datePicker.click();
-    });
-});
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
+//         const datePicker = document.getElementById('datePicker');
+//         datePicker.click();
+//     });
+// });
 
 
 // popup save btn
-    document.querySelector(".save").addEventListener("click", function() {
+    document.querySelector("#add_task_button").addEventListener("click", function() {
         // get user input
-        let title = document.getElementById("title").value;
-        let description = document.getElementById("description").value;
+        let title = document.getElementById("task_title_input").value;
+        let description = document.getElementById("task_description_input").value;
         let dates = document.getElementById("datePicker").value;
-        let startTime = document.getElementById("appt").value;
-        let endTime = document.getElementById("appt_1").value;
+        let startTime = document.getElementById("task_start_time").value;
+        let endTime = document.getElementById("task_end_time").value;
 
         // turn dates into seperate integers and convert time into military time
         let year = parseInt(dates.slice(0,4));
@@ -108,58 +110,61 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // ------------------------------------------------------------------------------------------------
 
-        document.getElementById('popup').style.display = 'none';
-
-        document.getElementById("title").value = "";
-        document.getElementById("description").value = "";
+        document.getElementById('popup_main_container').style.display = 'none';
+        // document.getElementsById("#hideContainer").style.display = '';
+        document.getElementById("task_title_input").value = "";
+        document.getElementById("task_description_input").value = "";
         document.getElementById("datePicker").value = "";
-        document.getElementById("appt").value = "";
-        document.getElementById("appt_1").value = "";
+        document.getElementById("task_start_time").value = "";
+        document.getElementById("task_end_time").value = "";
         
     });
 
     // display tasks on a given date
     function displayTasks (year, month, day, ) {
-        document.getElementById("allTasks").innerHTML = '';
+        document.getElementById("task_list").innerHTML = '';
         let tasksOnAGivenDay = taskContainer.getTasks(year, month, day);
 
-        document.getElementById("task_list").textContent = `Tasks for ${monthString[month - 1]} ${day}${getOrdinalSuffix(day)}, ${year}`;
+        document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for ${monthString[month - 1]} ${day}${getOrdinalSuffix(day)}, ${year}</h2>`;
         
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
-            newTask.classList.add("task"); 
+            newTask.className = "col bg-white text-black text-center p-2";
             newTask.innerHTML = `
                 <h1>${aTask.title}</h1>
                 <p>${aTask.description}</p>
                 <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
             `;
-            let button = document.createElement("button");
-            button.classList.add("delete-button");
-            button.textContent = "Delete";
+
+            let delete_button = document.createElement("button");
+
+            delete_button.className = "btn btn-danger task_item_delete_button btn-sm";
+            delete_button.textContent = "Delete";
 
             // delete task
-            button.addEventListener("click", () => { 
-                deleteTask(aTask, year, month, day)
+            delete_button.addEventListener("click", () => { 
+                deleteTask(aTask, year, month, day);
             });
 
-            let editButton = document.createElement("button");
-            editButton.classList.add("edit-button");
-            editButton.textContent = "Edit";
-            editButton.addEventListener("click", () => { editTask(aTask, year, month, day) });
+            let edit_button = document.createElement("button");
+
+            edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
+            edit_button.textContent = "Edit";
+            edit_button.addEventListener("click", () => { editTask(aTask, year, month, day) });
             
             // Append buttons to task div
-            newTask.appendChild(button);
-            newTask.appendChild(editButton);
+            newTask.appendChild(edit_button);
+            newTask.appendChild(delete_button);
 
-            document.getElementById("allTasks").appendChild(newTask);
-
-          
+            document.getElementById("task_list").appendChild(newTask);
 
         }
     }
 
     // delete task
     function deleteTask(taskDelete, year, month, day) {
+        console.log("delete button clicked from task list")
+
         taskContainer.removeTask(taskDelete, year, month, day);
         displayTasks(year, month, day);
     }
@@ -167,7 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // edit task
     // ----------------------------------------------------------------------------------------------
     function editTask(taskDelete, year, month, day) {
-        document.getElementById("edit-popup").style.display = 'block';
+        document.getElementById("popup_edit_container").style.display = 'block';
 
         document.getElementById("edit-title").value = taskDelete.title;
         document.getElementById("edit-description").value = taskDelete.description;
@@ -175,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("edit-appt").value = convertTime24hr(taskDelete.startTime);
         document.getElementById("edit-appt_1").value = convertTime24hr(taskDelete.endTime);
 
-        document.querySelector(".edit-save").addEventListener("click", () => { saveEditsMade(taskDelete, year, month, day) });
+        document.querySelector("#save_edit_task_button").addEventListener("click", () => { saveEditsMade(taskDelete, year, month, day) });
     }
 
     // turn year, month, date numbers into yyyy-mm-dd format
@@ -210,6 +215,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // edit save button
    function saveEditsMade(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay) {
+
+        console.log("save button clicke in edit popup")
+
         // get user input
         let title = document.getElementById("edit-title").value;
         let description = document.getElementById("edit-description").value;
@@ -231,9 +239,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
         displayTasks(beforeEditYear, beforeEditMonth, beforeEditDay);
-
+     
         document.getElementById('edit-popup').style.display = 'none';
-
+     
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
@@ -243,25 +251,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // edit popup cancel btn
-    document.querySelector(".edit-cancel_btn").addEventListener("click", function() {
+        document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
+  
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
         document.getElementById("edit-appt").value = "";
         document.getElementById("edit-appt_1").value = "";
-        document.getElementById('edit-popup').style.display = 'none';
+        document.getElementById('popup_edit_container').style.display = 'none';
     });
     // ------------------------------------------------------------------------------------------------
 
 
 // popup cancel btn
-    document.querySelector(".delete_btn").addEventListener("click", function() {
-        document.getElementById("title").value = "";
-        document.getElementById("description").value = "";
+    document.querySelector("#cancel_task_button").addEventListener("click", function() {
+        document.getElementById("task_title_input").value = "";
+        document.getElementById("task_description_input").value = "";
         document.getElementById("datePicker").value = "";
-        document.getElementById("appt").value = "";
-        document.getElementById("appt_1").value = "";
-        document.getElementById('popup').style.display = 'none';
+        document.getElementById("task_start_time").value = "";
+        document.getElementById("task_end_time").value = "";
+        document.getElementById('popup_main_container').style.display = 'none';
+        document.getElementById('addTask_container').style.display = 'flex';
+        document.getElementById('calender_container').style.display = 'flex';
+        document.getElementById('task_container').style.display = 'flex';
     });
 
 // updating current month and year on the main page

@@ -128,29 +128,32 @@ document.addEventListener('DOMContentLoaded', function() {
         
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
-            newTask.classList.add("text-black"); 
+            newTask.className = "col p-3 bg-white text-black";
             newTask.innerHTML = `
                 <h1>${aTask.title}</h1>
                 <p>${aTask.description}</p>
                 <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
             `;
-            let button = document.createElement("button");
-            button.classList.add("delete-button");
-            button.textContent = "Delete";
+
+            let delete_button = document.createElement("button");
+
+            delete_button.className = "btn btn-danger task_item_delete_button";
+            delete_button.textContent = "Delete";
 
             // delete task
-            button.addEventListener("click", () => { 
-                deleteTask(aTask, year, month, day)
+            delete_button.addEventListener("click", () => { 
+                deleteTask(aTask, year, month, day);
             });
 
-            let editButton = document.createElement("button");
-            editButton.classList.add("edit-button");
-            editButton.textContent = "Edit";
-            editButton.addEventListener("click", () => { editTask(aTask, year, month, day) });
+            let edit_button = document.createElement("button");
+
+            edit_button.className = "btn btn-danger task_item_edit_button";
+            edit_button.textContent = "Edit";
+            edit_button.addEventListener("click", () => { editTask(aTask, year, month, day) });
             
             // Append buttons to task div
-            newTask.appendChild(button);
-            newTask.appendChild(editButton);
+            newTask.appendChild(edit_button);
+            newTask.appendChild(delete_button);
 
             document.getElementById("task_list").appendChild(newTask);
 
@@ -159,8 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // delete task
     function deleteTask(taskDelete, year, month, day) {
-        taskContainer.removeTask(taskDelete, year, month, day);
-        displayTasks(year, month, day);
+        console.log("delete button clicked")
+        // taskContainer.removeTask(taskDelete, year, month, day);
+        // displayTasks(year, month, day);
     }
 
     // edit task

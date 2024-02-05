@@ -1,4 +1,6 @@
-
+.task_item_edit_button{
+  margin-right: 10px;
+}
 /* color variables */
 :root {
   --primary: #f15454;

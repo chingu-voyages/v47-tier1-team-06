@@ -163,7 +163,8 @@ function getOrdinalSuffix(day) {
 
     // delete task
     function deleteTask(taskDelete, year, month, day) {
-        return console.log("delete button clicked from task list")
+        console.log("delete button clicked from task list")
+
         taskContainer.removeTask(taskDelete, year, month, day);
         displayTasks(year, month, day);
     }
@@ -214,7 +215,9 @@ function getOrdinalSuffix(day) {
 
     // edit save button
    function saveEditsMade(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay) {
-        return console.log("save button clicke in edit popup")
+
+        console.log("save button clicke in edit popup")
+
         // get user input
         let title = document.getElementById("edit-title").value;
         let description = document.getElementById("edit-description").value;
@@ -236,9 +239,9 @@ function getOrdinalSuffix(day) {
 
 
         displayTasks(beforeEditYear, beforeEditMonth, beforeEditDay);
-
-        document.getElementById('popup_edit_container').style.display = 'none';
-
+     
+        document.getElementById('edit-popup').style.display = 'none';
+     
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
@@ -248,7 +251,8 @@ function getOrdinalSuffix(day) {
     }
 
     // edit popup cancel btn
-    document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
+        document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
+  
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";

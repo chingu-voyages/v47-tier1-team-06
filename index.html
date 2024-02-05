@@ -134,6 +134,108 @@
         </button>
       </div>
 
+      <div
+        id="edit-popup"
+        style="
+          display: none;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 300px;
+          height: 700px;
+          margin-left: 100px;
+          border-radius: 7px;
+          margin-top: 130px;
+          background-color: #f15454;
+        "
+      >
+        <h2 style="color: aliceblue; margin-left: 45px">Edit task</h2>
+
+        <p style="color: aliceblue; padding-top: 30px; padding-left: 20px">
+          Title
+        </p>
+
+        <label for="title">
+          <input type="text" id="edit-title" class="title" name="title" />
+        </label>
+        <p style="color: aliceblue; padding-top: 30px; padding-left: 20px">
+          Discription
+        </p>
+        <label for="title">
+          <input
+            type="text"
+            id="edit-description"
+            class="description"
+            name="description"
+          />
+        </label>
+        <p
+          class="date"
+          style="color: aliceblue; padding-top: 30px; padding-left: 20px"
+        >
+          Date
+        </p>
+
+        <input type="date" id="edit-datePicker" />
+        <p
+          class="time"
+          class="date"
+          style="color: aliceblue; padding-top: 30px; padding-left: 20px"
+        >
+          Time
+        </p>
+        <label for="appt"></label>
+        <input type="time" id="edit-appt" name="appt" min="09:00" max="18:00" />
+        Start Time
+        <label for="appt"></label>
+        <input
+          type="time"
+          id="edit-appt_1"
+          name="appt"
+          min="09:00"
+          max="18:00"
+        />
+        End Time
+        <button
+          type="button"
+          class="edit-cancel_btn"
+          style="
+            color: white;
+            margin-top: 50px;
+            margin-left: 85px;
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 3px;
+            border: 1px solid white;
+            font-size: x-large;
+            border-radius: 7px;
+            background-color: hsla(0, 0%, 98%, 0.2);
+          "
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="edit-save"
+          style="
+            color: white;
+            margin-top: 50px;
+            margin-left: 85px;
+            padding-top: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-bottom: 5px;
+            border: 1px solid white;
+            font-size: xx-large;
+            border-radius: 7px;
+            background-color: hsla(0, 0%, 98%, 0.2);
+          "
+        >
+          Done
+        </button>
+      </div>
+
       <section class="topOption_menu">
         <div class="backArrow">
           <i class="fa-solid fa-arrow-left fa-xl"></i>

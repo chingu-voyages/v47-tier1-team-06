@@ -30,7 +30,6 @@
 
     <!-- LOCAL SOURCE -->
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" type="text/css" href="popup.css" />
     <script defer type="module" src="App.js"></script>
   </head>
 
@@ -53,18 +52,11 @@
       }
     </script>
 
-    <div class="app" style="position: relative">
       <!--------------------- POPUP HTML SECTION ---------------------->
 
-      <div class="container-fluid mt-0 text-left" id="popup_main_container">
+      <div class="container-fluid text-left popupContainer" id="popup_main_container">
         <div class="row top_menu text-center" id="top_menu">
-          <div class="col p-3 text-white" id="today_month_year">
-            <!-- <i class="fa-solid fa-arrow-left fa-xl"></i> -->
-          </div>
-          <div class="col p-3 text-white" id="monthYear">Create New Task</div>
-          <div class="col p-3 text-white" id="addTaskButton">
-            <!-- <i class="fa-solid fa-magnifying-glass fa-xl"></i> -->
-          </div>
+          <div class="col p-3 text-white fs-1" id="monthYear">New Task</div>
         </div>
 
         <div class="mb-3 border-bottom border-danger">
@@ -134,222 +126,176 @@
         </div>
       </div>
 
-      <!---------------------END POPUP HTML SECTION ------------------->
+      <!-------------------- EDIT TASK POPUP SECTION ------------------>
 
-      <!-- EDIT TASK POPUP SECTION -->
-      <div
-        id="edit-popup"
-        style="
-          display: none;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 300px;
-          height: 700px;
-          margin-left: 100px;
-          border-radius: 7px;
-          margin-top: 130px;
-          background-color: #f15454;
-        "
-      >
-        <h2 style="color: aliceblue; margin-left: 45px">Edit task</h2>
+      <div class="container-fluid text-left popupContainer" id="popup_edit_container">
+        <div class="row top_menu text-center" id="top_menu">
+          <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
+        </div>
 
-        <p style="color: aliceblue; padding-top: 30px; padding-left: 20px">
-          Title
-        </p>
-
-        <label for="title">
-          <input type="text" id="edit-title" class="title" name="title" />
-        </label>
-        <p style="color: aliceblue; padding-top: 30px; padding-left: 20px">
-          Discription
-        </p>
-        <label for="title">
+        <div class="mb-3 border-bottom border-danger">
+          <label for="task_title_input" class="form-label text-white"
+            >Task Title</label
+          >
           <input
             type="text"
-            id="edit-description"
-            class="description"
-            name="description"
+            class="form-control"
+            id="edit-title"
+            aria-describedby="TaskTitle"
           />
-        </label>
-        <p
-          class="date"
-          style="color: aliceblue; padding-top: 30px; padding-left: 20px"
-        >
-          Date
-        </p>
-
-        <input type="date" id="edit-datePicker" />
-        <p
-          class="time"
-          class="date"
-          style="color: aliceblue; padding-top: 30px; padding-left: 20px"
-        >
-          Time
-        </p>
-        <label for="appt"></label>
-        <input type="time" id="edit-appt" name="appt" min="09:00" max="18:00" />
-        Start Time
-        <label for="appt"></label>
-        <input
-          type="time"
-          id="edit-appt_1"
-          name="appt"
-          min="09:00"
-          max="18:00"
-        />
-        End Time
-        <button
-          type="button"
-          class="edit-cancel_btn"
-          style="
-            color: white;
-            margin-top: 50px;
-            margin-left: 85px;
-            padding-top: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 3px;
-            border: 1px solid white;
-            font-size: x-large;
-            border-radius: 7px;
-            background-color: hsla(0, 0%, 98%, 0.2);
-          "
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          class="edit-save"
-          style="
-            color: white;
-            margin-top: 50px;
-            margin-left: 85px;
-            padding-top: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-bottom: 5px;
-            border: 1px solid white;
-            font-size: xx-large;
-            border-radius: 7px;
-            background-color: hsla(0, 0%, 98%, 0.2);
-          "
-        >
-          Done
-        </button>
-      </div>
-
-      <!-- ADD TASK SECTION -->
-      <div class="addTask_menu hideContainer" id="addTask_container">
-        <div class="currentMonth">
-          <h1 id="currentMonthYear"></h1>
         </div>
-        <div class="addtask">
-          <button id="addTask" class="addButton">+ add task</button>
+        <div class="mb-3">
+          <label for="task_description_input" class="form-label text-white"
+            >Description</label
+          >
+          <input type="text" class="form-control" id="edit-description" />
         </div>
-      </div>
-
-      <!-- CALENDAR SECTION -->
-      <div class="calender_menu hideContainer" id="calender_container">
-        <div class="calendar-container">
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Hang Out', '23 January')"
-          >
-            <p class="task-date">23rd Tue</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Stress Out', '24 January')"
-          >
-            <p class="task-date">24th Wed</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Work Out', '25 January')"
-          >
-            <p class="task-date">25th Thu</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Calm Down', '26 January')"
-          >
-            <p class="task-date">26th Fri</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Git Down', '26 January')"
-          >
-            <p class="task-date">27th Sat</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Chill Out', '26 January')"
-          >
-            <p class="task-date">28th Sun</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
+        <div class="mb-3">
+          <label for="datePicker" class="form-label text-white">Date</label>
+          <input
+            type="date"
+            class="form-control"
+            id="edit-datePicker"
+            onchange="datePicked(this)"
+          />
         </div>
-      </div>
 
-      <!-- TASK SECTION -->
-      <div class="hideContainer" id="task_container">
-        <h2>Task</h2>
-        <!-- new task generated -->
-        <div class="col p-3 text-white" id="task_list"></div>
-      </div>
-    </div>
-
-    <!-- FOOTER SECTION -->
-    <footer class="footer">
-      <section class="bottomOption_menu">
-        <div class="home bottomOption">
-          <i class="fa-solid fa-house fa-xl"></i>
+        <div class="row mb-3">
+          <div class="col-sm-6 p-3 text-black">
+            <label for="task_start_time" class="form-label text-white"
+              >Start Time</label
+            >
+            <input type="time" class="form-control" id="edit-appt" />
+          </div>
+          <div class="col-sm-6 p-3 text-black">
+            <label for="task_end_time" class="form-label text-white"
+              >End Time</label
+            >
+            <input type="time" class="form-control" id="edit-appt_1" />
+          </div>
         </div>
 
         <div
-          class="calendar bottomOption"
-          onclick="document.getElementById('datePicker').click();"
+          class="row"
+          class="task_button_container"
+          id="task_button_container"
         >
-          <i class="fa-regular fa-calendar-days fa-xl"></i>
+          <div
+            class="col-sm-12 task_button_container"
+            id="task_add_cancel_group"
+          >
+            <button
+              class="save btn btn-white btn-lg task_button_container"
+              id="save_edit_task_button"
+            >
+              Save
+            </button>
+            <button
+              class="cancel_btn btn btn-white btn-lg task_button_container"
+              id="cancel_edit_task_button"
+            >
+              Cancel
+            </button>
+          </div>
         </div>
+      </div>
 
-        <div class="alerts bottomOption">
-          <i class="fa-regular fa-bell fa-xl"></i>
-        </div>
-        <div class="search bottomOption">
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-        </div>
-      </section>
-    </footer>
+<!--- MAIN WRAPPER ---> 
+<div class="container-fluid wrapper_container" id="wrapper_container">
+
+  <!-- ADD TASK SECTION -->
+  <div class=" p-3 hideContainer" id="addTask_container">
+    
+    <div class="currentMonth" id="currentMonth">
+      <h1 id="currentMonthYear" class="fs-2"></h1>
+    </div>
+    <div class="addtask">
+      <button id="addTask" class="addButton">+ add task</button>
+    </div>
+  </div>
+
+  <!-- CALENDAR SECTION -->
+  <div class="calender_menu hideContainer" id="calender_container">
+          <div class="calendar-container">
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Hang Out', '23 January')"
+            >
+              <p class="task-date">23rd Tue</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Stress Out', '24 January')"
+            >
+              <p class="task-date">24th Wed</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Work Out', '25 January')"
+            >
+              <p class="task-date">25th Thu</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Calm Down', '26 January')"
+            >
+              <p class="task-date">26th Fri</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Git Down', '26 January')"
+            >
+              <p class="task-date">27th Sat</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+            <div
+              class="calendar-day"
+              onclick="showTaskDetails('Chill Out', '26 January')"
+            >
+              <p class="task-date">28th Sun</p>
+              <ul class="task-list">
+                <li class="task-item">
+                  <span class="task-name">Show</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+  </div>
+
+  <!-- TASK SECTION -->
+  <div class="col text-black text-center" id="task_list">
+  </div>
+  
+  <div class="hideContainer" id="task_container">
+    <!-- new task generated -->
+    
+  </div>
+
+</div>
+<!---END MAIN WRAPPER ---> 
   </body>
 </html>

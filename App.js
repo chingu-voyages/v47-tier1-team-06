@@ -19,12 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCurrentMonthDisplay(); // Update the display to show the current month and year
 
     // Click event listener for the calendar icon
-    document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-        const datePicker = document.getElementById('datePicker');
+    // document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
+    //     const datePicker = document.getElementById('datePicker');
         // Optional: You might want to toggle visibility or apply some style changes before clicking
-        datePicker.style.display = 'block'; // Make it visible if it's initially hidden
-        datePicker.click(); // Programmatically click the hidden date input
-    });
+        // datePicker.style.display = 'block'; // Make it visible if it's initially hidden
+        // datePicker.click(); // Programmatically click the hidden date input
+    // });
 
 });
 
@@ -73,12 +73,13 @@ function getOrdinalSuffix(day) {
       default: return "th";
     }
 }
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-        const datePicker = document.getElementById('datePicker');
-        datePicker.click();
-    });
-});
+
+// document.addEventListener('DOMContentLoaded', function() {
+//     document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
+//         const datePicker = document.getElementById('datePicker');
+//         datePicker.click();
+//     });
+// });
 
 
 // popup save btn
@@ -110,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // ------------------------------------------------------------------------------------------------
 
         document.getElementById('popup_main_container').style.display = 'none';
-        document.getElementsById("#hideContainer").style.display = '';
+        // document.getElementsById("#hideContainer").style.display = '';
         document.getElementById("task_title_input").value = "";
         document.getElementById("task_description_input").value = "";
         document.getElementById("datePicker").value = "";
@@ -124,11 +125,11 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("task_list").innerHTML = '';
         let tasksOnAGivenDay = taskContainer.getTasks(year, month, day);
 
-        document.getElementById("task_list").textContent = `Tasks for ${monthString[month - 1]} ${day}${getOrdinalSuffix(day)}, ${year}`;
+        document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for ${monthString[month - 1]} ${day}${getOrdinalSuffix(day)}, ${year}</h2>`;
         
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
-            newTask.className = "col p-3 bg-white text-black";
+            newTask.className = "col bg-white text-black text-center p-2";
             newTask.innerHTML = `
                 <h1>${aTask.title}</h1>
                 <p>${aTask.description}</p>
@@ -137,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let delete_button = document.createElement("button");
 
-            delete_button.className = "btn btn-danger task_item_delete_button";
+            delete_button.className = "btn btn-danger task_item_delete_button btn-sm";
             delete_button.textContent = "Delete";
 
             // delete task
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let edit_button = document.createElement("button");
 
-            edit_button.className = "btn btn-danger task_item_edit_button";
+            edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
             edit_button.textContent = "Edit";
             edit_button.addEventListener("click", () => { editTask(aTask, year, month, day) });
             
@@ -162,15 +163,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // delete task
     function deleteTask(taskDelete, year, month, day) {
-        console.log("delete button clicked")
-        // taskContainer.removeTask(taskDelete, year, month, day);
-        // displayTasks(year, month, day);
+        return console.log("delete button clicked from task list")
+        taskContainer.removeTask(taskDelete, year, month, day);
+        displayTasks(year, month, day);
     }
 
     // edit task
     // ----------------------------------------------------------------------------------------------
     function editTask(taskDelete, year, month, day) {
-        document.getElementById("edit-popup").style.display = 'block';
+        document.getElementById("popup_edit_container").style.display = 'block';
 
         document.getElementById("edit-title").value = taskDelete.title;
         document.getElementById("edit-description").value = taskDelete.description;
@@ -178,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("edit-appt").value = convertTime24hr(taskDelete.startTime);
         document.getElementById("edit-appt_1").value = convertTime24hr(taskDelete.endTime);
 
-        document.querySelector(".edit-save").addEventListener("click", () => { saveEditsMade(taskDelete, year, month, day) });
+        document.querySelector("#save_edit_task_button").addEventListener("click", () => { saveEditsMade(taskDelete, year, month, day) });
     }
 
     // turn year, month, date numbers into yyyy-mm-dd format
@@ -213,6 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // edit save button
    function saveEditsMade(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay) {
+        return console.log("save button clicke in edit popup")
         // get user input
         let title = document.getElementById("edit-title").value;
         let description = document.getElementById("edit-description").value;
@@ -235,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         displayTasks(beforeEditYear, beforeEditMonth, beforeEditDay);
 
-        document.getElementById('edit-popup').style.display = 'none';
+        document.getElementById('popup_edit_container').style.display = 'none';
 
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
@@ -246,13 +248,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // edit popup cancel btn
-    document.querySelector("#cancel_task_button").addEventListener("click", function() {
+    document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
         document.getElementById("edit-appt").value = "";
         document.getElementById("edit-appt_1").value = "";
-        document.getElementById('edit-popup').style.display = 'none';
+        document.getElementById('popup_edit_container').style.display = 'none';
     });
     // ------------------------------------------------------------------------------------------------
 

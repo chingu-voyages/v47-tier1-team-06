@@ -1,166 +1,4 @@
-.task_item_edit_button{
-  margin-right: 10px;
-}
-/* color variables */
-:root {
-  --primary: #f15454;
-  --lightPink: #f4afaf;
-
-}
-#popup_main_container{
-  display: none;
-}
-
-#popup{
-  z-index: 6;
-  display: block;
-  position: absolute;
-  /* top: 0;
-  left: 0; */
-  max-width: auto;
-  height: 800px;
-  /* margin-left: 100px; */
-  /* border-radius: 7px; */
-  /* margin-top: 130px; */
-  background-color: #f15454;
-}
-
-#save_button{
-  color: white;
-  margin-top: 50px;
-  margin-left: 85px;
-  padding-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 5px;
-  border: 1px solid white;
-  font-size: xx-large;
-  border-radius: 7px;
-  background-color: hsla(0, 0%, 98%, 0.2);
-}
-
-#cancel_button{
-  color: white;
-  margin-top: 50px;
-  margin-left: 85px;
-  padding-top: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 3px;
-  border: 1px solid white;
-  font-size: x-large;
-  border-radius: 7px;
-  background-color: hsla(0, 0%, 98%, 0.2);
-}
-/* reset */
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "montserrat", sans-serif;
-} */
-
-/* reset */
-/* input:not([type="radio"]):not([type="checkbox"]),
-button,
-textarea {
-  appearance: none;
-  border: none;
-  outline: none;
-  background: none;
-  cursor: initial;
-} */
-
-/* body {
-  background: var(--background);
-  color: var(--dark);
-} */
-
-/* section {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-} */
-
-/* h3 {
-  color: var(--dark);
-  font-size: 1rem;
-  font-weight: 400;
-  margin-bottom: 0.5rem;
-} */
-
-/* h4 {
-  color: var(--grey);
-  font-size: 0.875rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-} */
-
-/* i {
-  cursor: pointer;
-} */
-
-.topOption_menu {
-  display: flex;
-}
-
-.backArrow {
-  margin-right: auto;
-}
-
-.addTask_menu {
-  display: flex;
-  
-  align-items: center;
-  justify-content: center;
-}
-
-.currentMonth {
-  margin-right: auto;
-}
-
-.addButton {
-  border: 1px;
-}
-
-.addtask .addButton {
-  height: 4rem;
-  width: 7rem;
-  border-radius: 0.5rem;
-  margin-right: 0.5rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  background-color: var(--primary);
-}
-
-.addButton {
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.addButton button {
-  display: flex;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  transition: 0.2s ease-in-out;
-}
-
-.calender_menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-/*//////////////////////////////////////////
-////// PEACHES CODE
-//////////////////////////////////////////*/
+/*////////////PEACHES CSS CODE///////////////////*/
 
 .calendar-container {
   display: grid;
@@ -218,94 +56,106 @@ textarea {
   flex-grow: 1;
 }
 
-/* ///////////////////////////////////////*/
-.task_list .list {
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  padding: 0rem;
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-}
+/* //////////////END OF PEACHES CSS CODE//////////////*/
 
-.todo-item {
-  display: block;
-  align-items: center;
-  justify-content: center;
-}
 
-.todo-item label {
-  display: flex;
-  cursor: pointer;
-}
+/*///////////////// POPUP CSS ////////////////////////*/
+:root {
+  --primary: #f15454;
+  --lightPink: #f4afaf;
+}  
 
-.task_list .todo-item textarea {
-  display: inline-block;
-  width: 100%;
-  height: 50px;
-  /* padding-bottom: 1rem; */
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-
-.bottomOption_menu {
-  display: flex;
+/* dont display the popup on load */
+.popupContainer{
+  position:absolute;
+  background-color:var(--primary);
   height: 100%;
 }
 
-.bottomOption_menu i {
-  color: var(--grey);
+#popup_main_container{
+  display: none;
 }
 
-.bottomOption_menu i:hover {
-  opacity: 0.75;
-  color: var(--hover);
+#popup_edit_container{
+  display: none;
+  z-index: 7;
 }
 
-.alerts {
+.task_button_container {
+  display: flex;
+  margin: auto;
+}
+
+.task_button_container button {
+  color: #FFF;
+}
+
+.task_button_container button:hover {
+  background-color: #f4afaf;
+}
+
+/*///////////////END POPUP CSS ////////////////////////*/
+
+#addTask_container{
+  display: flex;
+  align-items: center;
+}
+#currentMonth{
   margin-right: auto;
 }
 
-.calendar {
-  margin-right: auto;
+.task_item_edit_button{
+  margin-right: 10px;
 }
 
-.home {
-  margin-right: auto;
+#save_button{
+  color: white;
+  margin-top: 50px;
+  margin-left: 85px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  border: 1px solid white;
+  font-size: xx-large;
+  border-radius: 7px;
+  background-color: hsla(0, 0%, 98%, 0.2);
 }
 
-/* #popup input {
-  background-color: white;
-  margin-left: 1rem;
-  margin-top: 1rem;
-  height: 2rem;
-  font-size: large;
-} */
-
-.delete-button {
-  background-color: #f15454;
-  width: 6em;
-  height: 2em;
-  border-radius: 9px;
-  margin-top: 10px;
+.addButton {
+  border: 1px;
 }
 
-/* .task {
+.addtask .addButton {
+  height: 4rem;
+  width: 7rem;
+  border-radius: 0.5rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  background-color: var(--primary);
+}
+
+.addButton {
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.calender_menu {
   display: flex;
   flex-direction: column;
-  padding: 1em;
-} */
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
 
-.footer{
-  display: none;
-}
-.topOption_menu{
-  display: none;
-}
+
+
+
+
+
+

@@ -1,0 +1,27 @@
+/*///////////////// POPUP CSS ////////////////////////*/
+:root {
+    --primary: #f15454;
+    --lightPink: #f4afaf;
+}  
+
+/* dont display the popup on load */
+#popup_main_container{
+    /* display: none; */
+    background-color:var(--primary);
+    
+}
+
+.task_button_container {
+    display: flex;
+    margin: auto;
+}
+
+.task_button_container button {
+    color: #FFF;
+}
+
+.task_button_container button:hover {
+    background-color: #f4afaf;
+}
+
+/*///////////////END// POPUP CSS ////////////////////////*/

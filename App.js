@@ -240,7 +240,7 @@ function getOrdinalSuffix(day) {
 
         displayTasks(beforeEditYear, beforeEditMonth, beforeEditDay);
      
-        document.getElementById('edit-popup').style.display = 'none';
+        document.getElementById('popup_edit_container').style.display = 'none';
      
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";

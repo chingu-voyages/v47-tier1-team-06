@@ -188,13 +188,3 @@
   flex-direction: column;
 
 }
-
-#currentMonthYear,
-#addTask {
-  position: sticky;
-  top: 0;
-  background-color: white;
-  /* Ajusta el color de fondo según sea necesario */
-  z-index: 1;
-  /* Asegura que estén por encima del contenido de las tareas */
-}

@@ -83,7 +83,8 @@ function getOrdinalSuffix(day) {
 
 
 // popup save btn
-    document.querySelector("#add_task_button").addEventListener("click", function() {
+    document.querySelector("#add_task_button").addEventListener("click", function(event) {
+        event.preventDefault();
         // get user input
         let title = document.getElementById("task_title_input").value;
         let description = document.getElementById("task_description_input").value;
@@ -91,6 +92,16 @@ function getOrdinalSuffix(day) {
         let startTime = document.getElementById("task_start_time").value;
         let endTime = document.getElementById("task_end_time").value;
 
+        if (title === '' || description === '' || dates === '' || startTime === '' || endTime === '') {
+            alert('You need to fill out everything.');
+            document.getElementById("popup_main_container").style.display = "block";
+            document.querySelector(".hideContainer").style.display = "none";
+           return;
+        } else {
+           
+            document.querySelector(".hideContainer").style.display = "flex";
+        }
+    
         // turn dates into seperate integers and convert time into military time
         let year = parseInt(dates.slice(0,4));
         let month = parseInt(dates.slice(5, 7));
@@ -98,6 +109,8 @@ function getOrdinalSuffix(day) {
         let startmilitaryTime = parseInt(startTime.slice(0,2) + startTime.slice(3));
         let endMilitaryTime = parseInt(endTime.slice(0,2) + endTime.slice(3));
 
+
+        
         // add task
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
         

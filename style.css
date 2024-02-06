@@ -83,7 +83,7 @@
 
 .task_button_container {
   display: flex;
-  margin: auto;
+  justify-content: space-evenly;
 }
 
 .task_button_container button {
@@ -92,6 +92,15 @@
 
 .task_button_container button:hover {
   background-color: #f4afaf;
+}
+#popup_time_container{
+  margin-top: 0.25rem;
+}
+.time_container{
+  margin: 1rem;
+}
+.time_labels{
+  margin-bottom: 0.50rem;
 }
 
 /*///////////////END POPUP CSS ////////////////////////*/
@@ -153,9 +162,13 @@
   cursor: pointer;
 }
 
-
-
-
+.times{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 3em;
+  padding-bottom: 8em;
+}
 
 
 

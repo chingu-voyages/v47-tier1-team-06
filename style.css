@@ -83,7 +83,9 @@
 
 .task_button_container {
   display: flex;
-  margin: auto;
+  justify-content: space-evenly;
+  
+  
 }
 
 .task_button_container button {
@@ -155,7 +157,13 @@
 
 
 
-
+.times{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 3em;
+  padding-bottom: 8em;
+}
 
 
 

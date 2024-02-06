@@ -41,7 +41,8 @@
 }
 
 .calendar-day:hover {
-  background-color: #f15454; /* Change color on hover */
+  background-color: #f15454;
+  /* Change color on hover */
 }
 
 .task-item {
@@ -63,29 +64,33 @@
 :root {
   --primary: #f15454;
   --lightPink: #f4afaf;
-}  
+}
 
 /* dont display the popup on load */
-.popupContainer{
-  position:absolute;
-  background-color:var(--primary);
+.popupContainer {
+  position: absolute;
+  background-color: var(--primary);
   height: 100%;
+
 }
 
-#popup_main_container{
+#popup_main_container {
+
   display: none;
+
 }
 
-#popup_edit_container{
+#popup_edit_container {
   display: none;
   z-index: 7;
+
 }
 
 .task_button_container {
   display: flex;
   justify-content: space-evenly;
-  
-  
+
+
 }
 
 .task_button_container button {
@@ -98,19 +103,22 @@
 
 /*///////////////END POPUP CSS ////////////////////////*/
 
-#addTask_container{
+#addTask_container {
   display: flex;
   align-items: center;
+
+
 }
-#currentMonth{
+
+#currentMonth {
   margin-right: auto;
 }
 
-.task_item_edit_button{
+.task_item_edit_button {
   margin-right: 10px;
 }
 
-#save_button{
+#save_button {
   color: white;
   margin-top: 50px;
   margin-left: 85px;
@@ -153,17 +161,34 @@
   background-color: #fff;
   border-radius: 0.5rem;
   cursor: pointer;
+
 }
 
 
 
-.times{
+.times {
   display: flex;
   justify-content: center;
   text-align: center;
   margin-top: 3em;
   padding-bottom: 8em;
+
+
 }
 
 
+/* vertical scroll*/
 
+
+#task_list {
+  max-height: 600px;
+  overflow-y: auto;
+
+
+}
+
+.task-container {
+  display: flex;
+  flex-direction: column;
+
+}

@@ -178,12 +178,17 @@
 
 
 /* vertical scroll*/
+#task_list {
+  max-height: 300px;
+
+  overflow-y: auto;
+
+}
 
 
 
 .task-container {
-  max-height: 600px;
-  overflow-y: auto;
+
   display: flex;
   flex-direction: column;
 

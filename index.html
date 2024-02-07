@@ -83,35 +83,32 @@
           />
         </div>
 
-        <div class="row mb-3 times">
-          <div class="col-sm-6 p-3 text-black">
-            <label for="task_start_time" class="form-label text-white"
-              >Start Time</label
-            >
-            <input type="number" name="tentacles" class="input-timepicker" id="task_start_time" min="0" max="12" />
-            <label>:</label>
-            <input type="number" name="tentacles" class="input-timepicker" id="task_start_time" min="0" max="59" />
+        <div class="row times" id="popup_time_container">
 
-            <select name="ampm" id="ampm">
+          <div class="row time_container" id="startTime_container">
+            <label class="text-white time_labels">Start Time</label>
+            <div class="col"><input type="number" class="input-timepicker form-control" id="task_start_time_hour" min="0" max="12" /></div>
+            <div class="col"><input type="number" class="input-timepicker form-control" id="task_start_time_minute" min="0" max="59" /></div>
+            <div class="col">            <select name="ampm" id="ampm" class="form-control">
               <option value="">AM/PM</option>
               <option value="am">AM</option>
               <option value="pm">PM</option>
-            </select>
-          </div>
-          <div class="col-sm-6 p-3 text-black">
-            <label for="task_end_time" class="form-label text-white"
-              >End Time</label
-            >
-            <input type="number" class="input-timepickers" id="task_end_time" min="0" max="12" />
-            <label>:</label>
-            <input type="number" class="input-timepicker" id="task_start_time" min="0" max="59" />
+            </select></div>
+          </div> 
 
-            <select name="ampm2" id="ampm">
-              <option value="">AM/PM</option>
-              <option value="am">AM</option>
-              <option value="pm">PM</option>
-            </select>
-          </div>
+          <div class="row time_container" id="endTime_container">
+            <label class="text-white time_labels">End Time</label>
+            <div class="col"><input type="number" class="input-timepicker form-control" id="task_end_time_hour" min="0" max="12" /></div>
+            <div class="col"><input type="number" class="input-timepicker form-control" id="task_end_time_minute" min="0" max="59" /></div>
+            <div class="col">
+              <select name="ampm" id="ampm" class="form-control">
+                <option value="">AM/PM</option>
+                <option value="am">AM</option>
+                <option value="pm">PM</option>
+              </select>
+            </div>
+          </div> 
+
         </div>
 
         <div
@@ -310,6 +307,7 @@
 
 </div>
 <!---END MAIN WRAPPER ---> 
+
     <footer>
       <a href="https://github.com/chingu-voyages/v47-tier1-team-06">Created by Chingu Voyage😃</a>
     </footer>

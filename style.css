@@ -90,8 +90,6 @@
 .task_button_container {
   display: flex;
   justify-content: space-evenly;
-  
-  
 }
 
 .task_button_container button {
@@ -100,6 +98,15 @@
 
 .task_button_container button:hover {
   background-color: #f4afaf;
+}
+#popup_time_container{
+  margin-top: 0.25rem;
+}
+.time_container{
+  margin: 1rem;
+}
+.time_labels{
+  margin-bottom: 0.50rem;
 }
 
 /*///////////////END POPUP CSS ////////////////////////*/
@@ -172,7 +179,6 @@
   border-radius: 0.5rem;
   cursor: pointer;
 }
-
 
 
 .times{

@@ -11,6 +11,8 @@ window.onbeforeunload = function(event) {
 
 // date logic------------------------------------------------------------
 let baseDate = new Date(); // Initialize date displayed with the current date
+
+// get today's date
 const todayMonth = baseDate.getMonth();
 const todayYear = baseDate.getFullYear();
 
@@ -131,6 +133,7 @@ function turnIntoMilitaryTime(hour, minute, ampm) {
 
 // display---------------------------------------------------------------------------
 
+// go to next month
 document.querySelector("#next_month").addEventListener("click", function(event) {
     baseDate.setDate(1);
     if (baseDate.getMonth() === 11) {
@@ -143,6 +146,7 @@ document.querySelector("#next_month").addEventListener("click", function(event) 
     displayMonth();
 });
 
+// go to previous month
 document.querySelector("#previous_month").addEventListener("click", function(event) {
     baseDate.setDate(1);
     if (baseDate.getMonth() === 0) {
@@ -160,12 +164,14 @@ function displayMonth() {
     let container = document.querySelector(".calendar-container");
     let dayCount = daysInMonth(baseDate.getMonth() + 1, baseDate.getFullYear());
 
+    // reset month/day displayed
     container.innerHTML = '';
     document.getElementById("task_list").innerHTML = '';
 
     document.getElementById("currentMonthYear").innerHTML = monthString[baseDate.getMonth()] 
     + " " + baseDate.getFullYear();
 
+    // user cannot see past months
     if (baseDate.getMonth() === todayMonth && baseDate.getFullYear() === todayYear) {
         document.getElementById("previous_month").style.display = "none";
     } else {

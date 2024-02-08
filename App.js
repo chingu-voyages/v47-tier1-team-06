@@ -257,6 +257,29 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let endTimeHour = document.getElementById("task_end_time_hour").value;
     let endTimeMinute = document.getElementById("task_end_time_minute").value;
     let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
+    let baseDate = new Date(); 
+    let dateInput = new Date(dates);
+    let max = new Date();
+    max.setFullYear(max.getFullYear() + 3);
+    
+    if (dateInput < baseDate) {
+        alert('The input date is in the past.');
+        return;
+    }
+
+    if (dateInput > max) {
+        alert('Please select a date within the next 3 years.');
+        return;
+    }
+
+    if (task_start_time_hour.value < 1 || task_start_time_hour.value > 12
+        || task_start_time_minute.value < 0 || task_start_time_minute.value > 59
+        || task_end_time_hour.value < 1 || task_end_time_hour.value > 12
+        || task_end_time_minute.value < 0 || task_end_time_minute.value > 59) {
+            alert('please enter valid time in this format  - 00:00');
+            return;
+        }
+
 
     if (title === '' || description === '' || dates === '' || startTimeHour === '' || startTimeMinute === ''
     || startTimeAmPm === '' || endTimeHour === '' || endTimeMinute === '' || endTimeAmPm === '') {

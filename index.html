@@ -7,7 +7,7 @@
 
     <!--JQUERY LIBRARY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-   
+
     <!-- FONTAWSOME -->
     <script
       defer
@@ -41,7 +41,6 @@
           jQuery("#popup_main_container").css({ display: "block" });
           jQuery(".hideContainer").css({ display: "none" });
         });
-        
       });
 
       function jsfunction() {
@@ -49,268 +48,331 @@
       }
     </script>
 
-      <!--------------------- POPUP HTML SECTION ---------------------->
+    <!--------------------- POPUP HTML SECTION ---------------------->
 
-      <div class="container-fluid text-left popupContainer" id="popup_main_container">
-        <div class="row top_menu text-center" id="top_menu">
-          <div class="col p-3 text-white fs-1" id="monthYear">New Task</div>
-        </div>
+    <div
+      class="container-fluid text-left popupContainer"
+      id="popup_main_container"
+    >
+      <div class="row top_menu text-center" id="top_menu">
+        <div class="col p-3 text-white fs-1" id="monthYear">New Task</div>
+      </div>
 
-        <div class="mb-3 border-bottom border-danger">
-          <label for="task_title_input" class="form-label text-white"
-            >Task Title</label
-          >
-          <input
-            type="text"
-            class="form-control"
-            id="task_title_input"
-            aria-describedby="TaskTitle"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="task_description_input" class="form-label text-white"
-            >Description</label
-          >
-          <input type="text" class="form-control" id="task_description_input" />
-        </div>
-        <div class="mb-3">
-          <label for="datePicker" class="form-label text-white">Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="datePicker"
-            onchange="datePicked(this)"
-          />
-        </div>
+      <div class="mb-3 border-bottom border-danger">
+        <label for="task_title_input" class="form-label text-white"
+          >Task Title</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="task_title_input"
+          aria-describedby="TaskTitle"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="task_description_input" class="form-label text-white"
+          >Description</label
+        >
+        <input type="text" class="form-control" id="task_description_input" />
+      </div>
+      <div class="mb-3">
+        <label for="datePicker" class="form-label text-white">Date</label>
+        <input type="date" class="form-control" id="datePicker" />
+      </div>
 
-        <div class="row times" id="popup_time_container">
-
-          <div class="row time_container" id="startTime_container">
-            <label class="text-white time_labels">Start Time</label>
-            <div class="col"><input type="number" class="input-timepicker form-control" id="task_start_time_hour" min="0" max="12" /></div>
-            <div class="col"><input type="number" class="input-timepicker form-control" id="task_start_time_minute" min="0" max="59" /></div>
-            <div class="col">            <select name="ampm" id="ampm" class="form-control">
+      <div class="row times" id="popup_time_container">
+        <div class="row time_container" id="startTime_container">
+          <label class="text-white time_labels">Start Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_start_time_hour"
+              min="0"
+              max="12"
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_start_time_minute"
+              min="0"
+              max="59"
+            />
+          </div>
+          <div class="col">
+            <select name="ampm" id="task_start_time_ampm" class="form-control">
               <option value="">AM/PM</option>
               <option value="am">AM</option>
               <option value="pm">PM</option>
-            </select></div>
-          </div> 
-
-          <div class="row time_container" id="endTime_container">
-            <label class="text-white time_labels">End Time</label>
-            <div class="col"><input type="number" class="input-timepicker form-control" id="task_end_time_hour" min="0" max="12" /></div>
-            <div class="col"><input type="number" class="input-timepicker form-control" id="task_end_time_minute" min="0" max="59" /></div>
-            <div class="col">
-              <select name="ampm" id="ampm" class="form-control">
-                <option value="">AM/PM</option>
-                <option value="am">AM</option>
-                <option value="pm">PM</option>
-              </select>
-            </div>
-          </div> 
-
+            </select>
+          </div>
         </div>
 
-        <div
-          class="row"
-          class="task_button_container"
-          id="task_button_container"
-        >
-          <div
-            class="col-sm-12 task_button_container"
-            id="task_add_cancel_group"
-          >
-            <button
-              class="save btn btn-white btn-lg task_button_container"
-              id="add_task_button"
-            >
-              Add Task
-            </button>
-            <button
-              class="cancel_btn btn btn-white btn-lg task_button_container"
-              id="cancel_task_button"
-            >
-              Cancel
-            </button>
+        <div class="row time_container" id="endTime_container">
+          <label class="text-white time_labels">End Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_end_time_hour"
+              min="0"
+              max="12"
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_end_time_minute"
+              min="0"
+              max="59"
+            />
+          </div>
+          <div class="col">
+            <select name="ampm" id="task_end_time_ampm" class="form-control">
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <!-------------------- EDIT TASK POPUP SECTION ------------------>
-
-      <div class="container-fluid text-left popupContainer" id="popup_edit_container">
-        <div class="row top_menu text-center" id="top_menu">
-          <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
-        </div>
-
-        <div class="mb-3 border-bottom border-danger">
-          <label for="task_title_input" class="form-label text-white"
-            >Task Title</label
+      <div class="row" class="task_button_container" id="task_button_container">
+        <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
+          <button
+            class="save btn btn-white btn-lg task_button_container"
+            id="add_task_button"
           >
-          <input
-            type="text"
-            class="form-control"
-            id="edit-title"
-            aria-describedby="TaskTitle"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="task_description_input" class="form-label text-white"
-            >Description</label
+            Add Task
+          </button>
+          <button
+            class="cancel_btn btn btn-white btn-lg task_button_container"
+            id="cancel_task_button"
           >
-          <input type="text" class="form-control" id="edit-description" />
+            Cancel
+          </button>
         </div>
-        <div class="mb-3">
-          <label for="datePicker" class="form-label text-white">Date</label>
-          <input
-            type="date"
-            class="form-control"
-            id="edit-datePicker"
-            onchange="datePicked(this)"
-          />
-        </div>
+      </div>
+    </div>
 
-        <div class="row mb-3">
-          <div class="col-sm-6 p-3 text-black">
-            <label for="task_start_time" class="form-label text-white"
-              >Start Time</label
-            >
-            <input type="text" class="form-control" id="input-timepicker" />
-          </div>
-          <div class="col-sm-6 p-3 text-black">
-            <label for="task_end_time" class="form-label text-white"
-              >End Time</label
-            >
-            <input type="time" class="form-control" id="edit-appt_1" />
-          </div>
-        </div>
+    <!-------------------- EDIT TASK POPUP SECTION ------------------>
 
-        <div
-          class="row"
-          class="task_button_container"
-          id="task_button_container"
+    <div
+      class="container-fluid text-left popupContainer"
+      id="popup_edit_container"
+    >
+      <div class="row top_menu text-center" id="top_menu">
+        <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
+      </div>
+
+      <div class="mb-3 border-bottom border-danger">
+        <label for="task_title_input" class="form-label text-white"
+          >Task Title</label
         >
-          <div
-            class="col-sm-12 task_button_container"
-            id="task_add_cancel_group"
-          >
-            <button
-              class="save btn btn-white btn-lg task_button_container"
-              id="save_edit_task_button"
+        <input
+          type="text"
+          class="form-control"
+          id="edit-title"
+          aria-describedby="TaskTitle"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="task_description_input" class="form-label text-white"
+          >Description</label
+        >
+        <input type="text" class="form-control" id="edit-description" />
+      </div>
+      <div class="mb-3">
+        <label for="datePicker" class="form-label text-white">Date</label>
+        <input type="date" class="form-control" id="edit-datePicker" />
+      </div>
+
+      <div class="row times" id="popup_time_container">
+        <div class="row time_container" id="startTime_container">
+          <label class="text-white time_labels">Start Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_start_time_hour"
+              min="0"
+              max="12"
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_start_time_minute"
+              min="0"
+              max="59"
+            />
+          </div>
+          <div class="col">
+            <select
+              name="ampm"
+              id="edit-task_start_time_ampm"
+              class="form-control"
             >
-              Save
-            </button>
-            <button
-              class="cancel_btn btn btn-white btn-lg task_button_container"
-              id="cancel_edit_task_button"
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row time_container" id="endTime_container">
+          <label class="text-white time_labels">End Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_end_time_hour"
+              min="0"
+              max="12"
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_end_time_minute"
+              min="0"
+              max="59"
+            />
+          </div>
+          <div class="col">
+            <select
+              name="ampm"
+              id="edit-task_end_time_ampm"
+              class="form-control"
             >
-              Cancel
-            </button>
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
           </div>
         </div>
       </div>
 
-<!--- MAIN WRAPPER ---> 
-<div class="container-fluid wrapper_container" id="wrapper_container">
-
-  <!-- ADD TASK SECTION -->
-  <div class=" p-3 hideContainer" id="addTask_container">
-    
-    <div class="currentMonth" id="currentMonth">
-      <h1 id="currentMonthYear" class="fs-2"></h1>
+      <div class="row" class="task_button_container" id="task_button_container">
+        <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
+          <button
+            class="save btn btn-white btn-lg task_button_container"
+            id="save_edit_task_button"
+          >
+            Save
+          </button>
+          <button
+            class="cancel_btn btn btn-white btn-lg task_button_container"
+            id="cancel_edit_task_button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="addtask">
-      <button id="addTask" class="addButton">+ add task</button>
-    </div>
-  </div>
 
-  <!-- CALENDAR SECTION -->
-  <div class="calender_menu hideContainer" id="calender_container">
-          <div class="calendar-container">
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Hang Out', '23 January')"
-            >
-              <p class="task-date">23rd Tue</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Stress Out', '24 January')"
-            >
-              <p class="task-date">24th Wed</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Work Out', '25 January')"
-            >
-              <p class="task-date">25th Thu</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Calm Down', '26 January')"
-            >
-              <p class="task-date">26th Fri</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Git Down', '26 January')"
-            >
-              <p class="task-date">27th Sat</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
-            <div
-              class="calendar-day"
-              onclick="showTaskDetails('Chill Out', '26 January')"
-            >
-              <p class="task-date">28th Sun</p>
-              <ul class="task-list">
-                <li class="task-item">
-                  <span class="task-name">Show</span>
-                </li>
-              </ul>
-            </div>
+    <!--- MAIN WRAPPER --->
+    <div class="container-fluid wrapper_container" id="wrapper_container">
+      <!-- ADD TASK SECTION -->
+      <div class="p-3 hideContainer" id="addTask_container">
+        <div class="currentMonth" id="currentMonth">
+          <h1 id="currentMonthYear" class="fs-2"></h1>
+        </div>
+        <div class="addtask">
+          <button id="addTask" class="addButton">+ add task</button>
+        </div>
+      </div>
+
+      <!-- CALENDAR SECTION -->
+      <div class="calender_menu hideContainer" id="calender_container">
+        <div class="calendar-container">
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Hang Out', '23 January')"
+          >
+            <p class="task-date">23rd Tue</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
           </div>
-  </div>
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Stress Out', '24 January')"
+          >
+            <p class="task-date">24th Wed</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Work Out', '25 January')"
+          >
+            <p class="task-date">25th Thu</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Calm Down', '26 January')"
+          >
+            <p class="task-date">26th Fri</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Git Down', '26 January')"
+          >
+            <p class="task-date">27th Sat</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="calendar-day"
+            onclick="showTaskDetails('Chill Out', '26 January')"
+          >
+            <p class="task-date">28th Sun</p>
+            <ul class="task-list">
+              <li class="task-item">
+                <span class="task-name">Show</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-  <!-- TASK SECTION -->
-  <div class="col text-black text-center" id="task_list">
-  </div>
-  
-  <div class="hideContainer" id="task_container">
-    <!-- new task generated -->
-    
-  </div>
+      <!-- TASK SECTION -->
+      <div class="col text-black text-center" id="task_list"></div>
 
-</div>
-<!---END MAIN WRAPPER ---> 
+      <div class="hideContainer" id="task_container">
+        <!-- new task generated -->
+      </div>
+    </div>
+    <!---END MAIN WRAPPER --->
 
     <footer>
-      <a href="https://github.com/chingu-voyages/v47-tier1-team-06">Created by Chingu Voyage😃</a>
+      <a href="https://github.com/chingu-voyages/v47-tier1-team-06"
+        >Created by Chingu Voyage😃</a
+      >
     </footer>
-
   </body>
 </html>

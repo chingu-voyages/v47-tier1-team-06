@@ -24,7 +24,6 @@ const weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 function daysInMonth(month, year) {
     // Array of days in each month
     const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-
   
     // Check for February and leap year
     if (month === 2 && isLeapYear(year)) {
@@ -33,7 +32,7 @@ function daysInMonth(month, year) {
       // Return days from array for other months
       return daysInMonths[month - 1]; 
     }
-  
+ 
 }
 
 function isLeapYear(year) {
@@ -69,7 +68,7 @@ function turnIntoDate(year, month, day) {
     if (("" + dayString).length == 1) {
         dayString = "0" + dayString;
     }
-
+  
     return `${year}-${monthNumberString}-${dayString}`;
 }
 

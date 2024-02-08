@@ -4,8 +4,8 @@ let taskContainer = new allTasks(); // container for all tasks
 taskContainer.initialize();
 
 
+let baseDate = new Date(); // current date
 
-let baseDate = new Date(); // Initialize with the current date
 
 window.onbeforeunload = function(event) {
     taskContainer.save();
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Function to handle date picking from the date input
 function datePicked(input) {
     const selectedDate = new Date(input.value);
+   
     baseDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
     generateCalendarDays(); // Update the calendar days based on the picked date
     // Optional: Hide the date picker again if you want
@@ -95,6 +96,18 @@ function getOrdinalSuffix(day) {
         let endTimeHour = document.getElementById("task_end_time_hour").value;
         let endTimeMinute = document.getElementById("task_end_time_minute").value;
         let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
+        let baseDate = new Date(); 
+        let dateInput = new Date(dates);
+        baseDate.setFullYear(baseDate.getFullYear() + 3);
+        
+        if (dateInput < baseDate) {
+            alert('The input date is in the past.');
+            return;
+        }
+        if (dateInput > baseDate) {
+            alert('Please select a date within the next 3 years.');
+            return;
+        }
 
         if (title === '' || description === '' || dates === '' || startTimeHour === '' || startTimeMinute === ''
         || startTimeAmPm === '' || endTimeHour === '' || endTimeMinute === '' || endTimeAmPm === '') {
@@ -107,6 +120,14 @@ function getOrdinalSuffix(day) {
             document.querySelector(".hideContainer").style.display = "flex";
         }
     
+        if (task_start_time_hour.value < 1 || task_start_time_hour.value > 12
+        || task_start_time_minute.value < 0 || task_start_time_minute.value > 59
+        || task_end_time_hour.value < 1 || task_end_time_hour.value > 12
+        || task_end_time_minute.value < 0 || task_end_time_minute.value > 59) {
+            alert('please enter valid time in this format  - 00:00');
+            return;
+        }
+
         // turn dates into seperate integers and convert time into military time
         let year = parseInt(dates.slice(0,4));
         let month = parseInt(dates.slice(5, 7));
@@ -222,8 +243,16 @@ function getOrdinalSuffix(day) {
         document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
             saveEditsMade(taskDelete, year, month, day)
             this.removeEventListener('click', editEventHandler);
+
+           
+
         });
+
+        
+   
     }
+
+   
 
     // turn year, month, date numbers into yyyy-mm-dd format
     function turnIntoDate(year, month, day) {
@@ -295,18 +324,32 @@ function getOrdinalSuffix(day) {
         let endTimeMinute = document.getElementById("edit-task_end_time_minute").value;
         let endTimeAmPm = document.getElementById("edit-task_end_time_ampm").value;
 
+        if (startTimeHour < 1 || startTimeHour > 12 
+            || startTimeMinute < 0 || startTimeMinute > 59
+            || endTimeHour < 1 || endTimeHour > 12
+            || endTimeMinute < 0 || endTimeMinute > 59) {
+            alert('please enter a valid time in this format - 00:00');
+            return editTask();
+        } 
+
+
         // turn dates into seperate integers and convert time into military time
         let year = parseInt(dates.slice(0,4));
         let month = parseInt(dates.slice(5, 7));
         let day = parseInt(dates.slice(8));
         let startmilitaryTime = turnIntoMilitaryTime(startTimeHour, startTimeMinute, startTimeAmPm);
         let endMilitaryTime = turnIntoMilitaryTime(endTimeHour, endTimeMinute, endTimeAmPm);
-
+        
+       
         // replace task with edited task
         taskContainer.removeTask(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay);
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
 
+        
+     
 
+    
+        // display tasks
         displayTasks(beforeEditYear, beforeEditMonth, beforeEditDay);
      
         document.getElementById('popup_edit_container').style.display = 'none';

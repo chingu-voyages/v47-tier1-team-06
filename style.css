@@ -74,8 +74,8 @@
 .popupContainer{
   position:absolute;
   background-color:var(--primary);
-  height: 100%;
-  max-height:
+  /* height: 100%;
+  max-height: */
 }
 
 #popup_main_container{
@@ -99,12 +99,15 @@
 .task_button_container button:hover {
   background-color: #f4afaf;
 }
+
 #popup_time_container{
-  margin-top: 0.25rem;
+  margin-top: 1rem;
 }
+
 .time_container{
   margin: 1rem;
 }
+
 .time_labels{
   margin-bottom: 0.50rem;
 }
@@ -115,7 +118,6 @@
   display: flex;
   align-items: center;
   text-align: center;
-  
 }
 
 
@@ -168,7 +170,6 @@
   transform: scale(1.1) rotate(360deg);
 }
 
-
 .calender_menu {
   display: flex;
   flex-direction: column;
@@ -180,14 +181,13 @@
   cursor: pointer;
 }
 
-
 .times{
   display: flex;
   justify-content: center;
   text-align: center;
   margin-top: 3em;
-  padding-bottom: 8em;
-  padding-right: 25px;
+  padding-bottom: 4em;
+  /* padding-right: 25px; */
 }
 
 footer {
@@ -227,7 +227,6 @@ footer {
 }
 
 @media only screen and (max-width: 600px) {
- 
  
   footer a{
     color: #f15454;

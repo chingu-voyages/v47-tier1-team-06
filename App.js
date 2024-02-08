@@ -11,59 +11,6 @@ window.onbeforeunload = function(event) {
     taskContainer.save();
 }
 
-// ... rest of your functions (navigateWeek, generateCalendarDays, etc.) ...
-
-// Event listener for DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
-
-    updateCurrentMonthDisplay(); // Update the display to show the current month and year
-
-    // Click event listener for the calendar icon
-    // document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-    //     const datePicker = document.getElementById('datePicker');
-        // Optional: You might want to toggle visibility or apply some style changes before clicking
-        // datePicker.style.display = 'block'; // Make it visible if it's initially hidden
-        // datePicker.click(); // Programmatically click the hidden date input
-    // });
-
-});
-
-// Function to handle date picking from the date input
-function datePicked(input) {
-    const selectedDate = new Date(input.value);
-    baseDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate());
-    generateCalendarDays(); // Update the calendar days based on the picked date
-    // Optional: Hide the date picker again if you want
-    input.style.display = 'none';
-}
-
-// Function to update the current month display
-function updateCurrentMonthDisplay() {
-    const currentMonthYear = document.getElementById('currentMonthYear');
-    currentMonthYear.textContent = baseDate.toLocaleString('default', {
-        month: 'long',
-        year: 'numeric'
-    });
-}
-
-function createCalendarDayElement(date) {
-    const dayDiv = document.createElement('div');
-    dayDiv.className = 'calendar-day';
-    const dayOfWeek = date.toLocaleString('default', { weekday: 'short' });
-    const dayOfMonth = date.getDate();
-    const ordinalSuffix = getOrdinalSuffix(dayOfMonth);
-
-    dayDiv.innerHTML = `
-        <p class="task-date">${dayOfMonth}${ordinalSuffix} ${dayOfWeek}</p>
-        <ul class="task-list">
-            <li class="task-item">
-                <span class="task-name">Show</span>
-            </li>
-        </ul>
-    `;
-    return dayDiv;
-}
-
 function getOrdinalSuffix(day) {
     if (day > 3 && day < 21) return 'th';
     switch (day % 10) {
@@ -73,14 +20,6 @@ function getOrdinalSuffix(day) {
       default: return "th";
     }
 }
-
-// document.addEventListener('DOMContentLoaded', function() {
-//     document.querySelector('.calendar.bottomOption').addEventListener('click', function() {
-//         const datePicker = document.getElementById('datePicker');
-//         datePicker.click();
-//     });
-// });
-
 
 // popup save btn
     document.querySelector("#add_task_button").addEventListener("click", function(event) {
@@ -99,12 +38,14 @@ function getOrdinalSuffix(day) {
         if (title === '' || description === '' || dates === '' || startTimeHour === '' || startTimeMinute === ''
         || startTimeAmPm === '' || endTimeHour === '' || endTimeMinute === '' || endTimeAmPm === '') {
             alert('You need to fill out everything.');
-            document.getElementById("popup_main_container").style.display = "block";
-            document.querySelector(".hideContainer").style.display = "none";
+            //document.getElementById("popup_main_container").style.display = "block";
+            //document.querySelector(".hideContainer").style.display = "none";
            return;
         } else {
            
-            document.querySelector(".hideContainer").style.display = "flex";
+            for (let element of document.getElementsByClassName("hideContainer")){
+                element.style.display="flex";
+            }
         }
     
         // turn dates into seperate integers and convert time into military time
@@ -119,15 +60,6 @@ function getOrdinalSuffix(day) {
         // add task
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
         
-
-        // TO BE REMOVED AND/OR CHANGED-----------------------------------------------------------------
-        // The current code currently does not have the means to get what day the user wants to see
-        // so this program just displays the list of tasks on the same day as the task the user just added 
-
-        displayTasks(year, month, day);
-
-        // ------------------------------------------------------------------------------------------------
-
         document.getElementById('popup_main_container').style.display = 'none';
         // document.getElementsById("#hideContainer").style.display = '';
         document.getElementById("task_title_input").value = "";
@@ -361,6 +293,7 @@ function getOrdinalSuffix(day) {
 
 // updating current month and year on the main page
     const monthString = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     const d = new Date();
     let mnth = monthString[d.getMonth()];
@@ -370,17 +303,36 @@ function getOrdinalSuffix(day) {
 
 //----------------------------------------------------------------------------------------
 
+let container = document.querySelector(".calendar-container");
+let dayCount = daysInMonth(baseDate.getMonth() + 1, baseDate.getFullYear());
 
-        
+for (let i = 1; i <= dayCount; i++) {
+     let dayButton = document.createElement("button");
+     let dayString = ('' + i) + "\n" + getDayString(i);
+
+    dayButton.className = "calendar-day";
+    dayButton.textContent = dayString;
+    dayButton.addEventListener("click", () => {
+         displayTasks(baseDate.getFullYear(), baseDate.getMonth() + 1, i);
+    })
+    container.appendChild(dayButton);
+}
 
         
 //==================================================
 // getting days in a month
 
+function getDayString(dayNumber) {
+    let date = new Date(baseDate.getFullYear(), baseDate.getMonth(), dayNumber);
+
+    return weekString[date.getDay()];
+}
+
 function daysInMonth(month, year) {
 
     // Array of days in each month
     const daysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
   
     // Check for February and leap year
     if (month === 2 && isLeapYear(year)) {
@@ -390,11 +342,11 @@ function daysInMonth(month, year) {
       return daysInMonths[month - 1]; 
     }
   
-  }
+}
   
-  function isLeapYear(year) {
+function isLeapYear(year) {
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
-  }
+}
   
 
-  //console.log(daysInMonth(2, 2025)); 
+//console.log(daysInMonth(2, 2025)); 

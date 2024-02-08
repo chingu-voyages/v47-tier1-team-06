@@ -98,13 +98,16 @@ function getOrdinalSuffix(day) {
         let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
         let baseDate = new Date(); 
         let dateInput = new Date(dates);
-        baseDate.setFullYear(baseDate.getFullYear() + 3);
+        let max = new Date();
+        max.setFullYear(max.getFullYear() + 3);
         
+      
         if (dateInput < baseDate) {
             alert('The input date is in the past.');
             return;
         }
-        if (dateInput > baseDate) {
+
+        if (dateInput > max) {
             alert('Please select a date within the next 3 years.');
             return;
         }

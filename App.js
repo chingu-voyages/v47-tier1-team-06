@@ -365,6 +365,7 @@ function saveEditsMade(taskDelete) {
 // edit popup cancel btn
 document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
     clearOutEdit();
+    document.getElementById('popup_edit_container').style.display = 'none';
 });
 
 

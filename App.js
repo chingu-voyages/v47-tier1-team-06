@@ -89,10 +89,15 @@ function getOrdinalSuffix(day) {
         let title = document.getElementById("task_title_input").value;
         let description = document.getElementById("task_description_input").value;
         let dates = document.getElementById("datePicker").value;
-        let startTime = document.getElementById("task_start_time").value;
-        let endTime = document.getElementById("task_end_time").value;
+        let startTimeHour = document.getElementById("task_start_time_hour").value;
+        let startTimeMinute = document.getElementById("task_start_time_minute").value;
+        let startTimeAmPm = document.getElementById("task_start_time_ampm").value;
+        let endTimeHour = document.getElementById("task_end_time_hour").value;
+        let endTimeMinute = document.getElementById("task_end_time_minute").value;
+        let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
 
-        if (title === '' || description === '' || dates === '' || startTime === '' || endTime === '') {
+        if (title === '' || description === '' || dates === '' || startTimeHour === '' || startTimeMinute === ''
+        || startTimeAmPm === '' || endTimeHour === '' || endTimeMinute === '' || endTimeAmPm === '') {
             alert('You need to fill out everything.');
             document.getElementById("popup_main_container").style.display = "block";
             document.querySelector(".hideContainer").style.display = "none";
@@ -106,8 +111,8 @@ function getOrdinalSuffix(day) {
         let year = parseInt(dates.slice(0,4));
         let month = parseInt(dates.slice(5, 7));
         let day = parseInt(dates.slice(8));
-        let startmilitaryTime = parseInt(startTime.slice(0,2) + startTime.slice(3));
-        let endMilitaryTime = parseInt(endTime.slice(0,2) + endTime.slice(3));
+        let startmilitaryTime = turnIntoMilitaryTime(startTimeHour, startTimeMinute, startTimeAmPm);
+        let endMilitaryTime = turnIntoMilitaryTime(endTimeHour, endTimeMinute, endTimeAmPm);
 
 
         
@@ -128,10 +133,28 @@ function getOrdinalSuffix(day) {
         document.getElementById("task_title_input").value = "";
         document.getElementById("task_description_input").value = "";
         document.getElementById("datePicker").value = "";
-        document.getElementById("task_start_time").value = "";
-        document.getElementById("task_end_time").value = "";
+        document.getElementById("task_start_time_hour").value = "";
+        document.getElementById("task_start_time_minute").value = "";
+        document.getElementById("task_start_time_ampm").value = "";
+        document.getElementById("task_end_time_hour").value = "";
+        document.getElementById("task_end_time_minute").value = "";
+        document.getElementById("task_end_time_ampm").value = "";
         
     });
+
+    function turnIntoMilitaryTime(hour, minute, ampm) {
+        let militaryTime = 0;
+
+        if (ampm === "pm") {
+            militaryTime = militaryTime + 12;
+        }
+
+        militaryTime = militaryTime + parseInt(hour);
+        militaryTime = militaryTime * 100;
+        militaryTime = militaryTime + parseInt(minute);
+
+        return militaryTime;
+    }
 
     // display tasks on a given date
     function displayTasks (year, month, day, ) {
@@ -176,8 +199,6 @@ function getOrdinalSuffix(day) {
 
     // delete task
     function deleteTask(taskDelete, year, month, day) {
-        console.log("delete button clicked from task list")
-
         taskContainer.removeTask(taskDelete, year, month, day);
         displayTasks(year, month, day);
     }
@@ -190,10 +211,18 @@ function getOrdinalSuffix(day) {
         document.getElementById("edit-title").value = taskDelete.title;
         document.getElementById("edit-description").value = taskDelete.description;
         document.getElementById("edit-datePicker").value = turnIntoDate(year, month, day);
-        document.getElementById("edit-appt").value = convertTime24hr(taskDelete.startTime);
-        document.getElementById("edit-appt_1").value = convertTime24hr(taskDelete.endTime);
 
-        document.querySelector("#save_edit_task_button").addEventListener("click", () => { saveEditsMade(taskDelete, year, month, day) });
+        document.getElementById("edit-task_start_time_hour").value = getHour(taskDelete.getStartTime());
+        document.getElementById("edit-task_start_time_minute").value = getMinutes(taskDelete.getStartTime());
+        document.getElementById("edit-task_start_time_ampm").value = getAmPm(taskDelete.getStartTime());
+        document.getElementById("edit-task_end_time_hour").value = getHour(taskDelete.getEndTime());
+        document.getElementById("edit-task_end_time_minute").value = getMinutes(taskDelete.getEndTime());
+        document.getElementById("edit-task_end_time_ampm").value = getAmPm(taskDelete.getEndTime());
+
+        document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
+            saveEditsMade(taskDelete, year, month, day)
+            this.removeEventListener('click', editEventHandler);
+        });
     }
 
     // turn year, month, date numbers into yyyy-mm-dd format
@@ -212,41 +241,68 @@ function getOrdinalSuffix(day) {
         return `${year}-${monthNumberString}-${dayString}`;
     }
 
-     // convert military time into 00:00 format
-    function convertTime24hr(militaryTime) {
-        let time = militaryTime; // new time
+     // get hour from string time
+    function getHour(time12HourFormat) {
+        let hour = "";
 
-        if (("" + time).length == 3) {
-            time = ("" + time).slice(0, 1) + ":" + ("" + time).slice(1);
-            time = "0" + ("" + time);
+        if (time12HourFormat.length == 7) {
+            hour = time12HourFormat.slice(0,1);
         } else {
-            time = ("" + time).slice(0, 2) + ":" + ("" + time).slice(2);
+            hour = time12HourFormat.slice(0,2);
         }
 
-        return time;
+        return hour;
+    }
+
+
+    // get minutes from string time
+    function getMinutes(time12HourFormat) {
+        let minutes = "";
+
+        if (time12HourFormat.length == 7) {
+            minutes = time12HourFormat.slice(2,4);
+        } else {
+            minutes = time12HourFormat.slice(3,5);
+        }
+
+        return minutes;
+    }
+
+    // get am/pm from string time
+    function getAmPm(time12HourFormat) {
+        let amPm = "";
+
+        if (time12HourFormat.length == 7) {
+            amPm = time12HourFormat.slice(5);
+        } else {
+            amPm = time12HourFormat.slice(6);
+        }
+
+        return amPm;
     }
 
     // edit save button
    function saveEditsMade(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay) {
 
-        console.log("save button clicke in edit popup")
-
         // get user input
         let title = document.getElementById("edit-title").value;
         let description = document.getElementById("edit-description").value;
         let dates = document.getElementById("edit-datePicker").value;
-        let startTime = document.getElementById("edit-appt").value;
-        let endTime = document.getElementById("edit-appt_1").value;
+        let startTimeHour = document.getElementById("edit-task_start_time_hour").value;
+        let startTimeMinute = document.getElementById("edit-task_start_time_minute").value;
+        let startTimeAmPm = document.getElementById("edit-task_start_time_ampm").value;
+        let endTimeHour = document.getElementById("edit-task_end_time_hour").value;
+        let endTimeMinute = document.getElementById("edit-task_end_time_minute").value;
+        let endTimeAmPm = document.getElementById("edit-task_end_time_ampm").value;
 
         // turn dates into seperate integers and convert time into military time
         let year = parseInt(dates.slice(0,4));
         let month = parseInt(dates.slice(5, 7));
         let day = parseInt(dates.slice(8));
-        let startmilitaryTime = parseInt(startTime.slice(0,2) + startTime.slice(3));
-        let endMilitaryTime = parseInt(endTime.slice(0,2) + endTime.slice(3));
+        let startmilitaryTime = turnIntoMilitaryTime(startTimeHour, startTimeMinute, startTimeAmPm);
+        let endMilitaryTime = turnIntoMilitaryTime(endTimeHour, endTimeMinute, endTimeAmPm);
 
-
-        // replace task with editted task
+        // replace task with edited task
         taskContainer.removeTask(taskDelete, beforeEditYear, beforeEditMonth, beforeEditDay);
         taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
 
@@ -258,9 +314,12 @@ function getOrdinalSuffix(day) {
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
-        document.getElementById("edit-appt").value = "";
-        document.getElementById("edit-appt_1").value = "";
-        
+        document.getElementById("edit-task_start_time_hour").value = "";
+        document.getElementById("edit-task_start_time_minute").value = "";
+        document.getElementById("edit-task_start_time_ampm").value = "";
+        document.getElementById("edit-task_end_time_hour").value = "";
+        document.getElementById("edit-task_end_time_minute").value = "";
+        document.getElementById("edit-task_end_time_ampm").value = "";        
     }
 
     // edit popup cancel btn
@@ -269,8 +328,12 @@ function getOrdinalSuffix(day) {
         document.getElementById("edit-title").value = "";
         document.getElementById("edit-description").value = "";
         document.getElementById("edit-datePicker").value = "";
-        document.getElementById("edit-appt").value = "";
-        document.getElementById("edit-appt_1").value = "";
+        document.getElementById("edit-task_start_time_hour").value = "";
+        document.getElementById("edit-task_start_time_minute").value = "";
+        document.getElementById("edit-task_start_time_ampm").value = "";
+        document.getElementById("edit-task_end_time_hour").value = "";
+        document.getElementById("edit-task_end_time_minute").value = "";
+        document.getElementById("edit-task_end_time_ampm").value = "";
         document.getElementById('popup_edit_container').style.display = 'none';
     });
     // ------------------------------------------------------------------------------------------------
@@ -281,8 +344,15 @@ function getOrdinalSuffix(day) {
         document.getElementById("task_title_input").value = "";
         document.getElementById("task_description_input").value = "";
         document.getElementById("datePicker").value = "";
-        document.getElementById("task_start_time").value = "";
-        document.getElementById("task_end_time").value = "";
+
+        document.getElementById("task_start_time_hour").value = "";
+        document.getElementById("task_start_time_minute").value = "";
+        document.getElementById("task_start_time_ampm").value = "";
+        document.getElementById("task_end_time_hour").value = "";
+        document.getElementById("task_end_time_minute").value = "";
+        document.getElementById("task_end_time_ampm").value = "";
+
+
         document.getElementById('popup_main_container').style.display = 'none';
         document.getElementById('addTask_container').style.display = 'flex';
         document.getElementById('calender_container').style.display = 'flex';

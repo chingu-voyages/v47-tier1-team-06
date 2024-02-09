@@ -354,7 +354,7 @@ function editTask(taskDelete) {
 
 // edit save button
 function saveEditsMade(taskDelete) {
-
+    
     // get user input
     let title = document.getElementById("edit-title").value;
     let description = document.getElementById("edit-description").value;
@@ -365,6 +365,29 @@ function saveEditsMade(taskDelete) {
     let endTimeHour = document.getElementById("edit-task_end_time_hour").value;
     let endTimeMinute = document.getElementById("edit-task_end_time_minute").value;
     let endTimeAmPm = document.getElementById("edit-task_end_time_ampm").value;
+    
+    let baseDates = new Date(); 
+    let dateInput = new Date(dates);
+    let max = new Date();
+    max.setFullYear(max.getFullYear() + 3);
+    
+    if (dateInput < baseDates) {
+        alert('The input date is in the past.');
+        return editTask(taskDelete);
+    }
+
+    if (dateInput > max) {
+        alert('Please select a date within the next 3 years.');
+        return editTask(taskDelete);
+    }
+  
+
+    if (startTimeHour < 1 || startTimeHour > 12 || startTimeMinute < 0 || startTimeMinute > 59 || endTimeHour < 1 || endTimeHour > 12
+        || endTimeMinute < 0 || endTimeMinute > 59) {
+            alert('please enter valid time in this format  - 00:00');
+            return editTask();
+        }
+
 
     // turn dates into seperate integers and convert time into military time
     let year = parseInt(dates.slice(0,4));

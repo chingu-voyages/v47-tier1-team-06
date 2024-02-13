@@ -88,7 +88,7 @@
               type="number"
               class="input-timepicker form-control"
               id="task_start_time_hour"
-              min="0"
+              min="1"
               max="12"
             />
           </div>
@@ -117,7 +117,7 @@
               type="number"
               class="input-timepicker form-control"
               id="task_end_time_hour"
-              min="0"
+              min="1"
               max="12"
             />
           </div>
@@ -195,11 +195,11 @@
           <label class="text-white time_labels">Start Time</label>
           <div class="col">
             <input
-              type="number"
+              type="number" 
               class="input-timepicker form-control"
               id="edit-task_start_time_hour"
               min="0"
-              max="12"
+              max="12" 
             />
           </div>
           <div class="col">
@@ -228,7 +228,7 @@
           <label class="text-white time_labels">End Time</label>
           <div class="col">
             <input
-              type="number"
+              type="number" 
               class="input-timepicker form-control"
               id="edit-task_end_time_hour"
               min="0"
@@ -280,6 +280,8 @@
     <div class="container-fluid wrapper_container" id="wrapper_container">
       <!-- ADD TASK SECTION -->
       <div class="p-3 hideContainer" id="addTask_container">
+        <button id="previous_month">prev</button>
+        <button id="next_month">next</button>
         <div class="currentMonth" id="currentMonth">
           <h1 id="currentMonthYear" class="fs-2"></h1>
         </div>
@@ -290,74 +292,7 @@
 
       <!-- CALENDAR SECTION -->
       <div class="calender_menu hideContainer" id="calender_container">
-        <div class="calendar-container">
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Hang Out', '23 January')"
-          >
-            <p class="task-date">23rd Tue</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Stress Out', '24 January')"
-          >
-            <p class="task-date">24th Wed</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Work Out', '25 January')"
-          >
-            <p class="task-date">25th Thu</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Calm Down', '26 January')"
-          >
-            <p class="task-date">26th Fri</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Git Down', '26 January')"
-          >
-            <p class="task-date">27th Sat</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Chill Out', '26 January')"
-          >
-            <p class="task-date">28th Sun</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <div class="calendar-container"></div>
       </div>
 
       <!-- TASK SECTION -->

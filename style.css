@@ -3,7 +3,7 @@
   margin-top: 2rem;
   /* height: 100%;
     max-height: 100%; */
-  /* margin: auto 0; */
+  margin: auto 0;
 
 }
 
@@ -89,8 +89,9 @@ body {
 .popupContainer {
   position: absolute;
   background-color: var(--primary);
-  height: 100%;
-  max-height:
+
+  /* height: 100%; */
+
 }
 
 #popup_main_container {
@@ -115,8 +116,9 @@ body {
   background-color: #f4afaf;
 }
 #popup_time_container {
-  margin-top: 0.25rem;
+  margin: auto 0;
 }
+
 .time_container {
   margin: 1rem;
 }
@@ -200,14 +202,14 @@ body {
   cursor: pointer;
 }
 
-.times {
+/* .times {
   display: flex;
   justify-content: center;
   text-align: center;
   margin-top: 3em;
-  padding-bottom: 8em;
+  padding-bottom: 4em;
   padding-right: 25px;
-}
+} */
 
 footer {
   display: flex;
@@ -254,6 +256,13 @@ footer {
 }
 
 @media only screen and (min-width: 600px) {
+  .wrapper_container{
+    height: 100%;
+  }
+
+  #popup_main_container{
+    height: auto;
+  }
   .calendar-container {
     padding-left: 5em;
   }

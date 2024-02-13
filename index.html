@@ -212,6 +212,8 @@
             />
           </div>
           <div class="col">
+
+
             <select
               name="ampm"
               id="edit-task_start_time_ampm"
@@ -280,13 +282,23 @@
     <div class="container-fluid wrapper_container" id="wrapper_container">
       <!-- ADD TASK SECTION -->
       <div class="p-3 hideContainer" id="addTask_container">
-        <button id="previous_month">prev</button>
-        <button id="next_month">next</button>
-        <div class="currentMonth" id="currentMonth">
-          <h1 id="currentMonthYear" class="fs-2"></h1>
-        </div>
-        <div class="addtask">
-          <button id="addTask" class="addButton">+ add task</button>
+        <div class="currentMonth container text-center align-middle" id="currentMonth">
+          <div class="row align-items-center align-middle">
+            <div class="col">
+              <i id="previous_month" class="fa-solid fa-circle-left fa-lg"></i>
+            </div>
+            <div class="col">
+              <p id="currentMonthYear" class="fs-4"></p>
+            </div>
+            <div class="col">
+              <i id="next_month" class="fa-solid fa-circle-right fa-lg"></i>
+            </div>
+            <div class="col">
+              <button id="addTask" class="addButton btn btn-danger">
+                <i class="fa-solid fa-plus"></i><i class="fa-solid fa-thumbtack"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -305,9 +317,9 @@
     <!---END MAIN WRAPPER --->
 
     <footer>
-      <a href="https://github.com/chingu-voyages/v47-tier1-team-06"
-        >Created by Chingu Voyage😃</a
-      >
+      <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
+        Created by Chingu Voyage😃
+      </a>
     </footer>
   </body>
 </html>

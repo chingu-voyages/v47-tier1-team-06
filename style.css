@@ -4,6 +4,7 @@
   /* height: 100%;
     max-height: 100%; */
   margin: auto 0;
+
 }
 
 .calendar-container {
@@ -12,7 +13,9 @@
   gap: 10px;
   max-width: 850px;
   margin: 0 auto;
+
   padding-top: 3rem;
+
 }
 
 .calendar-day {
@@ -24,6 +27,7 @@
   text-align: center;
   opacity: 0.75;
   color: var(--primary);
+  
 }
 
 .task-container {
@@ -85,7 +89,9 @@ body {
 .popupContainer {
   position: absolute;
   background-color: var(--primary);
+
   /* height: 100%; */
+
 }
 
 #popup_main_container {
@@ -126,6 +132,7 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
+
 }
 
 #currentMonth {
@@ -159,6 +166,7 @@ body {
 
 .addButton {
   border: 1px;
+ 
 }
 
 .addtask .addButton {
@@ -181,6 +189,7 @@ body {
 .addButton:hover {
   transform: scale(1.1) rotate(360deg);
 }
+
 
 .calender_menu {
   display: flex;
@@ -257,9 +266,10 @@ footer {
   .calendar-container {
     padding-left: 5em;
   }
-
+ 
   footer a {
     text-decoration: none;
     margin-top: 11em;
   }
 }
+

@@ -106,7 +106,6 @@ class allTasks {
     // constructor
     constructor() {
         this.taskYear = new Map();
-
     }
 
     // addTask: add task

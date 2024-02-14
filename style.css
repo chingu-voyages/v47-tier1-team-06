@@ -1,28 +1,33 @@
 /*////////////PEACHES CSS CODE///////////////////*/
 .wrapper_container {
-  padding-top: 4em;
+  margin-top: 2rem;
+  /* height: 100%;
+    max-height: 100%; */
+  margin: auto 0;
+
 }
 
 .calendar-container {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
   gap: 10px;
-  max-width: 750px;
-  margin: 0 auto;
-  padding-top: 3em;
-  
+  width: 80vw;
+  margin: 0;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  overflow-y: auto;
+  align-items: center;
+  scrollbar-width: none;
 }
 
 .calendar-day {
   border: 1px solid #ddd;
-  background-color: #FFF;
-  box-shadow: 0 0 10px #F4AFAF;
+  background-color: #fff;
+  box-shadow: 0 0 10px #f4afaf;
   padding: 10px;
   border-radius: 10px;
   text-align: center;
   opacity: 0.75;
-  color: var(--primary);
-  
+  color: var(--primary);  
 }
 
 .task-container {
@@ -63,26 +68,37 @@
 
 /* //////////////END OF PEACHES CSS CODE//////////////*/
 
-
 /*///////////////// POPUP CSS ////////////////////////*/
 :root {
   --primary: #f15454;
   --lightPink: #f4afaf;
-}  
-
-/* dont display the popup on load */
-.popupContainer{
-  position:absolute;
-  background-color:var(--primary);
-  height: 100%;
-  max-height: 100%;
 }
 
-#popup_main_container{
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#previous_month,
+#next_month {
+  color: var(--primary);
+}
+
+/* dont display the popup on load */
+.popupContainer {
+  position: absolute;
+  background-color: var(--primary);
+
+  /* height: 100%; */
+
+}
+
+#popup_main_container {
   display: none;
 }
 
-#popup_edit_container{
+#popup_edit_container {
   display: none;
   z-index: 7;
 }
@@ -93,42 +109,61 @@
 }
 
 .task_button_container button {
-  color: #FFF;
+  color: #fff;
 }
 
 .task_button_container button:hover {
   background-color: #f4afaf;
 }
-#popup_time_container{
-  margin-top: 0.25rem;
+#popup_time_container {
+  margin: auto 0;
 }
-.time_container{
+
+.time_container {
   margin: 1rem;
 }
-.time_labels{
-  margin-bottom: 0.50rem;
+.time_labels {
+  margin-bottom: 0.5rem;
+}
+
+.colomn {
+  display: inline-block;
+  width: 10px;
+  padding: 0;
+  text-align: center;
+  color: #fff;
+}
+
+.time_specification {
+  color: #fff;
+  font-size: 9px;
 }
 
 /*///////////////END POPUP CSS ////////////////////////*/
 
-#addTask_container{
+#addTask_container {
   display: flex;
   align-items: center;
   text-align: center;
-  
+
 }
 
-
-
-#currentMonth{
+#currentMonth {
   margin-right: auto;
+  white-space: nowrap;
+  justify-content: center;
+  align-items: center;
 }
 
-.task_item_edit_button{
+#currentMonthYear{
+  margin: auto 0;
+}
+
+.task_item_edit_button {
   margin-right: 10px;
 }
 
-#save_button{
+#save_button {
   color: white;
   margin-top: 50px;
   margin-left: 85px;
@@ -161,7 +196,7 @@
   color: #fff;
   cursor: pointer;
   font-size: 18px;
-  transition: transform .7s ease-in-out;
+  transition: transform 0.7s ease-in-out;
 }
 
 .addButton:hover {
@@ -180,26 +215,24 @@
   cursor: pointer;
 }
 
-
-.times{
+/* .times {
   display: flex;
   justify-content: center;
   text-align: center;
   margin-top: 3em;
-  padding-bottom: 8em;
+  padding-bottom: 4em;
   padding-right: 25px;
-}
+} */
 
 footer {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin-top: 26em;
+  margin: auto 0;
 }
 
 @media only screen and (min-width: 1024px) {
- 
   #addTask_container {
     margin: 0 6em;
   }
@@ -207,45 +240,37 @@ footer {
   footer {
     display: flex;
     flex-direction: column;
-    padding-top: 27em;
     justify-content: center;
     align-items: center;
-    margin-top: 3.5em;
-    
+    margin-top: auto;
   }
 
   footer a {
     text-decoration: none;
-    color:#f15454;
-   
+    color: #f15454;
   }
 
-  .calendar-container {
-    
-    padding-left: 3.5em;
-}
 }
 
 @media only screen and (max-width: 600px) {
- 
- 
-  footer a{
+  footer a {
     color: #f15454;
     text-decoration: none;
   }
 
-#addTask_container {
-  display: flex;
-  flex-flow: row wrap;
-  flex-basis: 100%;
 }
 
-.calendar-container {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0px, 1fr)); 
-  grid-gap: 10px; 
- 
-}
+@media only screen and (min-width: 600px) {
+  .wrapper_container{
+    height: 100%;
+  }
 
+  #popup_main_container{
+    height: auto;
+  }
 
+  footer a {
+    text-decoration: none;
+    margin-top: 11em;
+  }
 }

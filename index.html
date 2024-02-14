@@ -109,6 +109,7 @@
           <option value="3">Needs Focus Time</option>
         </select>
       </div>
+
       <div class="mb-3">
         <label for="datePicker" class="form-label text-white">Date</label>
         <input type="date" class="form-control" id="datePicker" />
@@ -122,10 +123,17 @@
               type="number"
               class="input-timepicker form-control"
               id="task_start_time_hour"
-              min="0"
+              min="1"
               max="12"
             />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -134,6 +142,11 @@
               min="0"
               max="59"
             />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
+
           </div>
           <div class="col">
             <select name="ampm" id="task_start_time_ampm" class="form-control">
@@ -151,10 +164,17 @@
               type="number"
               class="input-timepicker form-control"
               id="task_end_time_hour"
-              min="0"
+              min="1"
               max="12"
             />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -163,6 +183,10 @@
               min="0"
               max="59"
             />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
             <select name="ampm" id="task_end_time_ampm" class="form-control">
@@ -191,7 +215,6 @@
         </div>
       </div>
     </div>
-  
 
     <!-------------------- EDIT TASK POPUP SECTION ------------------>
 
@@ -236,7 +259,14 @@
               min="0"
               max="12"
             />
+
+            <label for="edit-task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -245,6 +275,10 @@
               min="0"
               max="59"
             />
+
+            <label for="edit-task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
             <select
@@ -269,7 +303,14 @@
               min="0"
               max="12"
             />
+
+            <label for="edit-task_end_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -278,7 +319,12 @@
               min="0"
               max="59"
             />
+
+            <label for="edit-task_end_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
+
           <div class="col">
             <select
               name="ampm"
@@ -315,86 +361,33 @@
     <div class="container-fluid wrapper_container" id="wrapper_container">
       <!-- ADD TASK SECTION -->
       <div class="p-3 hideContainer" id="addTask_container">
-        <div class="currentMonth" id="currentMonth">
-          <h1 id="currentMonthYear" class="fs-2"></h1>
-        </div>
-        <div class="addtask">
-          <button id="addTask" class="addButton">+ add task</button>
+        <div
+          class="currentMonth container text-center align-middle"
+          id="currentMonth"
+        >
+          <div class="row align-items-center align-middle">
+            <div class="col">
+              <i id="previous_month" class="fa-solid fa-circle-left fa-lg"></i>
+            </div>
+            <div class="col">
+              <p id="currentMonthYear" class="fs-4"></p>
+            </div>
+            <div class="col">
+              <i id="next_month" class="fa-solid fa-circle-right fa-lg"></i>
+            </div>
+            <div class="col">
+              <button id="addTask" class="addButton btn btn-danger">
+                <i class="fa-solid fa-plus"></i
+                ><i class="fa-solid fa-thumbtack"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      
-
       <!-- CALENDAR SECTION -->
       <div class="calender_menu hideContainer" id="calender_container">
-        <div class="calendar-container">
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Hang Out', '23 January')"
-          >
-            <p class="task-date">23rd Tue</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Stress Out', '24 January')"
-          >
-            <p class="task-date">24th Wed</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Work Out', '25 January')"
-          >
-            <p class="task-date">25th Thu</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Calm Down', '26 January')"
-          >
-            <p class="task-date">26th Fri</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Git Down', '26 January')"
-          >
-            <p class="task-date">27th Sat</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-          <div
-            class="calendar-day"
-            onclick="showTaskDetails('Chill Out', '26 January')"
-          >
-            <p class="task-date">28th Sun</p>
-            <ul class="task-list">
-              <li class="task-item">
-                <span class="task-name">Show</span>
-              </li>
-            </ul>
-          </div>
-        </div>
+        <div class="calendar-container"></div>
       </div>
 
       <!-- TASK SECTION -->
@@ -407,9 +400,9 @@
     <!---END MAIN WRAPPER --->
 
     <footer>
-      <a href="https://github.com/chingu-voyages/v47-tier1-team-06"
-        >Created by Chingu Voyage😃</a
-      >
+      <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
+        Created by Chingu Voyage😃
+      </a>
     </footer>
   </body>
 </html>

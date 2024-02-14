@@ -10,12 +10,16 @@ window.onbeforeunload = function(event) {
 
 
 // date logic------------------------------------------------------------
-let baseDate = new Date(); // Initialize date displayed with the current date
+
+// currently displayed date initialized to the current date
+let baseDate = new Date(); 
 
 // get today's date
 const todayMonth = baseDate.getMonth();
 const todayYear = baseDate.getFullYear();
+const todayDay = baseDate.getDate()
 
+// store month/dat strings
 const monthString = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 const weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -35,6 +39,7 @@ function daysInMonth(month, year) {
  
 }
 
+// check if yeare is a leap year
 function isLeapYear(year) {
     return year % 4 === 0 && year % 100 !== 0 || year % 400 === 0;
 }
@@ -46,6 +51,7 @@ function getDayString(dayNumber) {
     return weekString[date.getDay()];
 }
 
+// get day suffix
 function getOrdinalSuffix(day) {
     if (day > 3 && day < 21) return 'th';
     switch (day % 10) {
@@ -115,6 +121,7 @@ function getAmPm(time12HourFormat) {
     return amPm;
 }
 
+// turn time information (hour, minute, ampm) into military time
 function turnIntoMilitaryTime(hour, minute, ampm) {
     let militaryTime = 0;
 
@@ -160,13 +167,17 @@ document.querySelector("#previous_month").addEventListener("click", function(eve
 
 // display month
 function displayMonth() {
+    // container to put in days
     let container = document.querySelector(".calendar-container");
+
+    // how many days are in the chosen month
     let dayCount = daysInMonth(baseDate.getMonth() + 1, baseDate.getFullYear());
 
     // reset month/day displayed
     container.innerHTML = '';
     document.getElementById("task_list").innerHTML = '';
 
+    // show chosen month and year
     document.getElementById("currentMonthYear").innerHTML = monthString[baseDate.getMonth()] 
     + " " + baseDate.getFullYear();
 
@@ -184,6 +195,8 @@ function displayMonth() {
 
         dayButton.className = "calendar-day";
         dayButton.textContent = dayString;
+
+        // functionality when clicked/show all tasks when clicked
         dayButton.addEventListener("click", () => {
             baseDate.setDate(1);
             baseDate.setFullYear(baseDate.getFullYear());
@@ -198,15 +211,23 @@ function displayMonth() {
 
 // display tasks
 function displayTasks () {
+    // clear out current shown task list
     document.getElementById("task_list").innerHTML = '';
+
+    // get task list on chosen date
     let tasksOnAGivenDay = taskContainer.getTasks(baseDate.getFullYear(), 
     baseDate.getMonth() + 1, baseDate.getDate());
 
+    // show current month, day, and year
     document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for 
     ${monthString[baseDate.getMonth()]} ${baseDate.getDate()}${getOrdinalSuffix(baseDate.getDate())}, 
     ${baseDate.getFullYear()}</h2>`;
 
+    // if there are tasks within the list
     if (tasksOnAGivenDay != null) {
+
+        // for each task, show title, description, times and create edit and 
+        // delete buttons
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
             newTask.className = "col bg-white text-black text-center p-2";
@@ -216,26 +237,28 @@ function displayTasks () {
                 <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
             `;
 
+            // delete button
             let delete_button = document.createElement("button");
 
             delete_button.className = "btn btn-danger task_item_delete_button btn-sm";
             delete_button.textContent = "Delete";
 
-            // delete task
             delete_button.addEventListener("click", () => { 
                 deleteTask(aTask);
             });
 
+            // edit button
             let edit_button = document.createElement("button");
 
             edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
             edit_button.textContent = "Edit";
             edit_button.addEventListener("click", () => { editTask(aTask) });
             
-            // Append buttons to task div
+            // Append buttons to task 
             newTask.appendChild(edit_button);
             newTask.appendChild(delete_button);
 
+            // Append task to task container
             document.getElementById("task_list").appendChild(newTask);
         }
     }
@@ -257,33 +280,16 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let endTimeHour = document.getElementById("task_end_time_hour").value;
     let endTimeMinute = document.getElementById("task_end_time_minute").value;
     let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
-    let baseDate = new Date(); 
-    let dateInput = new Date(dates);
-    let max = new Date();
-    max.setFullYear(max.getFullYear() + 3);
-    
-    if (dateInput < baseDate) {
-        alert('The input date is in the past.');
-        return;
-    }
 
-    if (dateInput > max) {
-        alert('Please select a date within the next 3 years.');
-        return;
-    }
+    // turn dates into seperate integers
+    let year = parseInt(dates.slice(0,4));
+    let month = parseInt(dates.slice(5, 7));
+    let day = parseInt(dates.slice(8));
 
-    if (task_start_time_hour.value < 1 || task_start_time_hour.value > 12
-        || task_start_time_minute.value < 0 || task_start_time_minute.value > 59
-        || task_end_time_hour.value < 1 || task_end_time_hour.value > 12
-        || task_end_time_minute.value < 0 || task_end_time_minute.value > 59) {
-            alert('please enter valid time in this format  - 00:00');
-            return;
-        }
-
-
-    if (title === '' || description === '' || dates === '' || startTimeHour === '' || startTimeMinute === ''
-    || startTimeAmPm === '' || endTimeHour === '' || endTimeMinute === '' || endTimeAmPm === '') {
-        alert('You need to fill out everything.');
+    // check for any bad inputs
+    if (checkInputs(title, description, dates, year, month, day, parseInt(startTimeHour), 
+    parseInt(startTimeMinute), startTimeAmPm, parseInt(endTimeHour), parseInt(endTimeMinute), 
+    endTimeAmPm) === false) {
         return;
     } else {
         for (let element of document.getElementsByClassName("hideContainer")){
@@ -291,25 +297,21 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
         }
     }
 
-    // turn dates into seperate integers and convert time into military time
-    let year = parseInt(dates.slice(0,4));
-    let month = parseInt(dates.slice(5, 7));
-    let day = parseInt(dates.slice(8));
+    // convert time into military time
     let startmilitaryTime = turnIntoMilitaryTime(startTimeHour, startTimeMinute, startTimeAmPm);
     let endMilitaryTime = turnIntoMilitaryTime(endTimeHour, endTimeMinute, endTimeAmPm);
-
-
     
     // add task
     taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
 
+    // if the current date shown is the date of the task added, redraw/update task list
     if (year === baseDate.getFullYear() && month === baseDate.getMonth() + 1 && day === baseDate.getDate()) {
         displayTasks();
     }
     
+    // clear out popup and hide popup
     document.getElementById('popup_main_container').style.display = 'none';
     clearOutTaskAdd();
-    
 });
 
 // popup cancel btn
@@ -325,16 +327,21 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
 
 // edit task-------------------------------------------------------------
 
-// delete task
+// functionality of delete button/delete task
 function deleteTask(taskDelete) {
+    // remove task
     taskContainer.removeTask(taskDelete, baseDate.getFullYear(), 
     baseDate.getMonth() + 1, baseDate.getDate());
+
+    // show task list again with updated list
     displayTasks();
 }
 
+// functionality of edit button/when button clicked, show edit popup
 function editTask(taskDelete) {
     document.getElementById("popup_edit_container").style.display = 'block';
 
+    // put in task information into the inputs
     document.getElementById("edit-title").value = taskDelete.title;
     document.getElementById("edit-description").value = taskDelete.description;
     document.getElementById("edit-datePicker").value = turnIntoDate(baseDate.getFullYear(), 
@@ -346,6 +353,7 @@ function editTask(taskDelete) {
     document.getElementById("edit-task_end_time_minute").value = getMinutes(taskDelete.getEndTime());
     document.getElementById("edit-task_end_time_ampm").value = getAmPm(taskDelete.getEndTime());
 
+    // add functionality to save button
     document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
         saveEditsMade(taskDelete)
         this.removeEventListener('click', editEventHandler);
@@ -366,33 +374,18 @@ function saveEditsMade(taskDelete) {
     let endTimeMinute = document.getElementById("edit-task_end_time_minute").value;
     let endTimeAmPm = document.getElementById("edit-task_end_time_ampm").value;
     
-    let baseDates = new Date(); 
-    let dateInput = new Date(dates);
-    let max = new Date();
-    max.setFullYear(max.getFullYear() + 3);
-    
-    if (dateInput < baseDates) {
-        alert('The input date is in the past.');
-        return editTask(taskDelete);
-    }
-
-    if (dateInput > max) {
-        alert('Please select a date within the next 3 years.');
-        return editTask(taskDelete);
-    }
-  
-
-    if (startTimeHour < 1 || startTimeHour > 12 || startTimeMinute < 0 || startTimeMinute > 59 || endTimeHour < 1 || endTimeHour > 12
-        || endTimeMinute < 0 || endTimeMinute > 59) {
-            alert('please enter valid time in this format  - 00:00');
-            return editTask();
-        }
-
-
     // turn dates into seperate integers and convert time into military time
     let year = parseInt(dates.slice(0,4));
     let month = parseInt(dates.slice(5, 7));
     let day = parseInt(dates.slice(8));
+
+    // check for any bad inputs
+    if (checkInputs(title, description, dates, year, month, day, parseInt(startTimeHour), 
+    parseInt(startTimeMinute), startTimeAmPm, parseInt(endTimeHour), parseInt(endTimeMinute), 
+    endTimeAmPm) === false) {
+        return editTask(taskDelete);
+    } 
+
     let startmilitaryTime = turnIntoMilitaryTime(startTimeHour, startTimeMinute, startTimeAmPm);
     let endMilitaryTime = turnIntoMilitaryTime(endTimeHour, endTimeMinute, endTimeAmPm);
 
@@ -400,11 +393,11 @@ function saveEditsMade(taskDelete) {
     taskContainer.removeTask(taskDelete, baseDate.getFullYear(), baseDate.getMonth() + 1, baseDate.getDate());
     taskContainer.addTask(title, description, year, month, day, startmilitaryTime, endMilitaryTime);
 
-
+    // update task list with edits made
     displayTasks();
 
+    // clear out popup and hide
     document.getElementById('popup_edit_container').style.display = 'none';
-    
     clearOutEdit();    
 }
 
@@ -416,6 +409,8 @@ document.querySelector("#cancel_edit_task_button").addEventListener("click", fun
 
 
 // helper functions--------------------------------------------------------------------------
+
+// clear out task add inputs
 function clearOutTaskAdd() {
     document.getElementById("task_title_input").value = "";
     document.getElementById("task_description_input").value = "";
@@ -428,6 +423,7 @@ function clearOutTaskAdd() {
     document.getElementById("task_end_time_ampm").value = "";
 }
 
+// clear out edit inputs
 function clearOutEdit() {
     document.getElementById("edit-title").value = "";
     document.getElementById("edit-description").value = "";
@@ -438,6 +434,44 @@ function clearOutEdit() {
     document.getElementById("edit-task_end_time_hour").value = "";
     document.getElementById("edit-task_end_time_minute").value = "";
     document.getElementById("edit-task_end_time_ampm").value = "";  
+}
+
+// check for input validity (return false if the inputs are not valid)
+function checkInputs(title, description, dates, year, month, day, startHour, startMinute, 
+    startAmPm, endHour, endMinute, endAmPM) {
+
+    // check if not everything is filled in
+    if (title === '' || description === '' || dates === '' || startHour === '' || startMinute === ''
+    || startAmPm === '' || endHour === '' || endMinute === '' || endAmPM === '') {
+        alert('You need to fill out everything.');
+    } 
+    // check if date is in the past
+    else if (year < todayYear || (year === todayYear && month < todayMonth + 1) || 
+    (year === todayYear && month === todayMonth + 1 && day < todayDay)) {
+        alert('The input date is in the past.');
+    } 
+    // check if date is too far into the future
+    else if (year > todayYear + 11) {
+        alert('Please select a reasonable date.');
+    } 
+    // check if hours and minutes are not within range
+    else if (startHour.value < 1 || startHour.value > 12
+        || startMinute.value < 0 || startMinute.value > 59
+        || endHour.value < 1 || endHour.value > 12
+        || endMinute.value < 0 || endMinute.value > 59) {
+            alert('please enter valid time in this format  - 00:00');
+    } 
+    // check if end time starts before start time
+    else if (startAmPm === 'pm' && endAmPM === 'am') {
+        alert('please enter valid start and end time');
+    } else if ((startAmPm === endAmPM) && ((startHour > endHour) || 
+    ((startHour === endHour) && startMinute > endMinute))) {
+        alert('please enter valid start and end time');
+    } else {
+        return true;
+    }
+
+    return false;
 }
 
 // display current month when page loads------------------------------------------------

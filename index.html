@@ -91,7 +91,14 @@
               min="1"
               max="12"
             />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -100,6 +107,10 @@
               min="0"
               max="59"
             />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
             <select name="ampm" id="task_start_time_ampm" class="form-control">
@@ -120,7 +131,14 @@
               min="1"
               max="12"
             />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -129,6 +147,10 @@
               min="0"
               max="59"
             />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
             <select name="ampm" id="task_end_time_ampm" class="form-control">
@@ -138,7 +160,6 @@
             </select>
           </div>
         </div>
-
       </div>
 
       <div class="row" class="task_button_container" id="task_button_container">
@@ -157,7 +178,6 @@
           </button>
         </div>
       </div>
-
     </div>
 
     <!-------------------- EDIT TASK POPUP SECTION ------------------>
@@ -197,13 +217,20 @@
           <label class="text-white time_labels">Start Time</label>
           <div class="col">
             <input
-              type="number" 
+              type="number"
               class="input-timepicker form-control"
               id="edit-task_start_time_hour"
               min="0"
-              max="12" 
+              max="12"
             />
+
+            <label for="edit-task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -212,10 +239,12 @@
               min="0"
               max="59"
             />
+
+            <label for="edit-task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
-
-
             <select
               name="ampm"
               id="edit-task_start_time_ampm"
@@ -232,13 +261,20 @@
           <label class="text-white time_labels">End Time</label>
           <div class="col">
             <input
-              type="number" 
+              type="number"
               class="input-timepicker form-control"
               id="edit-task_end_time_hour"
               min="0"
               max="12"
             />
+
+            <label for="edit-task_end_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
           </div>
+
+          <h3 class="colomn">:</h3>
+
           <div class="col">
             <input
               type="number"
@@ -247,7 +283,12 @@
               min="0"
               max="59"
             />
+
+            <label for="edit-task_end_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
+
           <div class="col">
             <select
               name="ampm"
@@ -284,7 +325,10 @@
     <div class="container-fluid wrapper_container" id="wrapper_container">
       <!-- ADD TASK SECTION -->
       <div class="p-3 hideContainer" id="addTask_container">
-        <div class="currentMonth container text-center align-middle" id="currentMonth">
+        <div
+          class="currentMonth container text-center align-middle"
+          id="currentMonth"
+        >
           <div class="row align-items-center align-middle">
             <div class="col">
               <i id="previous_month" class="fa-solid fa-circle-left fa-lg"></i>
@@ -297,7 +341,8 @@
             </div>
             <div class="col">
               <button id="addTask" class="addButton btn btn-danger">
-                <i class="fa-solid fa-plus"></i><i class="fa-solid fa-thumbtack"></i>
+                <i class="fa-solid fa-plus"></i
+                ><i class="fa-solid fa-thumbtack"></i>
               </button>
             </div>
           </div>

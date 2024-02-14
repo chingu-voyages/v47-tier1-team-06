@@ -178,8 +178,7 @@ body {
 
 .addButton {
   border: 1px;
- 
-}
+ }
 
 .addtask .addButton {
   height: 4rem;
@@ -272,4 +271,3 @@ footer {
     margin-top: 11em;
   }
 }
-

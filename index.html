@@ -75,6 +75,41 @@
         >
         <input type="text" class="form-control" id="task_description_input" />
       </div>
+
+      <!--Peaches Catergory Section-->
+      <div>
+        <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+         <div><option selected>Categories</option></div> 
+          <option value="3">Appointments</option>
+          <option value="3">Dinner</option>
+          <option value="1">Pay Bills</option>
+          <option value="3">Shopping</option>
+          <option value="3">Studying</option>
+          <option value="2">Workout</option>
+          <option value="3">Work</option>
+          
+        </select>
+         <div>
+        <select class="form-select form-select-sm" aria-label="Small select example">
+          <option selected>Doctor/other</option>
+          <option value="1">Rent due</option>
+          <option value="2">Phone bill</option>
+          <option value="3">Groceries/Necessities</option>
+          <option value="3">Projects/Homework</option>
+          <option value="3">Run</option>
+        
+        </select>
+      </div>
+        <select class="form-select form-select-sm" aria-label="Small select example">
+          <option selected> Priority</option>
+          <option value="1">Urgent</option>
+          <option value="2">Important!</option>
+          <option value="3">For Later</option>
+          <option value="3">Blocked</option>
+          <option value="3">Needs Focus Time</option>
+        </select>
+      </div>
+
       <div class="mb-3">
         <label for="datePicker" class="form-label text-white">Date</label>
         <input type="date" class="form-control" id="datePicker" />
@@ -111,6 +146,7 @@
             <label for="task_start_time_minute" class="time_specification">
               Minutes (0-59)
             </label>
+
           </div>
           <div class="col">
             <select name="ampm" id="task_start_time_ampm" class="form-control">

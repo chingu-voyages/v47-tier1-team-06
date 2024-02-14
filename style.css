@@ -8,14 +8,15 @@
 }
 
 .calendar-container {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  display: flex;
   gap: 10px;
-  max-width: 850px;
-  margin: 0 auto;
-
+  width: 80vw;
+  margin: 0;
   padding-top: 3rem;
-
+  padding-bottom: 3rem;
+  overflow-y: auto;
+  align-items: center;
+  scrollbar-width: none;
 }
 
 .calendar-day {
@@ -26,8 +27,7 @@
   border-radius: 10px;
   text-align: center;
   opacity: 0.75;
-  color: var(--primary);
-  
+  color: var(--primary);  
 }
 
 .task-container {
@@ -124,6 +124,19 @@ body {
 }
 .time_labels {
   margin-bottom: 0.5rem;
+}
+
+.colomn {
+  display: inline-block;
+  width: 10px;
+  padding: 0;
+  text-align: center;
+  color: #fff;
+}
+
+.time_specification {
+  color: #fff;
+  font-size: 9px;
 }
 
 /*///////////////END POPUP CSS ////////////////////////*/
@@ -237,9 +250,6 @@ footer {
     color: #f15454;
   }
 
-  .calendar-container {
-    padding-left: 3.5em;
-  }
 }
 
 @media only screen and (max-width: 600px) {
@@ -248,11 +258,6 @@ footer {
     text-decoration: none;
   }
 
-  .calendar-container {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0px, 1fr));
-    grid-gap: 10px;
-  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -263,10 +268,7 @@ footer {
   #popup_main_container{
     height: auto;
   }
-  .calendar-container {
-    padding-left: 5em;
-  }
- 
+
   footer a {
     text-decoration: none;
     margin-top: 11em;

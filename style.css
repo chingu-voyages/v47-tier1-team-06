@@ -179,8 +179,7 @@ body {
 
 .addButton {
   border: 1px;
- 
-}
+ }
 
 .addtask .addButton {
   height: 4rem;
@@ -224,7 +223,7 @@ body {
 }
 
 footer {
-  z-index: -1;
+  z-index: 1;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -243,14 +242,14 @@ footer {
 
   footer a {
     text-decoration: none;
-    color: #f15454;
+    color: black;
   }
 
 }
 
 @media only screen and (max-width: 600px) {
   footer a {
-    color: #f15454;
+    color: black;
     text-decoration: none;
   }
   .footer {
@@ -274,4 +273,3 @@ footer {
     margin-top: 11em;
   }
 }
-

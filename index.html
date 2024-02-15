@@ -38,7 +38,9 @@
     <script>
       jQuery(document).ready(function () {
         jQuery("#addTask").click(function () {
-          jQuery("#popup_main_container").css({ display: "block" });
+          jQuery("#popup_main_container").css({ display: "block" ,
+            height: "100%"
+          });
           jQuery(".hideContainer").css({ display: "none" });
         });
       });
@@ -51,7 +53,7 @@
     <!--------------------- POPUP HTML SECTION ---------------------->
 
     <div
-      class="container-fluid text-left popupContainer"
+      class="container-fluid text-left"
       id="popup_main_container"
     >
       <div class="row top_menu text-center" id="top_menu">
@@ -399,7 +401,7 @@
     </div>
     <!---END MAIN WRAPPER --->
 
-    <footer>
+    <footer class="footer">
       <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
         Created by Chingu Voyage😃
       </a>

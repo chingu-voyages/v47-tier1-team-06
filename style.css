@@ -89,7 +89,7 @@ body {
   height: 100%;
 }
 
-#popup_main_container {
+#popup_main_container , #popup_edit_container{
   position: absolute;
   background-color: var(--primary);
   display: none;
@@ -264,5 +264,5 @@ footer {
   footer a {
     text-decoration: none;
     margin-top: 11em;
-  }
 }
+

@@ -193,7 +193,8 @@ function displayMonth() {
         let dayButton = document.createElement("button");
         let dayString = ('' + i) + "\n" + getDayString(i);
 
-        dayButton.className = "calendar-day";
+        dayButton.className = "btn btn-lg calendar-day";
+        dayButton.type = "button";
         dayButton.textContent = dayString;
 
         // functionality when clicked/show all tasks when clicked

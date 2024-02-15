@@ -23,10 +23,10 @@
   border-radius: 10px;
   text-align: center;
   opacity: 0.75;
-  color: var(--primary);  
+  color: var(--primary);
 }
 .calendar-day:focus {
-border-color: #f15454;
+  border-color: #f15454;
 }
 
 .task-container {
@@ -86,7 +86,6 @@ body {
 
 /* dont display the popup on load */
 .popupContainer {
-
   height: 100%;
 }
 
@@ -115,15 +114,20 @@ body {
 .task_button_container button:hover {
   background-color: #f4afaf;
 }
-#popup_time_container {
-  margin: auto 0;
-}
 
 .time_container {
   margin: 1rem;
 }
+
 .time_labels {
   margin-bottom: 0.5rem;
+}
+
+.times {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-bottom: 3em;
 }
 
 .colomn {
@@ -139,13 +143,13 @@ body {
   font-size: 9px;
 }
 
+
 /*///////////////END POPUP CSS ////////////////////////*/
 
 #addTask_container {
   display: flex;
   align-items: center;
   text-align: center;
-
 }
 
 #currentMonth {
@@ -155,7 +159,7 @@ body {
   align-items: center;
 }
 
-#currentMonthYear{
+#currentMonthYear {
   margin: auto 0;
 }
 
@@ -179,7 +183,7 @@ body {
 
 .addButton {
   border: 1px;
- }
+}
 
 .addtask .addButton {
   height: 4rem;
@@ -213,15 +217,6 @@ body {
   cursor: pointer;
 }
 
-.times {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  margin-top: 3em;
-  padding-bottom: 4em;
-  padding-right: 25px;
-}
-
 footer {
   z-index: 1;
 }
@@ -238,13 +233,12 @@ footer {
     width: 100%;
     color: white;
     text-align: center;
- }
+  }
 
   footer a {
     text-decoration: none;
     color: black;
   }
-
 }
 
 @media only screen and (max-width: 600px) {
@@ -259,12 +253,11 @@ footer {
     width: 100%;
     color: white;
     text-align: center;
- }
-
+  }
 }
 
 @media only screen and (min-width: 600px) {
-  .wrapper_container{
+  .wrapper_container {
     height: 100%;
   }
 

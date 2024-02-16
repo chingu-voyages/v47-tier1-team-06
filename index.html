@@ -1,349 +1,554 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Task App</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Task App</title>
+    <!--JQUERY LIBRARY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-  <!--JQUERY LIBRARY -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- FONTAWSOME -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/df21ef76d6.js"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- FONTAWSOME -->
-  <script defer src="https://kit.fontawesome.com/df21ef76d6.js" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
 
-  <!-- BOOTSTRAP CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-    crossorigin="anonymous"></script>
+    <!-- LOCAL SOURCE -->
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script defer type="module" src="newApp.js"></script>
+  </head>
 
-  <!-- LOCAL SOURCE -->
-  <link rel="stylesheet" type="text/css" href="style.css" />
-  <script defer type="module" src="App.js"></script>
-</head>
-
-<body>
-  <!-- jquery code for popup -->
-  <script>
-    jQuery(document).ready(function () {
-      jQuery("#addTask").click(function () {
-        jQuery("#popup_main_container").css({
-          display: "block",
-          height: "100%"
+  <body>
+    <!-- jquery code for popup -->
+    <script>
+      jQuery(document).ready(function () {
+        jQuery("#addTask").click(function () {
+          jQuery("#popup_main_container").css({
+            display: "block",
+            height: "100%",
+          });
+          jQuery(".hideContainer").css({ display: "none" });
         });
-        jQuery(".hideContainer").css({ display: "none" });
       });
-    });
 
-    function jsfunction() {
-      alert("jsfunction");
-    }
-  </script>
+      function jsfunction() {
+        alert("jsfunction");
+      }
+    </script>
 
-  <!--------------------- POPUP HTML SECTION ---------------------->
+    <!--------------------- POPUP HTML SECTION ---------------------->
 
-  <div class="container-fluid text-left" id="popup_main_container">
-    <div class="row top_menu text-center" id="top_menu">
-      <div class="col p-3 text-white fs-1" id="monthYear">New Task</div>
-    </div>
-
-    <div class="mb-3 border-bottom border-danger">
-      <label for="task_title_input" class="form-label text-white">Task Title</label>
-      <input type="text" class="form-control" id="task_title_input" aria-describedby="TaskTitle" />
-    </div>
-    <div class="mb-3">
-      <label for="task_description_input" class="form-label text-white">Description</label>
-      <input type="text" class="form-control" id="task_description_input" />
-    </div>
-
-    <!--Peaches Catergory Section-->
-    <div class="mb-3">
-      <select class="form-select form-select-md mb-3" aria-label="Large select example">
-        <option selected>Categories</option>
-        <option value="3">Appointments</option>
-        <option value="3">Dinner</option>
-        <option value="1">Pay Bills</option>
-        <option value="3">Shopping</option>
-        <option value="3">Studying</option>
-        <option value="2">Workout</option>
-        <option value="3">Work</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <select class="form-select form-select-md" aria-label="Small select example">
-        <option selected>Doctor/other</option>
-        <option value="1">Rent due</option>
-        <option value="2">Phone bill</option>
-        <option value="3">Groceries/Necessities</option>
-        <option value="3">Projects/Homework</option>
-        <option value="3">Run</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <select class="form-select form-select-md md-3" aria-label="Small select example">
-        <option selected> Priority</option>
-        <option value="1">Urgent</option>
-        <option value="2">Important!</option>
-        <option value="3">For Later</option>
-        <option value="3">Blocked</option>
-        <option value="3">Needs Focus Time</option>
-      </select>
-    </div>
-    <!-- END OF CATERGORY -->
-
-    <div class="mb-3">
-      <label for="datePicker" class="form-label text-white">Date</label>
-      <input type="date" class="form-control" id="datePicker" />
-    </div>
-
-    <div class="row times" id="popup_time_container">
-      <div class="row time_container" id="startTime_container">
-        <label class="text-white time_labels">Start Time</label>
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="task_start_time_hour" min="1" max="12" />
-
-          <label for="task_start_time_hour" class="time_specification">
-            Hour (1-12)
-          </label>
-        </div>
-
-        <h3 class="colomn">:</h3>
-
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="task_start_time_minute" min="0" max="59" />
-
-          <label for="task_start_time_minute" class="time_specification">
-            Minutes (0-59)
-          </label>
-
-        </div>
-        <div class="col">
-          <select name="ampm" id="task_start_time_ampm" class="form-control">
-            <option value="">AM/PM</option>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </select>
-        </div>
+    <div class="container-fluid text-left" id="popup_main_container">
+      <div class="row top_menu text-center" id="top_menu">
+        <div class="col p-3 text-white fs-1" id="monthYear">New Task</div>
       </div>
 
-      <div class="row time_container" id="endTime_container">
-        <label class="text-white time_labels">End Time</label>
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="task_end_time_hour" min="1" max="12" />
-
-          <label for="task_start_time_hour" class="time_specification">
-            Hour (1-12)
-          </label>
-        </div>
-
-        <h3 class="colomn">:</h3>
-
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="task_end_time_minute" min="0" max="59" />
-
-          <label for="task_start_time_minute" class="time_specification">
-            Minutes (0-59)
-          </label>
-        </div>
-        <div class="col">
-          <select name="ampm" id="task_end_time_ampm" class="form-control">
-            <option value="">AM/PM</option>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </select>
-        </div>
+      <div class="mb-3 border-bottom border-danger">
+        <label for="task_title_input" class="form-label text-white"
+          >Task Title</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="task_title_input"
+          aria-describedby="TaskTitle"
+        />
       </div>
-    </div>
-
-    <div class="row" class="task_button_container" id="task_button_container">
-      <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
-        <button class="save btn btn-white btn-lg task_button_container" id="add_task_button">
-          Add Task
-        </button>
-        <button class="cancel_btn btn btn-white btn-lg task_button_container" id="cancel_task_button">
-          Cancel
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-------------------- EDIT TASK POPUP SECTION ------------------>
-
-  <div class="container-fluid text-left popupContainer" id="popup_edit_container">
-    <div class="row top_menu text-center" id="top_menu">
-      <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
-    </div>
-
-    <div class="mb-3 border-bottom border-danger">
-      <label for="task_title_input" class="form-label text-white">Task Title</label>
-      <input type="text" class="form-control" id="edit-title" aria-describedby="TaskTitle" />
-    </div>
-    <div class="mb-3">
-      <label for="task_description_input" class="form-label text-white">Description</label>
-      <input type="text" class="form-control" id="edit-description" />
-    </div>
-
-    <!--Peaches Catergory Section-->
-    <div class="mb-3">
-      <select class="form-select form-select-md mb-3" aria-label="Large select example">
-        <option selected>Categories</option>
-        <option value="3">Appointments</option>
-        <option value="3">Dinner</option>
-        <option value="1">Pay Bills</option>
-        <option value="3">Shopping</option>
-        <option value="3">Studying</option>
-        <option value="2">Workout</option>
-        <option value="3">Work</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <select class="form-select form-select-md" aria-label="Small select example">
-        <option selected>Doctor/other</option>
-        <option value="1">Rent due</option>
-        <option value="2">Phone bill</option>
-        <option value="3">Groceries/Necessities</option>
-        <option value="3">Projects/Homework</option>
-        <option value="3">Run</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <select class="form-select form-select-md md-3" aria-label="Small select example">
-        <option selected> Priority</option>
-        <option value="1">Urgent</option>
-        <option value="2">Important!</option>
-        <option value="3">For Later</option>
-        <option value="3">Blocked</option>
-        <option value="3">Needs Focus Time</option>
-      </select>
-    </div>
-    <!-- END OF CATERGORY -->
-
-    <div class="mb-3">
-      <label for="datePicker" class="form-label text-white">Date</label>
-      <input type="date" class="form-control" id="edit-datePicker" />
-    </div>
-
-    <div class="row times" id="popup_time_container">
-      <div class="row time_container" id="startTime_container">
-        <label class="text-white time_labels">Start Time</label>
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="edit-task_start_time_hour" min="0" max="12" />
-
-          <label for="edit-task_start_time_hour" class="time_specification">
-            Hour (1-12)
-          </label>
-        </div>
-
-        <h3 class="colomn">:</h3>
-
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="edit-task_start_time_minute" min="0"
-            max="59" />
-
-          <label for="edit-task_start_time_minute" class="time_specification">
-            Minutes (0-59)
-          </label>
-        </div>
-        <div class="col">
-          <select name="ampm" id="edit-task_start_time_ampm" class="form-control">
-            <option value="">AM/PM</option>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </select>
-        </div>
+      <div class="mb-3">
+        <label for="task_description_input" class="form-label text-white"
+          >Description</label
+        >
+        <input type="text" class="form-control" id="task_description_input" />
       </div>
 
-      <div class="row time_container" id="endTime_container">
-        <label class="text-white time_labels">End Time</label>
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="edit-task_end_time_hour" min="0" max="12" />
-
-          <label for="edit-task_end_time_hour" class="time_specification">
-            Hour (1-12)
-          </label>
-        </div>
-
-        <h3 class="colomn">:</h3>
-
-        <div class="col">
-          <input type="number" class="input-timepicker form-control" id="edit-task_end_time_minute" min="0" max="59" />
-
-          <label for="edit-task_end_time_minute" class="time_specification">
-            Minutes (0-59)
-          </label>
-        </div>
-
-        <div class="col">
-          <select name="ampm" id="edit-task_end_time_ampm" class="form-control">
-            <option value="">AM/PM</option>
-            <option value="am">AM</option>
-            <option value="pm">PM</option>
-          </select>
-        </div>
+      <!--Peaches Catergory Section-->
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md mb-3"
+          aria-label="Large select example"
+        >
+          <option selected>Categories</option>
+          <option value="3">Appointments</option>
+          <option value="3">Dinner</option>
+          <option value="1">Pay Bills</option>
+          <option value="3">Shopping</option>
+          <option value="3">Studying</option>
+          <option value="2">Workout</option>
+          <option value="3">Work</option>
+        </select>
       </div>
-    </div>
 
-    <div class="row" class="task_button_container" id="task_button_container">
-      <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
-        <button class="save btn btn-white btn-lg task_button_container" id="save_edit_task_button">
-          Save
-        </button>
-        <button class="cancel_btn btn btn-white btn-lg task_button_container" id="cancel_edit_task_button">
-          Cancel
-        </button>
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md"
+          aria-label="Small select example"
+        >
+          <option selected>Doctor/other</option>
+          <option value="1">Rent due</option>
+          <option value="2">Phone bill</option>
+          <option value="3">Groceries/Necessities</option>
+          <option value="3">Projects/Homework</option>
+          <option value="3">Run</option>
+        </select>
       </div>
-    </div>
-  </div>
 
-  <!--- MAIN WRAPPER --->
-  <div class="container-fluid wrapper_container" id="wrapper_container">
-    <!-- ADD TASK SECTION -->
-    <div class="p-3 hideContainer" id="addTask_container">
-      <div class="currentMonth container text-center align-middle" id="currentMonth">
-        <div class="row align-items-center align-middle">
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md md-3"
+          aria-label="Small select example"
+        >
+          <option selected>Priority</option>
+          <option value="1">Urgent</option>
+          <option value="2">Important!</option>
+          <option value="3">For Later</option>
+          <option value="3">Blocked</option>
+          <option value="3">Needs Focus Time</option>
+        </select>
+      </div>
+      <!-- END OF CATERGORY -->
+
+      <div class="mb-3">
+        <label for="datePicker" class="form-label text-white">Start Date</label>
+        <input type="date" class="form-control" id="startDatePicker" />
+      </div>
+
+      <div class="row times" id="popup_time_container">
+        <div class="row time_container" id="startTime_container">
+          <label class="text-white time_labels">Start Time</label>
           <div class="col">
-            <i id="previous_month" class="fa-solid fa-circle-left fa-lg"></i>
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_start_time_hour"
+              min="1"
+              max="12"
+            />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
+          </div>
+
+          <h3 class="colomn">:</h3>
+
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_start_time_minute"
+              min="0"
+              max="59"
+            />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
-            <p id="currentMonthYear" class="fs-4"></p>
+            <select name="ampm" id="task_start_time_ampm" class="form-control">
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="datePicker" class="form-label text-white">End Date</label>
+          <input type="date" class="form-control" id="endDatePicker" />
+        </div>
+
+        <div class="row time_container" id="endTime_container">
+          <label class="text-white time_labels">End Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_end_time_hour"
+              min="1"
+              max="12"
+            />
+
+            <label for="task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
+          </div>
+
+          <h3 class="colomn">:</h3>
+
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="task_end_time_minute"
+              min="0"
+              max="59"
+            />
+
+            <label for="task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
           </div>
           <div class="col">
-            <i id="next_month" class="fa-solid fa-circle-right fa-lg"></i>
-          </div>
-          <div class="col">
-            <button id="addTask" class="addButton btn btn-danger">
-              <i class="fa-solid fa-plus"></i><i class="fa-solid fa-thumbtack"></i>
-            </button>
+            <select name="ampm" id="task_end_time_ampm" class="form-control">
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
           </div>
         </div>
       </div>
+
+      <fieldset>
+        <legend>Select weekdays with tasks:</legend>
+
+        <div>
+          <input type="checkbox" value="0" name="weekday" checked />
+          <label for="sunday">Sunday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="1" name="weekday" checked />
+          <label for="monday">Monday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="2" name="weekday" checked />
+          <label for="tuesday">Tuesday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="3" name="weekday" checked />
+          <label for="wednesday">Wednesday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="4" name="weekday" checked />
+          <label for="thursday">Thursday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="5" name="weekday" checked />
+          <label for="friday">Friday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="6" name="weekday" checked />
+          <label for="saturday">Saturday</label>
+        </div>
+      </fieldset>
+
+      <div class="row" class="task_button_container" id="task_button_container">
+        <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
+          <button
+            class="save btn btn-white btn-lg task_button_container"
+            id="add_task_button"
+          >
+            Add Task
+          </button>
+          <button
+            class="cancel_btn btn btn-white btn-lg task_button_container"
+            id="cancel_task_button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- CALENDAR SECTION -->
-    <div class="calender_menu hideContainer" id="calender_container">
-      <div class="calendar-container"></div>
+    <!-------------------- EDIT TASK POPUP SECTION ------------------>
+
+    <div
+      class="container-fluid text-left popupContainer"
+      id="popup_edit_container"
+    >
+      <div class="row top_menu text-center" id="top_menu">
+        <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
+      </div>
+
+      <div class="mb-3 border-bottom border-danger">
+        <label for="task_title_input" class="form-label text-white"
+          >Task Title</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="edit-title"
+          aria-describedby="TaskTitle"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="task_description_input" class="form-label text-white"
+          >Description</label
+        >
+        <input type="text" class="form-control" id="edit-description" />
+      </div>
+
+      <!--Peaches Catergory Section-->
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md mb-3"
+          aria-label="Large select example"
+        >
+          <option selected>Categories</option>
+          <option value="3">Appointments</option>
+          <option value="3">Dinner</option>
+          <option value="1">Pay Bills</option>
+          <option value="3">Shopping</option>
+          <option value="3">Studying</option>
+          <option value="2">Workout</option>
+          <option value="3">Work</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md"
+          aria-label="Small select example"
+        >
+          <option selected>Doctor/other</option>
+          <option value="1">Rent due</option>
+          <option value="2">Phone bill</option>
+          <option value="3">Groceries/Necessities</option>
+          <option value="3">Projects/Homework</option>
+          <option value="3">Run</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <select
+          class="form-select form-select-md md-3"
+          aria-label="Small select example"
+        >
+          <option selected>Priority</option>
+          <option value="1">Urgent</option>
+          <option value="2">Important!</option>
+          <option value="3">For Later</option>
+          <option value="3">Blocked</option>
+          <option value="3">Needs Focus Time</option>
+        </select>
+      </div>
+      <!-- END OF CATERGORY -->
+
+      <div class="mb-3">
+        <label for="datePicker" class="form-label text-white">Start Date</label>
+        <input type="date" class="form-control" id="edit-startDatePicker" />
+      </div>
+
+      <div class="row times" id="popup_time_container">
+        <div class="row time_container" id="startTime_container">
+          <label class="text-white time_labels">Start Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_start_time_hour"
+              min="0"
+              max="12"
+            />
+
+            <label for="edit-task_start_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
+          </div>
+
+          <h3 class="colomn">:</h3>
+
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_start_time_minute"
+              min="0"
+              max="59"
+            />
+
+            <label for="edit-task_start_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
+          </div>
+          <div class="col">
+            <select
+              name="ampm"
+              id="edit-task_start_time_ampm"
+              class="form-control"
+            >
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="datePicker" class="form-label text-white">End Date</label>
+          <input type="date" class="form-control" id="edit-endDatePicker" />
+        </div>
+
+        <div class="row time_container" id="endTime_container">
+          <label class="text-white time_labels">End Time</label>
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_end_time_hour"
+              min="0"
+              max="12"
+            />
+
+            <label for="edit-task_end_time_hour" class="time_specification">
+              Hour (1-12)
+            </label>
+          </div>
+
+          <h3 class="colomn">:</h3>
+
+          <div class="col">
+            <input
+              type="number"
+              class="input-timepicker form-control"
+              id="edit-task_end_time_minute"
+              min="0"
+              max="59"
+            />
+
+            <label for="edit-task_end_time_minute" class="time_specification">
+              Minutes (0-59)
+            </label>
+          </div>
+
+          <div class="col">
+            <select
+              name="ampm"
+              id="edit-task_end_time_ampm"
+              class="form-control"
+            >
+              <option value="">AM/PM</option>
+              <option value="am">AM</option>
+              <option value="pm">PM</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Select weekdays with tasks:</legend>
+
+        <div>
+          <input type="checkbox" value="0" name="edit-weekday" checked />
+          <label for="sunday">Sunday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="1" name="edit-weekday" checked />
+          <label for="monday">Monday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="2" name="edit-weekday" checked />
+          <label for="tuesday">Tuesday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="3" name="edit-weekday" checked />
+          <label for="wednesday">Wednesday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="4" name="edit-weekday" checked />
+          <label for="thursday">Thursday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="5" name="edit-weekday" checked />
+          <label for="friday">Friday</label>
+        </div>
+
+        <div>
+          <input type="checkbox" value="6" name="edit-weekday" checked />
+          <label for="saturday">Saturday</label>
+        </div>
+      </fieldset>
+
+      <div class="row" class="task_button_container" id="task_button_container">
+        <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
+          <button
+            class="save btn btn-white btn-lg task_button_container"
+            id="save_edit_task_button"
+          >
+            Save
+          </button>
+          <button
+            class="cancel_btn btn btn-white btn-lg task_button_container"
+            id="cancel_edit_task_button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!-- TASK SECTION -->
-    <div class="col text-black text-center" id="task_list"></div>
+    <!--- MAIN WRAPPER --->
+    <div class="container-fluid wrapper_container" id="wrapper_container">
+      <!-- ADD TASK SECTION -->
+      <div class="p-3 hideContainer" id="addTask_container">
+        <div
+          class="currentMonth container text-center align-middle"
+          id="currentMonth"
+        >
+          <div class="row align-items-center align-middle">
+            <div class="col">
+              <i id="previous_month" class="fa-solid fa-circle-left fa-lg"></i>
+            </div>
+            <div class="col">
+              <p id="currentMonthYear" class="fs-4"></p>
+            </div>
+            <div class="col">
+              <i id="next_month" class="fa-solid fa-circle-right fa-lg"></i>
+            </div>
+            <div class="col">
+              <button id="addTask" class="addButton btn btn-danger">
+                <i class="fa-solid fa-plus"></i
+                ><i class="fa-solid fa-thumbtack"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
-    <div class="hideContainer" id="task_container">
-      <!-- new task generated -->
+      <!-- CALENDAR SECTION -->
+      <div class="calender_menu hideContainer" id="calender_container">
+        <div class="calendar-container"></div>
+      </div>
+
+      <!-- TASK SECTION -->
+      <div class="col text-black text-center" id="task_list"></div>
+
+      <div class="hideContainer" id="task_container">
+        <!-- new task generated -->
+      </div>
     </div>
-  </div>
-  <!---END MAIN WRAPPER --->
+    <!---END MAIN WRAPPER --->
 
-  <footer class="footer">
-    <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
-      Created by Chingu Voyage😃
-    </a>
-  </footer>
-</body>
-
+    <footer class="footer">
+      <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
+        Created by Chingu Voyage😃
+      </a>
+    </footer>
+  </body>
 </html>

@@ -1,28 +1,35 @@
-# voyage-tasks
+(![](Image/Daily_Task_App.png))
+# Names of contributors
+Amy Vier
+Peaches Stitts
+Maya Powers
+Ki 
+-----------------------------------------------------------------------------------------
+## Overview
+------------------------------------------------------------------------------------------
+ We created this app because we all volunterred our time to Chingu. Chingu is a remote collaboration community for like-minded developers to make projects in a team setting. We submitted a project to be reviewed for the program. After Jim Medlock and his team looked over our projects it was decided that we were going to be in Voyage 47 tier 1. This tier is for beginners and you can work your way up to tier 3. Once we found out that we were wroking together Jim gave us information on our GitHub that he created for us and his expectations of the project. We spent 6 weeks collectivly working on developing our app. 
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## Features
+----------------------------------------------------------------------------------------------
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
 
-> Own it & Make it your Own!
 
-## Team Documents
+## Tech Used/Dependencies
+This is a basic HTML/CSS/Javascript App
 
-You may find these helpful as you work together to organize your project.
+Add-on packages include:
+* Unordered list can use asterisks
+[Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/)
 
-- [Team Project Ideas](./docs/team_project_ideas.md)
-- [Team Decision Log](./docs/team_decision_log.md)
+## Running the project
+--------------------------------------------------------------------------------------------
+1.Install bootstrap npm install bootstrap (check in package-json in the dependencies section to see if it downloaded properly)
+2.create a index.html, style.css and App.javascript(js) file
+3.If you don'y have "open with live server" you can install that on the right hand side of Visual Studio Code click the "extenstions" logo
+4.I suggest to type "Hello World" with basic CSS like changing the header to be blue (or a color of your choice to see if your app is working)
+5. Now that you have your app up and running you can start coding!
 
-Meeting Agenda templates (located in the `/docs` directory in this repo):
 
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+
+

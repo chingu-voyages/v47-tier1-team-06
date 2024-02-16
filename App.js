@@ -268,33 +268,34 @@ function displayTasks () {
 
             // edit button
             let edit_button = document.createElement("button");
-            
+            let edit_icon = document.createElement("i");
+            edit_icon = document.className = "";
 
             edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
             edit_button.textContent = "Edit";
             edit_button.addEventListener("click", () => { editTask(aTask) });
             
             // Append buttons to task 
-            // newTask.appendChild(edit_button);
-            // newTask.appendChild(delete_button);
+            newTask.appendChild(edit_button);
+            newTask.appendChild(delete_button);
 
             // Append task to task container
             document.getElementById("task_list").appendChild(newTask);
 
 // Edit & Delete Icon
-            let edit_icon = document.querySelector("#edit_icon");
-            edit_icon.addEventListener("click", () => { editTask(aTask)  });
-            let delete_icon = document.querySelector("#delete_icon");
-            delete_icon.addEventListener("click", () => { 
+            // let edit_icon = document.querySelector("#edit_icon");
+            // edit_icon.addEventListener("click", () => { editTask(aTask)  });
+            // let delete_icon = document.querySelector("#delete_icon");
+            // delete_icon.addEventListener("click", () => { 
 
-                if(confirm("Delete this task?")){
-                    deleteTask(aTask);
-                }
-                else{
-                    alert("Delete Task Canceled");
-                }
+            //     if(confirm("Delete this task?")){
+            //         deleteTask(aTask);
+            //     }
+            //     else{
+            //         alert("Delete Task Canceled");
+            //     }
                 
-            });
+            // });
             
         }
     }

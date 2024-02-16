@@ -54,6 +54,16 @@
   padding: 0;
 }
 
+.card{
+  z-index: 0;
+}
+
+.card-header{
+  background-color: var(--primary);
+  color: white;
+}
+
+
 .calendar-day:hover {
   border-color: var(--primary);
 }
@@ -95,6 +105,7 @@ body {
 }
 
 #popup_main_container , #popup_edit_container{
+  z-index: 7;
   position: absolute;
   background-color: var(--primary);
   display: none;
@@ -224,11 +235,6 @@ body {
 
 footer {
   z-index: 1;
-}
-
-.card-header{
-  background-color: var(--primary);
-  color: white;
 }
 
 @media only screen and (min-width: 1024px) {

@@ -231,12 +231,30 @@ function displayTasks () {
         // delete buttons
         for (let aTask of tasksOnAGivenDay) {
             let newTask = document.createElement("div");
-            newTask.className = "col bg-white text-black text-center p-2";
+            newTask.className = "card col bg-white text-black text-center p-2";
             newTask.innerHTML = `
-                <h1>${aTask.title}</h1>
-                <p>${aTask.description}</p>
-                <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
+                <div class="card-header">
+                    <div class="container text-center">
+                        <div class="row align-middle">
+                            <div class="col">
+                            <i id="edit_icon" class="fa-solid fa-pen-to-square fa-lg"></i>
+                            </div>
+                            <div class="col-8">
+                            <h2>${aTask.title}</h2>
+                            </div>
+                            <div class="col">
+                            <i id="delete_icon" class="fa-solid fa-trash-can fa-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">${aTask.description}</di>
+                <div class="card-body">${aTask.getStartTime()} - ${aTask.getEndTime()}</div>
             `;
+
+            // <h1>${aTask.title}</h1>
+            // <p>${aTask.description}</p>
+            // <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
 
             // delete button
             let delete_button = document.createElement("button");
@@ -250,17 +268,34 @@ function displayTasks () {
 
             // edit button
             let edit_button = document.createElement("button");
+            
 
             edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
             edit_button.textContent = "Edit";
             edit_button.addEventListener("click", () => { editTask(aTask) });
             
             // Append buttons to task 
-            newTask.appendChild(edit_button);
-            newTask.appendChild(delete_button);
+            // newTask.appendChild(edit_button);
+            // newTask.appendChild(delete_button);
 
             // Append task to task container
             document.getElementById("task_list").appendChild(newTask);
+
+// Edit & Delete Icon
+            let edit_icon = document.querySelector("#edit_icon");
+            edit_icon.addEventListener("click", () => { editTask(aTask)  });
+            let delete_icon = document.querySelector("#delete_icon");
+            delete_icon.addEventListener("click", () => { 
+
+                if(confirm("Delete this task?")){
+                    deleteTask(aTask);
+                }
+                else{
+                    alert("Delete Task Canceled");
+                }
+                
+            });
+            
         }
     }
 }

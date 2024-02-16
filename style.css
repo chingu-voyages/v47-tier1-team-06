@@ -226,6 +226,11 @@ footer {
   z-index: 1;
 }
 
+.card-header{
+  background-color: var(--primary);
+  color: white;
+}
+
 @media only screen and (min-width: 1024px) {
   #addTask_container {
     margin: 0 6em;

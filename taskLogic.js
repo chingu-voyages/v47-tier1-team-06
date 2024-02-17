@@ -425,7 +425,7 @@ class AllTasks {
         let tasksOnDate = new Array();
 
         for (let i = 0; i < this.#allTasks.length; i++) {
-            if (this.#allTasks[i].start <= date && this.#allTasks[i].end >= date &&
+            if (compareDates(this.#allTasks[i].start, date) < 1 && this.#allTasks[i].end >= date &&
                (this.#allTasks[i].includesDay(getWeekString(date.getDay())) || 
                this.#allTasks[i].includesDay(date.getDate()))) {
                 tasksOnDate.push(this.#allTasks[i]);

@@ -1,9 +1,5 @@
 ![](Image/Daily_Task_App.png)
-# Names of contributors #
-Amy Vier,
-Peaches Stitts,
-Maya Powers,
-Ki 
+
 -----------------------------------------------------------------------------------------
 # Overview #
 
@@ -45,13 +41,13 @@ Add-on packages include:
 
 ![Figma prototype](Image/figma.png)
 
-Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a reapet because that's what the instructions asked for. 
+Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a reapet because that's what the instructions asked for to make the app more cohesive and fluid. 
 
 # Contributors #
 
-Amy Vier
-Peaches Stitts [LinkedIn](https://www.linkedin.com/in/chawntel-stitts-143780157/)
-Maya Powers
+Amy Vier <br>
+Peaches Stitts [LinkedIn](https://www.linkedin.com/in/chawntel-stitts-143780157/) <br>
+Maya Powers <br>
 Ki discord username- kiki2551
 
 

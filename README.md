@@ -32,7 +32,9 @@ Add-on packages include:
 
 # Running the project #
 --------------------------------------------------------------------------------------------
-Markup: 1. Clone project
+##List
+Ordered
+1.Clone project
 2.Install bootstrap npm install bootstrap (check in package-json in the dependencies section to see if it downloaded properly)
 3.create a index.html, style.css and App.javascript(js) file
 4.If you don't have "open with live server" you can install that on the right hand side of Visual Studio Code click the "extenstions" logo, search for open with live server and install it. You then right click on your mouse "open with live server" and you can see the changes you made in action. 

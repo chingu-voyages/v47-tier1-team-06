@@ -45,7 +45,7 @@ Add-on packages include:
 
 ![Figma prototype](Image/figma.png)
 
-Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app.
+Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a reapet because that's what the instructions asked for. 
 
 # Contributors #
 

@@ -124,8 +124,8 @@ body {
   height: 100%;
 }
 
-#popup_main_container,
-#popup_edit_container {
+
+#popup_main_container , #popup_edit_container{
   z-index: 7;
   position: absolute;
   background-color: var(--primary);

@@ -231,11 +231,25 @@ function displayTasks () {
 function createTaskDisplay(task) {
     let taskDisplay = document.createElement("div");
 
-    taskDisplay.className = "col bg-white text-black text-center p-2";
+    taskDisplay.className = "card col bg-white text-black text-center p-2";
     taskDisplay.innerHTML = `
-        <h1>${task.category}-${task.type}:${task.title}</h1>
-        <p>${task.description}</p>
-        <p>${task.startTime} - ${task.endTime}</p>
+        <div class="card-header">
+            <div class="container text-center">
+                <div class="row align-middle">
+                    <div class="col">
+                    <i id="edit_icon" class="fa-solid fa-pen-to-square fa-lg"></i>
+                    </div>
+                    <div class="col-8">
+                    <h2>${task.category} - ${task.type}: ${task.title}</h2>
+                    </div>
+                    <div class="col">
+                    <i id="delete_icon" class="fa-solid fa-trash-can fa-lg"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">${task.description}</di>
+        <div class="card-body">${task.startTime} - ${aTask.endTime}</div>
     `;
 
     // delete button

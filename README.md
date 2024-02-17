@@ -1,6 +1,6 @@
 ![](Image/Daily_Task_App.png)
 
------------------------------------------------------------------------------------------
+
 # Overview #
 
  We created this app because we all volunterred our time to Chingu. Chingu is a remote collaboration community for like-minded developers to make projects in a team setting. We submitted a project to be reviewed for the program. After Jim Medlock and his team looked over our projects it was decided that we were going to be in Voyage 47 tier 1 team 06. This tier is for beginners and you can work your way up to tier 3. Once we found out that we were working together Jim gave us information on our GitHub that he created for us and his expectations of the project. We broke into seperate groups, one group for HTML and CSS which Maya and Peaches were in and Ki and Amy worked on the Javascript portion of the app. We spent 6 weeks collectivly working on developing our app.
@@ -16,6 +16,7 @@
 6. You can cancel your task if you don't need it anymore<br>
 7. The task will display on the landing page once complete <br>
 8. You can click on any date to see if there's a task, the cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates to see what task is coming up <br>
+9. You can switch to any month and day to input your task
 
 
 # Tech Used/Dependencies #
@@ -41,7 +42,7 @@ Add-on packages include:
 
 ![Figma prototype](Image/figma.png)
 
-Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a reapet because that's what the instructions asked for to make the app more cohesive and fluid. 
+Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a repeat option because that's what the instructions asked for to make the app more cohesive and fluid. 
 
 # Contributors #
 

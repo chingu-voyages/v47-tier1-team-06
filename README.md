@@ -8,7 +8,7 @@
 
 # Features #
 
-1. With this app you can choose a specfic day and time to input your task<br>
+1. With this app you can choose a specfic day, time and month to input your task<br>
 2. There's mutiple detailed descriptions you can choose from<br>
 3. You can repeat a task daily,weekly, and monthly<br>
 4. You can cancel or edit your task<br>
@@ -16,7 +16,7 @@
 6. You can cancel your task if you don't need it anymore<br>
 7. The task will display on the landing page once complete <br>
 8. You can click on any date to see if there's a task, the cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates to see what task is coming up <br>
-9. You can switch to any month and day to input your task
+
 
 
 # Tech Used/Dependencies #

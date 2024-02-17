@@ -211,7 +211,24 @@ class AllTasks {
         console.log(this.#allTasks);
     }
 
+    save() {
+        
+    }
+
     initialize() {
+        let savedTasksString = localStorage.getItem("everyTask");
+
+        // if the data exists
+        if (savedTasksString !== null) {
+            let savedTasks = JSON.parse(savedTasksString);
+
+            
+        } else {
+            this.#getExampleData();
+        }
+    }
+
+    #getExampleData() {
         console.log(data);
 
         for (let taskCategory of data) {

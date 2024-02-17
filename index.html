@@ -30,7 +30,7 @@
 
     <!-- LOCAL SOURCE -->
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <script defer type="module" src="newApp.js"></script>
+    <script defer type="module" src="newNewApp.js"></script>
   </head>
 
   <body>
@@ -114,13 +114,14 @@
         <select
           class="form-select form-select-md md-3"
           aria-label="Small select example"
+          id="selectPriority"
         >
-          <option selected>Priority</option>
-          <option value="1">Urgent</option>
-          <option value="2">Important!</option>
-          <option value="3">For Later</option>
-          <option value="3">Blocked</option>
-          <option value="3">Needs Focus Time</option>
+          <option value="" selected>Priority</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Important!">Important!</option>
+          <option value="For Later">For Later</option>
+          <option value="Blocked">Blocked</option>
+          <option value="Needs Focus Time">Needs Focus Time</option>
         </select>
       </div>
       <!-- END OF CATERGORY -->
@@ -222,22 +223,34 @@
       </div>
 
       <fieldset>
-        <legend>Select weekdays with tasks:</legend>
+        <legend>Repeat Every:</legend>
 
         <div>
-          <input type="checkbox" value="0" name="weekday" id="sunday" checked />
+          <input
+            type="checkbox"
+            value="sunday"
+            name="weekday"
+            id="sunday"
+            checked
+          />
           <label for="sunday">Sunday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="1" name="weekday" id="monday" checked />
+          <input
+            type="checkbox"
+            value="monday"
+            name="weekday"
+            id="monday"
+            checked
+          />
           <label for="monday">Monday</label>
         </div>
 
         <div>
           <input
             type="checkbox"
-            value="2"
+            value="tuesday"
             name="weekday"
             id="tuesday"
             checked
@@ -248,7 +261,7 @@
         <div>
           <input
             type="checkbox"
-            value="3"
+            value="wednesday"
             name="weekday"
             id="wednesday"
             checked
@@ -259,7 +272,7 @@
         <div>
           <input
             type="checkbox"
-            value="4"
+            value="thursday"
             name="weekday"
             id="thursday"
             checked
@@ -268,19 +281,38 @@
         </div>
 
         <div>
-          <input type="checkbox" value="5" name="weekday" id="friday" checked />
+          <input
+            type="checkbox"
+            value="friday"
+            name="weekday"
+            id="friday"
+            checked
+          />
           <label for="friday">Friday</label>
         </div>
 
         <div>
           <input
             type="checkbox"
-            value="6"
+            value="saturday"
             name="weekday"
             id="saturday"
             checked
           />
           <label for="saturday">Saturday</label>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            value="days"
+            name="monthlyDays"
+            id="monthlyDays"
+          />
+          <label for="monthlyDays"
+            >Day (put spaces in between every day):
+            <input type="text" class="form-control" id="task_monthDays" />
+          </label>
         </div>
       </fieldset>
 
@@ -368,13 +400,14 @@
         <select
           class="form-select form-select-md md-3"
           aria-label="Small select example"
+          id="edit-selectPriority"
         >
-          <option selected>Priority</option>
-          <option value="1">Urgent</option>
-          <option value="2">Important!</option>
-          <option value="3">For Later</option>
-          <option value="3">Blocked</option>
-          <option value="3">Needs Focus Time</option>
+          <option value="" selected>Priority</option>
+          <option value="Urgent">Urgent</option>
+          <option value="Important!">Important!</option>
+          <option value="For Later">For Later</option>
+          <option value="Blocked">Blocked</option>
+          <option value="Needs Focus Time">Needs Focus Time</option>
         </select>
       </div>
       <!-- END OF CATERGORY -->
@@ -485,12 +518,12 @@
       </div>
 
       <fieldset>
-        <legend>Select weekdays with tasks:</legend>
+        <legend>Repeat Every:</legend>
 
         <div>
           <input
             type="checkbox"
-            value="0"
+            value="sunday"
             name="edit-weekday"
             id="edit-sunday"
             checked
@@ -501,7 +534,7 @@
         <div>
           <input
             type="checkbox"
-            value="1"
+            value="monday"
             name="edit-weekday"
             id="edit-monday"
             checked
@@ -512,7 +545,7 @@
         <div>
           <input
             type="checkbox"
-            value="2"
+            value="tuesday"
             name="edit-weekday"
             id="edit-tuesday"
             checked
@@ -523,7 +556,7 @@
         <div>
           <input
             type="checkbox"
-            value="3"
+            value="wednesday"
             name="edit-weekday"
             id="edit-wednesday"
             checked
@@ -534,7 +567,7 @@
         <div>
           <input
             type="checkbox"
-            value="4"
+            value="thursday"
             name="edit-weekday"
             id="edit-thursday"
             checked
@@ -545,7 +578,7 @@
         <div>
           <input
             type="checkbox"
-            value="5"
+            value="friday"
             name="edit-weekday"
             id="edit-friday"
             checked
@@ -556,12 +589,25 @@
         <div>
           <input
             type="checkbox"
-            value="6"
+            value="saturday"
             name="edit-weekday"
             id="edit-saturday"
             checked
           />
           <label for="edit-saturday">Saturday</label>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            value="days"
+            name="edit-monthlyDays"
+            id="edit-monthlyDays"
+          />
+          <label for="edit-monthlyDays"
+            >Day (put spaces in between every day):
+            <input type="text" class="form-control" id="edit-task_monthDays" />
+          </label>
         </div>
       </fieldset>
 

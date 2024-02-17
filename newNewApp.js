@@ -1,7 +1,11 @@
-import {AllTasks, Task} from "./newTaskLogic.js"; /// import
+import {AllTasks, Task} from "./newNewTaskLogic.js"; /// import
  
 // task initialization/save----------------------------------------------
 let taskContainer = new AllTasks(); // container for all tasks
+
+window.onbeforeunload = function(event) {
+    taskContainer.save();
+}
 
 
 // date logic------------------------------------------------------------
@@ -217,18 +221,11 @@ function displayTasks () {
     ${monthString[baseDate.getMonth()]} ${baseDate.getDate()}${getOrdinalSuffix(baseDate.getDate())}, 
     ${baseDate.getFullYear()}</h2>`;
 
-    console.log(tasksOnAGivenDay);
-
     // for each task, show title, description, times and create edit and 
     // delete buttons
     for (let aTask of tasksOnAGivenDay) {
-        console.log(aTask);
-        console.log(aTask.startTime);
-        if (aTask.includesWeekDay(baseDate.getDay())) {
-            document.getElementById("task_list").appendChild(createTaskDisplay(aTask));
-        } 
+        document.getElementById("task_list").appendChild(createTaskDisplay(aTask));
     }
-
 }
 
 function createTaskDisplay(task) {
@@ -262,7 +259,6 @@ function createTaskDisplay(task) {
     taskStatus_checkBox.type = "checkbox";
 
     if (task.isFinished(baseDate)) {
-        console.log("finished")
         taskStatus_checkBox.checked = true;
     } else {
         taskStatus_checkBox.checked = false;
@@ -270,10 +266,8 @@ function createTaskDisplay(task) {
 
     taskStatus_checkBox.addEventListener('change', function() {
         if (this.checked) {
-            console.log(baseDate)
             task.addFinished(baseDate);
         } else {
-            console.log(baseDate)
             task.removeFinished(baseDate);
         }
     });
@@ -286,6 +280,7 @@ function createTaskDisplay(task) {
     return taskDisplay;
 }
 
+
 // new task---------------------------------------------------------------------------
 
 // popup save btn
@@ -296,6 +291,7 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let type = document.getElementById("task_type").value;
     let title = document.getElementById("task_title_input").value;
     let description = document.getElementById("task_description_input").value;
+    let priority = document.getElementById("selectPriority").value;
     let startDate = document.getElementById("startDatePicker").value;
     let startTimeHour = document.getElementById("task_start_time_hour").value;
     let startTimeMinute = document.getElementById("task_start_time_minute").value;
@@ -306,19 +302,17 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let endTimeAmPm = document.getElementById("task_end_time_ampm").value;
 
     let checkboxes = document.getElementsByName('weekday');
-    let weekDayList = new Array();
+    let dayList = new Array();
+
+    if (document.getElementById("monthlyDays").checked) {
+        dayList = document.getElementById("task_monthDays").value.split(" ");
+    }
 
     for (let i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-            weekDayList.push(i);
+            dayList.push(checkboxes[i].value);
         }
     }
-
-    if (!(checkValidInputs(category, type, title, description, startDate, endDate,
-        startTimeHour, startTimeMinute, startTimeAmPm, endTimeHour, endTimeMinute,
-        endTimeAmPm, weekDayList))) {
-            return;
-    } 
 
     // turn dates into seperate integers
     let startYear = parseInt(startDate.slice(0,4));
@@ -335,22 +329,21 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let endTask =  new Date(endYear, endMonth - 1, endDay);
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
-    if (!(checkDateTime(startTask, endTask))) {
-            return;
-    } else {
-        for (let element of document.getElementsByClassName("hideContainer")){
-            element.style.display="flex";
-        }
+    ///////// add input check
+    for (let element of document.getElementsByClassName("hideContainer")){
+        element.style.display="flex";
     }
+    /////////
 
     // add task
-    taskContainer.newTask(category, type, title, description, startTask, endTask, weekDayList);
+    taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
 
     displayTasks();
     
     // clear out popup and hide popup
     document.getElementById('popup_main_container').style.display = 'none';
     clearOutTaskAdd();
+
 });
 
 // popup cancel btn
@@ -362,7 +355,6 @@ document.querySelector("#cancel_task_button").addEventListener("click", function
     document.getElementById('calender_container').style.display = 'flex';
     document.getElementById('task_container').style.display = 'flex';
 });
-
 
 // edit task-------------------------------------------------------------
 
@@ -384,6 +376,7 @@ function editTask(taskDelete) {
     document.getElementById("edit-task_type").value = taskDelete.type;
     document.getElementById("edit-title").value = taskDelete.title;
     document.getElementById("edit-description").value = taskDelete.description;
+    document.getElementById("edit-selectPriority").value = taskDelete.priority;
     document.getElementById("edit-startDatePicker").value = turnIntoDate(taskDelete.start);
     document.getElementById("edit-task_start_time_hour").value = getHour(taskDelete.startTime);
     document.getElementById("edit-task_start_time_minute").value = getMinutes(taskDelete.startTime);
@@ -396,7 +389,20 @@ function editTask(taskDelete) {
     let checkboxes = document.getElementsByName('edit-weekday');
 
     for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = taskDelete.includesWeekDay(i);
+        checkboxes[i].checked = taskDelete.includesDay(checkboxes[i].value);
+    }
+
+    let days = taskDelete.days;
+    let daycheckBox =  document.getElementById("edit-task_monthDays");
+
+    for (let day of days) {
+        if (!(isNaN(parseInt(day)))) {
+            daycheckBox.value = daycheckBox.value + " " + ("" + day);
+        }
+    }
+
+    if (daycheckBox.value != "") {
+        document.getElementById("edit-monthlyDays").checked = true;
     }
 
     // add functionality to save button
@@ -413,6 +419,7 @@ function saveEditsMade(taskDelete) {
     let type = document.getElementById("edit-task_type").value;
     let title = document.getElementById("edit-title").value;
     let description = document.getElementById("edit-description").value;
+    let priority = document.getElementById("edit-selectPriority").value;
     let startDate = document.getElementById("edit-startDatePicker").value;
     let startTimeHour = document.getElementById("edit-task_start_time_hour").value;
     let startTimeMinute = document.getElementById("edit-task_start_time_minute").value;
@@ -423,11 +430,15 @@ function saveEditsMade(taskDelete) {
     let endTimeAmPm = document.getElementById("edit-task_end_time_ampm").value;
 
     let checkboxes = document.getElementsByName('edit-weekday');
-    let weekDayList = new Array();
+    let dayList = new Array();
+
+    if (document.getElementById("edit-monthlyDays").checked) {
+        dayList = document.getElementById("edit-task_monthDays").value.split(" ");
+    }
 
     for (let i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-            weekDayList.push(i);
+            dayList.push(checkboxes[i].value);
         }
     }
 
@@ -449,14 +460,7 @@ function saveEditsMade(taskDelete) {
 
     // replace task with edited task
     taskContainer.removeTask(taskDelete);
-    console.log(category);
-    console.log(type);
-    console.log(title);
-    console.log(description);
-    console.log(startTask);
-    console.log(endTask);
-    console.log(weekDayList);
-    taskContainer.newTask(category, type, title, description, startTask, endTask, weekDayList);
+    taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
 
     // update task list with edits made
     displayTasks();
@@ -481,6 +485,7 @@ function clearOutTaskAdd() {
     document.getElementById("task_type").value = "";
     document.getElementById("task_title_input").value = "";
     document.getElementById("task_description_input").value = "";
+    document.getElementById("selectPriority").value = "";
     document.getElementById("startDatePicker").value = "";
     document.getElementById("task_start_time_hour").value = "";
     document.getElementById("task_start_time_minute").value = "";
@@ -495,6 +500,9 @@ function clearOutTaskAdd() {
     for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = true;
     }
+
+    document.getElementById("monthlyDays").checked = false;
+    document.getElementById("task_monthDays").value = "";
 }
 
 // clear out edit inputs
@@ -503,6 +511,7 @@ function clearOutEdit() {
     document.getElementById("edit-task_type").value = "";
     document.getElementById("edit-title").value = "";
     document.getElementById("edit-description").value = "";
+    document.getElementById("edit-selectPriority").value = "";
     document.getElementById("edit-startDatePicker").value = "";
     document.getElementById("edit-task_start_time_hour").value = "";
     document.getElementById("edit-task_start_time_minute").value = "";
@@ -517,58 +526,11 @@ function clearOutEdit() {
     for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = true;
     }
-}
 
-// check for input validity (return false if the inputs are not valid)
-function checkValidInputs(category, type, title, description, startDates, endDates, startHour, startMinute, 
-    startAmPm, endHour, endMinute, endAmPM, weekdays) {
-    let hasWeekdaySelected = false;
-
-    for (let i = 0; i < weekdays.length; i++) {
-        if (weekdays[i]) {
-            hasWeekdaySelected = true;
-        }
-    }
-
-    // check if not everything is filled in
-    if (category === "" || type === "" || title === '' || description === '' || startDates === '' || 
-    endDates === '' || startHour === '' || startMinute === '' || startAmPm === '' || endHour === '' 
-    || endMinute === '' || endAmPM === '') {
-        alert('You need to fill out everything.');
-    } else if (!(hasWeekdaySelected)) {
-        alert('You need to select at least one weekday.');
-    }
-    // check if hours and minutes are not within range
-    else if (startHour.value < 1 || startHour.value > 12
-        || startMinute.value < 0 || startMinute.value > 59
-        || endHour.value < 1 || endHour.value > 12
-        || endMinute.value < 0 || endMinute.value > 59) {
-            alert('please enter valid time in this format  - 00:00');
-    } else {
-        return true;
-    }
-
-    return false;
-}
-
-function checkDateTime(start, end) {
-    let currentDate = new Date();
-    let futureLimit = new Date();
-    futureLimit.setFullYear(futureLimit.getFullYear() + 5);
-
-    if (start > end) {
-        alert('please enter valid start and end times/dates');
-    } else if (end < currentDate) {
-        alert('the entered time/date is in the past');
-    } else if (end > futureLimit) {
-        alert('please enter a reasonable date');
-    } else {
-        return true;
-    }
-
-    return false;
+    document.getElementById("edit-monthlyDays").checked = false;
+    document.getElementById("edit-task_monthDays").value = "";
 }
 
 // display current month when page loads------------------------------------------------
 displayMonth();
-taskContainer.test();
+taskContainer.initialize();

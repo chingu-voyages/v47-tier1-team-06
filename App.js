@@ -26,6 +26,7 @@ const todayYear = baseDate.getFullYear();
 const monthString = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 const weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const weekFullString = new Set(["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]);
 
 
 // get number of days in a given month
@@ -400,7 +401,6 @@ document.querySelector("#cancel_task_button").addEventListener("click", function
     document.getElementById('popup_main_container').style.display = 'none';
     document.getElementById('addTask_container').style.display = 'flex';
     document.getElementById('calender_container').style.display = 'flex';
-    document.getElementById('task_container').style.display = 'flex';
 });
 
 // edit task-------------------------------------------------------------
@@ -505,6 +505,11 @@ function saveEditsMade(taskDelete) {
         return editTask(taskDelete);
     }
 
+    for (let day of dayList) {
+        console.log(day)
+    }
+
+
     // turn dates into seperate integers
     let startYear = parseInt(startDate.slice(0,4));
     let startMonth = parseInt(startDate.slice(5, 7));
@@ -605,15 +610,34 @@ function clearOutEdit() {
 // check for input validity (return false if the inputs are not valid)
 function checkValidInputs(category, type, title, description, priority, startDates, 
     endDates, startHour, startMinute, startAmPm, endHour, endMinute, endAmPM, days) {
+    let validDays = new Array(); // store all valid inputs
+    
+    // find all valid inputs
+    for (let day of days) {
+        if (isNaN(parseInt(day)) && weekFullString.has(day)) {
+            validDays.push(day);
+        } else if (parseInt(day) >= 1 && parseInt(day) <= 31) {
+            console.log(day)
+            validDays.push(parseInt(day));
+        }
+    }
 
-    // in progress: check days
+    // remove all invalid inputs from repeat days array
+    for (let i = 0; i < validDays.length; i ++) {
+        days[i] = validDays[i];
+    }
+    days.length = validDays.length;
 
-    // check if not everything is filled in
+    // check if anything was not filled out
     if (category === "" || type === "" || title === '' || description === '' || priority === ''
     || startDates === '' ||  endDates === '' || startHour === '' || startMinute === '' || 
     startAmPm === '' || endHour === '' || endMinute === '' || endAmPM === '') {
         alert('You need to fill out everything.');
     } 
+    // check if there are any valid repeats left
+    else if (days.length === 0) {
+        alert('You need to have at least valid one day to repeat.');
+    }
     // check if hours and minutes are not within range
     else if (parseInt(startHour) < 1 || parseInt(startHour) > 12
         || parseInt(startMinute) < 0 || parseInt(startMinute) > 59
@@ -634,7 +658,7 @@ function checkDateTime(start, end) {
 
     // check if start date takes place after end date
     if (start > end) {
-        alert('please enter valid start and end times/dates');
+        alert('please enter valid start and end dates');
     } 
     // check if task is in the past
     else if (end < currentDate) {
@@ -643,6 +667,9 @@ function checkDateTime(start, end) {
     // check is task is too far in the future
     else if (end > futureLimit) {
         alert('please enter a reasonable date');
+    } else if (end.getHours() < start.getHours() || (end.getHours() === start.getHours() 
+    && end.getMinutes() < start.getMinutes())) {
+        alert("please enter valid start and end times")
     } else {
         return true;
     }

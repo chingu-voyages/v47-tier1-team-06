@@ -1,9 +1,9 @@
-(![](Image/Daily_Task_App.png))
+![](Image/Daily_Task_App.png)
 # Names of contributors #
-Amy Vier
-Peaches Stitts
-Maya Powers
-Ki 
+Amy Vier,
+Peaches Stitts,
+Maya Powers,
+Ki ,
 -----------------------------------------------------------------------------------------
 # Overview #
 ------------------------------------------------------------------------------------------
@@ -12,15 +12,14 @@ Ki
 
 # Features #
 ----------------------------------------------------------------------------------------------
-* Unordered list can use asterisks
-With this app you can choose a specfic day and time to input your task
-There's mutiple detailed descriptions you can choose from
-You can repeat a task daily,weekly, and monthly
-You can cancel or edit your task
-When you're done you can there is a "done" check box you can choose to show that the task is complete. If you accidently hit the "done" button you can deselect at any time.
-You can cancel your task if you don't need it anymore.
-The task will display on the landing page.
-You can click on any date to see if there's a task. The cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates. 
+1.With this app you can choose a specfic day and time to input your task
+2.There's mutiple detailed descriptions you can choose from
+3.You can repeat a task daily,weekly, and monthly
+4.You can cancel or edit your task
+5.When you're done you can there is a "done" check box you can choose to show that the task is complete. If you accidently hit the "done" button you can deselect at any time.
+6.You can cancel your task if you don't need it anymore.
+7.The task will display on the landing page.
+8.You can click on any date to see if there's a task. The cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates. 
 
 ----------------------------------------------------------------------------------------------
 # Tech Used/Dependencies #
@@ -36,13 +35,13 @@ Add-on packages include:
 1.Clone project
 2.Install bootstrap npm install bootstrap (check in package-json in the dependencies section to see if it downloaded properly)
 3.create a index.html, style.css and App.javascript(js) file
-4.If you don'y have "open with live server" you can install that on the right hand side of Visual Studio Code click the "extenstions" logo
+4.If you don't have "open with live server" you can install that on the right hand side of Visual Studio Code click the "extenstions" logo, search for open with live server and install it. You then right click on your mouse "open with live server" and you can see the changes you made in action. 
 5.I suggest to type "Hello World" with basic CSS like changing the header to be blue (or a color of your choice to see if your app is working)
 6.Now that you have your app up and running you can start coding!
 
 # Inspiration #
 ------------------------------------------------------------------------------------------
-(![Figma prototype](Image/figma.png))
+![Figma prototype](Image/figma.png)
 
 Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app.
 

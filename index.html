@@ -81,15 +81,16 @@
         <select
           class="form-select form-select-md mb-3"
           aria-label="Large select example"
+          id="task_category"
         >
-          <option selected>Categories</option>
-          <option value="3">Appointments</option>
-          <option value="3">Dinner</option>
-          <option value="1">Pay Bills</option>
-          <option value="3">Shopping</option>
-          <option value="3">Studying</option>
-          <option value="2">Workout</option>
-          <option value="3">Work</option>
+          <option value="" selected>Categories</option>
+          <option value="Appointments">Appointments</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Pay Bills">Pay Bills</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Studying">Studying</option>
+          <option value="Workout">Workout</option>
+          <option value="Work">Work</option>
         </select>
       </div>
 
@@ -97,13 +98,15 @@
         <select
           class="form-select form-select-md"
           aria-label="Small select example"
+          id="task_type"
         >
-          <option selected>Doctor/other</option>
-          <option value="1">Rent due</option>
-          <option value="2">Phone bill</option>
-          <option value="3">Groceries/Necessities</option>
-          <option value="3">Projects/Homework</option>
-          <option value="3">Run</option>
+          <option value="" selected>Types</option>
+          <option value="Doctor/other">Doctor/other</option>
+          <option value="Rent due">Rent due</option>
+          <option value="Phone bill">Phone bill</option>
+          <option value="Groceries/Necessities">Groceries/Necessities</option>
+          <option value="Projects/Homework">Projects/Homework</option>
+          <option value="Run">Run</option>
         </select>
       </div>
 
@@ -123,7 +126,9 @@
       <!-- END OF CATERGORY -->
 
       <div class="mb-3">
-        <label for="datePicker" class="form-label text-white">Start Date</label>
+        <label for="startDatePicker" class="form-label text-white"
+          >Start Date</label
+        >
         <input type="date" class="form-control" id="startDatePicker" />
       </div>
 
@@ -169,7 +174,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="datePicker" class="form-label text-white">End Date</label>
+          <label for="endDatePicker" class="form-label text-white"
+            >End Date</label
+          >
           <input type="date" class="form-control" id="endDatePicker" />
         </div>
 
@@ -218,37 +225,61 @@
         <legend>Select weekdays with tasks:</legend>
 
         <div>
-          <input type="checkbox" value="0" name="weekday" checked />
+          <input type="checkbox" value="0" name="weekday" id="sunday" checked />
           <label for="sunday">Sunday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="1" name="weekday" checked />
+          <input type="checkbox" value="1" name="weekday" id="monday" checked />
           <label for="monday">Monday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="2" name="weekday" checked />
+          <input
+            type="checkbox"
+            value="2"
+            name="weekday"
+            id="tuesday"
+            checked
+          />
           <label for="tuesday">Tuesday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="3" name="weekday" checked />
+          <input
+            type="checkbox"
+            value="3"
+            name="weekday"
+            id="wednesday"
+            checked
+          />
           <label for="wednesday">Wednesday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="4" name="weekday" checked />
+          <input
+            type="checkbox"
+            value="4"
+            name="weekday"
+            id="thursday"
+            checked
+          />
           <label for="thursday">Thursday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="5" name="weekday" checked />
+          <input type="checkbox" value="5" name="weekday" id="friday" checked />
           <label for="friday">Friday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="6" name="weekday" checked />
+          <input
+            type="checkbox"
+            value="6"
+            name="weekday"
+            id="saturday"
+            checked
+          />
           <label for="saturday">Saturday</label>
         </div>
       </fieldset>
@@ -304,15 +335,16 @@
         <select
           class="form-select form-select-md mb-3"
           aria-label="Large select example"
+          id="edit-task_category"
         >
-          <option selected>Categories</option>
-          <option value="3">Appointments</option>
-          <option value="3">Dinner</option>
-          <option value="1">Pay Bills</option>
-          <option value="3">Shopping</option>
-          <option value="3">Studying</option>
-          <option value="2">Workout</option>
-          <option value="3">Work</option>
+          <option value="" selected>Categories</option>
+          <option value="Appointments">Appointments</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Pay Bills">Pay Bills</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Studying">Studying</option>
+          <option value="Workout">Workout</option>
+          <option value="Work">Work</option>
         </select>
       </div>
 
@@ -320,13 +352,15 @@
         <select
           class="form-select form-select-md"
           aria-label="Small select example"
+          id="edit-task_type"
         >
-          <option selected>Doctor/other</option>
-          <option value="1">Rent due</option>
-          <option value="2">Phone bill</option>
-          <option value="3">Groceries/Necessities</option>
-          <option value="3">Projects/Homework</option>
-          <option value="3">Run</option>
+          <option value="" selected>Types</option>
+          <option value="Doctor/other">Doctor/other</option>
+          <option value="Rent due">Rent due</option>
+          <option value="Phone bill">Phone bill</option>
+          <option value="Groceries/Necessities">Groceries/Necessities</option>
+          <option value="Projects/Homework">Projects/Homework</option>
+          <option value="Run">Run</option>
         </select>
       </div>
 
@@ -346,7 +380,9 @@
       <!-- END OF CATERGORY -->
 
       <div class="mb-3">
-        <label for="datePicker" class="form-label text-white">Start Date</label>
+        <label for="edit-startDatePicker" class="form-label text-white"
+          >Start Date</label
+        >
         <input type="date" class="form-control" id="edit-startDatePicker" />
       </div>
 
@@ -396,7 +432,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="datePicker" class="form-label text-white">End Date</label>
+          <label for="edit-endDatePicker" class="form-label text-white"
+            >End Date</label
+          >
           <input type="date" class="form-control" id="edit-endDatePicker" />
         </div>
 
@@ -450,38 +488,80 @@
         <legend>Select weekdays with tasks:</legend>
 
         <div>
-          <input type="checkbox" value="0" name="edit-weekday" checked />
-          <label for="sunday">Sunday</label>
+          <input
+            type="checkbox"
+            value="0"
+            name="edit-weekday"
+            id="edit-sunday"
+            checked
+          />
+          <label for="edit-sunday">Sunday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="1" name="edit-weekday" checked />
-          <label for="monday">Monday</label>
+          <input
+            type="checkbox"
+            value="1"
+            name="edit-weekday"
+            id="edit-monday"
+            checked
+          />
+          <label for="edit-monday">Monday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="2" name="edit-weekday" checked />
-          <label for="tuesday">Tuesday</label>
+          <input
+            type="checkbox"
+            value="2"
+            name="edit-weekday"
+            id="edit-tuesday"
+            checked
+          />
+          <label for="edit-tuesday">Tuesday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="3" name="edit-weekday" checked />
-          <label for="wednesday">Wednesday</label>
+          <input
+            type="checkbox"
+            value="3"
+            name="edit-weekday"
+            id="edit-wednesday"
+            checked
+          />
+          <label for="edit-wednesday">Wednesday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="4" name="edit-weekday" checked />
-          <label for="thursday">Thursday</label>
+          <input
+            type="checkbox"
+            value="4"
+            name="edit-weekday"
+            id="edit-thursday"
+            checked
+          />
+          <label for="edit-thursday">Thursday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="5" name="edit-weekday" checked />
-          <label for="friday">Friday</label>
+          <input
+            type="checkbox"
+            value="5"
+            name="edit-weekday"
+            id="edit-friday"
+            checked
+          />
+          <label for="edit-friday">Friday</label>
         </div>
 
         <div>
-          <input type="checkbox" value="6" name="edit-weekday" checked />
-          <label for="saturday">Saturday</label>
+          <input
+            type="checkbox"
+            value="6"
+            name="edit-weekday"
+            id="edit-saturday"
+            checked
+          />
+          <label for="edit-saturday">Saturday</label>
         </div>
       </fieldset>
 

@@ -224,14 +224,12 @@ function displayTasks () {
     // delete buttons
     for (let aTask of tasksOnAGivenDay) {
         console.log(aTask);
+        console.log(aTask.startTime);
         if (aTask.includesWeekDay(baseDate.getDay())) {
             document.getElementById("task_list").appendChild(createTaskDisplay(aTask));
         } 
     }
 
-    for (let element of document.getElementsByClassName("hideContainer")){
-        element.style.display="flex";
-    }
 }
 
 function createTaskDisplay(task) {
@@ -260,14 +258,34 @@ function createTaskDisplay(task) {
     edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
     edit_button.textContent = "Edit";
     edit_button.addEventListener("click", () => { editTask(task) });
+
+    let taskStatus_checkBox = document.createElement('input');
+    taskStatus_checkBox.type = "checkbox";
+
+    if (task.isFinished(baseDate)) {
+        console.log("finished")
+        taskStatus_checkBox.checked = true;
+    } else {
+        taskStatus_checkBox.checked = false;
+    }
+
+    taskStatus_checkBox.addEventListener('change', function() {
+        if (this.checked) {
+            console.log(baseDate)
+            task.addFinished(baseDate);
+        } else {
+            console.log(baseDate)
+            task.removeFinished(baseDate);
+        }
+    });
     
-    // Append buttons to task 
+    // Append checkbox/buttons to task 
+    taskDisplay.appendChild(taskStatus_checkBox);
     taskDisplay.appendChild(edit_button);
     taskDisplay.appendChild(delete_button);
 
     return taskDisplay;
 }
-
 
 // new task---------------------------------------------------------------------------
 
@@ -275,8 +293,8 @@ function createTaskDisplay(task) {
 document.querySelector("#add_task_button").addEventListener("click", function(event) {
     event.preventDefault();
     // get user input
-    let category = "category to do";
-    let type = "type to do";
+    let category = document.getElementById("task_category").value;
+    let type = document.getElementById("task_type").value;
     let title = document.getElementById("task_title_input").value;
     let description = document.getElementById("task_description_input").value;
     let startDate = document.getElementById("startDatePicker").value;
@@ -297,6 +315,12 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
         }
     }
 
+    if (!(checkValidInputs(category, type, title, description, startDate, endDate,
+        startTimeHour, startTimeMinute, startTimeAmPm, endTimeHour, endTimeMinute,
+        endTimeAmPm, weekDayList))) {
+            return;
+    } 
+
     // turn dates into seperate integers
     let startYear = parseInt(startDate.slice(0,4));
     let startMonth = parseInt(startDate.slice(5, 7));
@@ -312,6 +336,13 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let endTask =  new Date(endYear, endMonth - 1, endDay);
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
+    if (!(checkDateTime(startTask, endTask))) {
+            return;
+    } else {
+        for (let element of document.getElementsByClassName("hideContainer")){
+            element.style.display="flex";
+        }
+    }
 
     // add task
     taskContainer.newTask(category, type, title, description, startTask, endTask, weekDayList);
@@ -350,9 +381,8 @@ function editTask(taskDelete) {
     document.getElementById("popup_edit_container").style.display = 'block';
 
     // put in task information into the inputs
-
-    // category
-    // type
+    document.getElementById("edit-task_category").value = taskDelete.category;
+    document.getElementById("edit-task_type").value = taskDelete.type;
     document.getElementById("edit-title").value = taskDelete.title;
     document.getElementById("edit-description").value = taskDelete.description;
     document.getElementById("edit-startDatePicker").value = turnIntoDate(taskDelete.start);
@@ -364,6 +394,12 @@ function editTask(taskDelete) {
     document.getElementById("edit-task_end_time_minute").value = getMinutes(taskDelete.endTime);
     document.getElementById("edit-task_end_time_ampm").value = getAmPm(taskDelete.endTime);
 
+    let checkboxes = document.getElementsByName('edit-weekday');
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = taskDelete.includesWeekDay(i);
+    }
+
     // add functionality to save button
     document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
         saveEditsMade(taskDelete)
@@ -374,8 +410,8 @@ function editTask(taskDelete) {
 // edit save button
 function saveEditsMade(taskDelete) {
     // get user input
-    let category = "category to do";
-    let type = "type to do";
+    let category = document.getElementById("edit-task_category").value;
+    let type = document.getElementById("edit-task_type").value;
     let title = document.getElementById("edit-title").value;
     let description = document.getElementById("edit-description").value;
     let startDate = document.getElementById("edit-startDatePicker").value;
@@ -431,12 +467,19 @@ function saveEditsMade(taskDelete) {
     clearOutEdit();    
 }
 
+// edit popup cancel btn
+document.querySelector("#cancel_edit_task_button").addEventListener("click", function() {
+    clearOutEdit();
+    document.getElementById('popup_edit_container').style.display = 'none';
+});
+
+
 // helper functions--------------------------------------------------------------------------
 
 // clear out task add inputs
 function clearOutTaskAdd() {
-    // category
-    // type
+    document.getElementById("task_category").value = "";
+    document.getElementById("task_type").value = "";
     document.getElementById("task_title_input").value = "";
     document.getElementById("task_description_input").value = "";
     document.getElementById("startDatePicker").value = "";
@@ -457,8 +500,8 @@ function clearOutTaskAdd() {
 
 // clear out edit inputs
 function clearOutEdit() {
-    // category
-    // type
+    document.getElementById("edit-task_category").value = "";
+    document.getElementById("edit-task_type").value = "";
     document.getElementById("edit-title").value = "";
     document.getElementById("edit-description").value = "";
     document.getElementById("edit-startDatePicker").value = "";
@@ -477,5 +520,56 @@ function clearOutEdit() {
     }
 }
 
+// check for input validity (return false if the inputs are not valid)
+function checkValidInputs(category, type, title, description, startDates, endDates, startHour, startMinute, 
+    startAmPm, endHour, endMinute, endAmPM, weekdays) {
+    let hasWeekdaySelected = false;
+
+    for (let i = 0; i < weekdays.length; i++) {
+        if (weekdays[i]) {
+            hasWeekdaySelected = true;
+        }
+    }
+
+    // check if not everything is filled in
+    if (category === "" || type === "" || title === '' || description === '' || startDates === '' || 
+    endDates === '' || startHour === '' || startMinute === '' || startAmPm === '' || endHour === '' 
+    || endMinute === '' || endAmPM === '') {
+        alert('You need to fill out everything.');
+    } else if (!(hasWeekdaySelected)) {
+        alert('You need to select at least one weekday.');
+    }
+    // check if hours and minutes are not within range
+    else if (startHour.value < 1 || startHour.value > 12
+        || startMinute.value < 0 || startMinute.value > 59
+        || endHour.value < 1 || endHour.value > 12
+        || endMinute.value < 0 || endMinute.value > 59) {
+            alert('please enter valid time in this format  - 00:00');
+    } else {
+        return true;
+    }
+
+    return false;
+}
+
+function checkDateTime(start, end) {
+    let currentDate = new Date();
+    let futureLimit = new Date();
+    futureLimit.setFullYear(futureLimit.getFullYear() + 5);
+
+    if (start > end) {
+        alert('please enter valid start and end times/dates');
+    } else if (end < currentDate) {
+        alert('the entered time/date is in the past');
+    } else if (end > futureLimit) {
+        alert('please enter a reasonable date');
+    } else {
+        return true;
+    }
+
+    return false;
+}
+
 // display current month when page loads------------------------------------------------
 displayMonth();
+taskContainer.test();

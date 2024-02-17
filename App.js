@@ -233,17 +233,11 @@ function displayTasks () {
             let newTask = document.createElement("div");
             newTask.className = "card col bg-white text-black text-center p-2";
             newTask.innerHTML = `
-                <div class="card-header">
-                    <div class="container text-center">
-                        <div class="row align-middle">
-                            <div class="col">
-                            <i id="edit_icon" class="fa-solid fa-pen-to-square fa-lg"></i>
-                            </div>
-                            <div class="col-8">
+                <div class="card-header text-center">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
                             <h2>${aTask.title}</h2>
-                            </div>
-                            <div class="col">
-                            <i id="delete_icon" class="fa-solid fa-trash-can fa-lg"></i>
                             </div>
                         </div>
                     </div>
@@ -256,31 +250,59 @@ function displayTasks () {
             // <p>${aTask.description}</p>
             // <p>${aTask.getStartTime()} - ${aTask.getEndTime()}</p>
 
-            // delete button
+            // Task buttons
+            let edit_button = document.createElement("button");
             let delete_button = document.createElement("button");
-
+            edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
+            edit_button.textContent = "Edit";
+            
             delete_button.className = "btn btn-danger task_item_delete_button btn-sm";
             delete_button.textContent = "Delete";
 
+            edit_button.addEventListener("click", () => { editTask(aTask) });
             delete_button.addEventListener("click", () => { 
                 deleteTask(aTask);
             });
 
-            // edit button
-            let edit_button = document.createElement("button");
+            // Icon buttons for tasks
+            let completed_icon = document.createElement("i");
             let edit_icon = document.createElement("i");
-            edit_icon = document.className = "";
+            let delete_icon = document.createElement("i");
+            completed_icon.className = "fa-solid fa-square-check fa-lg taskIcon completedIcon";
+            edit_icon.className = "fa-solid fa-pen-to-square fa-lg taskIcon editIcon";
+            delete_icon.className = "fa-solid fa-trash-can fa-lg taskIcon deleteIcon";
 
-            edit_button.className = "btn btn-danger task_item_edit_button btn-sm";
-            edit_button.textContent = "Edit";
-            edit_button.addEventListener("click", () => { editTask(aTask) });
+            completed_icon.addEventListener("click", () => { 
+                confirm("Mark Task Completed?") ? alert("Task Marked Completed"): alert("Task Not Completed");
+            });
             
+            edit_icon.addEventListener("click", () => { editTask(aTask) });
+            
+            delete_icon.addEventListener("click", () => { 
+                confirm("Delete this task?") ? deleteTask(aTask) : alert("Delete Task Canceled");
+            });
+
+            let iconButton_container = document.createElement('div');
+            iconButton_container.className = "container-fluid align-middle text-center taskIconContainer";
+
+
+            iconButton_container.append(completed_icon);
+            iconButton_container.append(edit_icon);
+            iconButton_container.append(delete_icon);
+
+            newTask.appendChild(iconButton_container);
+
+            // Append Icon buttons to task
+            // newTask.appendChild(completed_icon);
+            // newTask.appendChild(edit_icon);
+            // newTask.appendChild(delete_icon);
+
             // Append buttons to task 
-            newTask.appendChild(edit_button);
-            newTask.appendChild(delete_button);
+            // newTask.appendChild(edit_button);
+            // newTask.appendChild(delete_button);
 
             // Append task to task container
-            document.getElementById("task_list").appendChild(newTask);
+            
 
 // Edit & Delete Icon
             // let edit_icon = document.querySelector("#edit_icon");
@@ -296,6 +318,8 @@ function displayTasks () {
             //     }
                 
             // });
+
+            document.getElementById("task_list").appendChild(newTask);
             
         }
     }

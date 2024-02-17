@@ -28,7 +28,8 @@ This is a basic HTML/CSS/Javascript App
 Add-on packages include:
 
 [Bootstrap](https://getbootstrap.com/docs/4.0/getting-started/introduction/) <br>
-[Daily Task Logo](https://banner.godori.dev/)
+[Daily Task Logo](https://banner.godori.dev/) <br>
+[Figma](https://www.figma.com/)
 
 # Running the project #
 

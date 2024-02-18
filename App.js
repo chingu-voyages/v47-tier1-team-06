@@ -476,8 +476,8 @@ function editTask(taskDelete) {
 
     // add functionality to save button
     document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
-        saveEditsMade(taskDelete)
         this.removeEventListener('click', editEventHandler);
+        saveEditsMade(taskDelete)
     });
 
     

@@ -197,10 +197,7 @@ function displayMonth() {
         dayButton.type = "button";
         dayButton.textContent = dayString;
 
-        let year = baseDate.getFullYear();
-        let month = baseDate.getMonth();
-        let date = i+1;
-        let dayButtonDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), i + 1);
+        let dayButtonDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), i);
         let tasksOnDayButton = taskContainer.getTasks(dayButtonDate);
         if (tasksOnDayButton.length > 0) {
             dayButton.classList.add("event-marker");
@@ -435,13 +432,20 @@ function editTask(taskDelete) {
     document.getElementById("edit-description").value = taskDelete.description;
     document.getElementById("edit-selectPriority").value = taskDelete.priority;
     document.getElementById("edit-startDatePicker").value = turnIntoDate(taskDelete.start);
-    document.getElementById("edit-task_start_time_hour").value = getTimeDetails(taskDelete.startTime);
-    document.getElementById("edit-task_start_time_minute").value = getTimeDetails(taskDelete.startTime);
-    document.getElementById("edit-task_start_time_ampm").value = getTimeDetails(taskDelete.startTime);
+
+    let startTimeDetails = getTimeDetails(taskDelete.startTime);
+
+    document.getElementById("edit-task_start_time_hour").value = startTimeDetails.hour;
+    document.getElementById("edit-task_start_time_minute").value = startTimeDetails.minutes;
+    document.getElementById("edit-task_start_time_ampm").value = startTimeDetails.amPm;
+
     document.getElementById("edit-endDatePicker").value = turnIntoDate(taskDelete.end);
-    document.getElementById("edit-task_end_time_hour").value = getTimeDetails(taskDelete.endTime);
-    document.getElementById("edit-task_end_time_minute").value =getTimeDetails(taskDelete.endTime);
-    document.getElementById("edit-task_end_time_ampm").value = getTimeDetails(taskDelete.endTime);
+
+    let endTimeDetails = getTimeDetails(taskDelete.startTime);
+
+    document.getElementById("edit-task_end_time_hour").value = endTimeDetails.hour;
+    document.getElementById("edit-task_end_time_minute").value = endTimeDetails.minutes;
+    document.getElementById("edit-task_end_time_ampm").value = endTimeDetails.amPm;
 
    
     // get all weekday checkboxes

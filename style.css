@@ -258,6 +258,22 @@ footer {
   z-index: 1;
 }
 
+.event-marker {
+  position: relative;
+}
+
+.event-marker::after {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
 @media only screen and (min-width: 1024px) {
   #addTask_container {
     margin: 0 6em;

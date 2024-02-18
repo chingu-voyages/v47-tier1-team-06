@@ -1,4 +1,4 @@
-import {AllTasks, Task} from "./taskLogic.js"; // import
+import {AllTasks, Task, getWeekString} from "./taskLogic.js"; // import
  
 // task initialization/save----------------------------------------------
 let taskContainer = new AllTasks(); // container for all tasks
@@ -675,6 +675,63 @@ function checkDateTime(start, end) {
     }
 
     return false;
+}
+
+function checkDayRepitition(start, end, days) {
+    let allowableWeekDays = new Set();
+    let dayRange1Start;
+    let dayRange1End;
+    let dayRange2Start;
+    let dayRange2End;
+
+    let findMaxRange = new Date(start);
+    let findNextMonth = new Date(start);
+    findNextMonth.setDate(1);
+    findNextMonth.setMonth(findNextMonth.getMonth() + 1);
+
+    if (start.getFullYear() === end.getFullYear() && 
+    start.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        dayRange1End = end.getDate();
+
+    } else if (findNextMonth.getFullYear() === end.getFullYear() 
+    && findNextMonth.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        findNextMonth.setDate(0);
+        dayRange1End = findNextMonth.getDate();
+        dayRange2Start = 1;
+        dayRange2End = end.getDate();
+    } else {
+        dayRange1Start = 1;
+
+        findMaxRange.setDate(1);
+        findMaxRange.setMonth(findMaxRange.getMonth() + 1);
+        findMaxRange.setDate(0);
+
+        dayRange1End = findMaxRange.getDate()
+
+        while (dateCurrent.getFullYear() != end.getFullYear() || dateCurrent.getMonth() != end.getMonth()) {
+            findMaxRange.setDate(1);
+            findMaxRange.setMonth(findMaxRange.getMonth() + 1);
+            findMaxRange.setDate(0);
+
+            if (dayRange1End < findMinMax.getDate()) {
+                maximumDayNumber = findMinMax.getDate();
+            } else if (dayRange1End === 31) {
+                break;
+            }
+        }
+    }
+
+
+}
+
+function checkDayRange(days, allowableWeekDays, range1Start, range1End, range2Start, range2End) {
+    for (let day of days) {
+        if () {
+
+        }
+    }
 }
 
 // display current month when page loads------------------------------------------------

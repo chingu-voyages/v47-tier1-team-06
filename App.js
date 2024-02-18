@@ -240,7 +240,7 @@ function displayTasks () {
     let tasksOnAGivenDay = taskContainer.getTasks(baseDate);
 
     // show current month, day, and year
-    document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for 
+    document.getElementById("task_list").innerHTML = `<h2 class="fs-3 mb-4">Tasks for 
     ${monthString[baseDate.getMonth()]} ${baseDate.getDate()}${getOrdinalSuffix(baseDate.getDate())}, 
     ${baseDate.getFullYear()}</h2>`;
 

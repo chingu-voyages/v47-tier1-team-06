@@ -89,7 +89,6 @@ function turnIntoDate(date) {
 function setTime(date, hour, minute, amPm) {
     if (amPm === "pm") {
         hour = parseInt(hour) + 12;
-
     } else {
         hour = parseInt(hour);
     }
@@ -117,7 +116,6 @@ function getTimeDetails(time12HourFormat) {
         minutes = time12HourFormat.slice(3, 5);
         amPm = time12HourFormat.slice(6);
     }
-
 
     return {
         hour: hour,
@@ -242,7 +240,7 @@ function displayTasks () {
     let tasksOnAGivenDay = taskContainer.getTasks(baseDate);
 
     // show current month, day, and year
-    document.getElementById("task_list").innerHTML = `<h2 class="fs-3 mb-5">Tasks for 
+    document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for 
     ${monthString[baseDate.getMonth()]} ${baseDate.getDate()}${getOrdinalSuffix(baseDate.getDate())}, 
     ${baseDate.getFullYear()}</h2>`;
 
@@ -345,9 +343,7 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let checkboxes = document.getElementsByName('weekday'); // get all weekday checkboxes
     let dayList = new Array(); // get days where the task will be repeated
 
-
     
-
     // if checkbox for numbered days is checked, get all days in textbox seperated by spaces
     if (document.getElementById("monthlyDays").checked) {
         dayList = document.getElementById("task_monthDays").value.split(" ");
@@ -390,11 +386,11 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
             element.style.display="flex";
         }
     }
+
   
     // add task
     taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
    
-
 
     if (displayed) {
         displayTasks();
@@ -439,7 +435,6 @@ function editTask(taskDelete) {
     document.getElementById("edit-description").value = taskDelete.description;
     document.getElementById("edit-selectPriority").value = taskDelete.priority;
     document.getElementById("edit-startDatePicker").value = turnIntoDate(taskDelete.start);
-
     document.getElementById("edit-task_start_time_hour").value = getTimeDetails(taskDelete.startTime);
     document.getElementById("edit-task_start_time_minute").value = getTimeDetails(taskDelete.startTime);
     document.getElementById("edit-task_start_time_ampm").value = getTimeDetails(taskDelete.startTime);
@@ -449,7 +444,6 @@ function editTask(taskDelete) {
     document.getElementById("edit-task_end_time_ampm").value = getTimeDetails(taskDelete.endTime);
 
    
-
     // get all weekday checkboxes
     let checkboxes = document.getElementsByName('edit-weekday');
 

@@ -1,4 +1,4 @@
-import {AllTasks, Task} from "./taskLogic.js"; // import
+import {AllTasks, Task, getWeekString} from "./taskLogic.js"; // import
  
 // task initialization/save----------------------------------------------
 let taskContainer = new AllTasks(); // container for all tasks
@@ -379,7 +379,7 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
     // check time/dates
-    if (!(checkDateTime(startTask, endTask))) {
+    if (!(checkDateTime(startTask, endTask, dayList))) {
         return;
     } else {
         for (let element of document.getElementsByClassName("hideContainer")){
@@ -518,11 +518,6 @@ function saveEditsMade(taskDelete) {
         return editTask(taskDelete);
     }
 
-    for (let day of dayList) {
-        console.log(day)
-    }
-
-
     // turn dates into seperate integers
     let startYear = parseInt(startDate.slice(0,4));
     let startMonth = parseInt(startDate.slice(5, 7));
@@ -539,7 +534,7 @@ function saveEditsMade(taskDelete) {
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
     // check dates/times
-    if (!(checkDateTime(startTask, endTask))) {
+    if (!(checkDateTime(startTask, endTask, dayList))) {
         return editTask(taskDelete);
     } 
 
@@ -634,7 +629,6 @@ function checkValidInputs(category, type, title, description, priority, startDat
         if (isNaN(parseInt(day)) && weekFullString.has(day)) {
             validDays.push(day);
         } else if (parseInt(day) >= 1 && parseInt(day) <= 31) {
-            console.log(day)
             validDays.push(parseInt(day));
         }
     }
@@ -668,7 +662,8 @@ function checkValidInputs(category, type, title, description, priority, startDat
     return false;
 }
 
-function checkDateTime(start, end) {
+// checks if the dates/times are valid and whether the days repeats within the dates/times
+function checkDateTime(start, end, days) {
     let currentDate = new Date();
     let futureLimit = new Date();
     futureLimit.setFullYear(futureLimit.getFullYear() + 5);
@@ -688,10 +683,130 @@ function checkDateTime(start, end) {
     && end.getMinutes() < start.getMinutes())) {
         alert("please enter valid start and end times")
     } else {
+        // checks whether the days repeats within the dates/times
+        checkDayRepitition(start, end, days);
+
+        if (days.length === 0) {
+            alert("You need to have at least valid one day to repeat")
+            return false;
+        }
+
         return true;
     }
 
     return false;
+}
+
+// checks all repeated days
+function checkDayRepitition(start, end, days) {
+    let allowableWeekDays = new Set(); // week days that are found within the start to end dates
+
+    // if the end month is one month away from the start month, signifies when the start month
+    // starts and when the start month ends
+    let dayRange1Start; // the lowest day number 
+    let dayRange1End; // the highest day number 
+
+    // use when the end month is one month away from the start month as there is an interval
+    // of days where the days isn't found within the start to end dates. when the end month
+    // start and when the end month end
+    let dayRange2Start; // the lowest day number
+    let dayRange2End; // the highest day number 
+
+    // date iterated to find all week days that are found within the start to end dates
+    let findWeekDays = new Date(start); 
+
+    // date iterated to find the day with the largest value when the end date is more than
+    // one month away from the start date
+    let findMaxRange = new Date(start);
+
+    // date to find day ranges of the month after the start date
+    let findNextMonth = new Date(start);
+    findNextMonth.setDate(1);
+    findNextMonth.setMonth(findNextMonth.getMonth() + 1);
+
+    // if end date month is same as start date month
+    if (start.getFullYear() === end.getFullYear() && 
+    start.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        dayRange1End = end.getDate();
+
+    } 
+    // if start date month is one month away from end date month
+    else if (findNextMonth.getFullYear() === end.getFullYear() 
+    && findNextMonth.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        findNextMonth.setDate(0);
+        dayRange1End = findNextMonth.getDate();
+        dayRange2Start = 1;
+        dayRange2End = end.getDate();
+    } 
+    // if start date month is more than one month away from end date month
+    else {
+        dayRange1Start = 1;
+
+        findMaxRange.setDate(1);
+        findMaxRange.setMonth(findMaxRange.getMonth() + 1);
+        findMaxRange.setDate(0);
+
+        dayRange1End = findMaxRange.getDate()
+
+        // find largest day number of every month
+        while (findMaxRange.getFullYear() != end.getFullYear() || findMaxRange.getMonth() != end.getMonth()) {
+
+            if (dayRange1End < findMaxRange.getDate()) {
+                dayRange1End = findMaxRange.getDate();
+            } else if (dayRange1End === 31) {
+                break;
+            }
+
+            findMaxRange.setDate(1);
+            findMaxRange.setMonth(findMaxRange.getMonth() + 2);
+            findMaxRange.setDate(0);
+        }
+    }
+
+    // find all week days that are found within the start to end dates
+    allowableWeekDays.add(getWeekString(findWeekDays.getDay()));
+    while (findWeekDays.getFullYear() != end.getFullYear() 
+    || findWeekDays.getMonth() != end.getMonth() || findWeekDays.getDate() != end.getDate()) {
+        findWeekDays.setDate(findWeekDays.getDate() + 1);
+        if (!(allowableWeekDays.has(getWeekString(findWeekDays.getDay())))) {
+            allowableWeekDays.add(getWeekString(findWeekDays.getDay()));
+        } else {
+            break;
+        }
+    }
+
+    checkDayRange(days, allowableWeekDays, dayRange1Start, dayRange1End, dayRange2Start, dayRange2End);
+
+}
+
+// filter out any days that don't fall within the start and end month
+function checkDayRange(days, allowableWeekDays, range1Start, range1End, range2Start, range2End) {
+    let validDays = new Array(); // all days that were found to be between the start and end month
+
+    for (let day of days) {
+        // check week days (sun - sat)
+        if (isNaN(parseInt(day)) && allowableWeekDays.has(day)) {
+            validDays.push(day);
+        } 
+        // check day range
+        else if (!(isNaN(parseInt(day))) && day >= range1Start && day <= range1End) {
+            validDays.push(parseInt(day));
+        } 
+        // check day range if the end date is one month away from start date
+        else if (!(isNaN(parseInt(day))) && range2Start != undefined && 
+        day >= range2Start && day <= range2End) {
+            validDays.push(parseInt(day));
+        }
+    }
+
+    // remove all invalid inputs from repeat days array
+    for (let i = 0; i < validDays.length; i ++) {
+        days[i] = validDays[i];
+    }
+
+    days.length = validDays.length;
 }
 
 // display current month when page loads------------------------------------------------

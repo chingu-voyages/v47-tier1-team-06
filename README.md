@@ -10,12 +10,13 @@
 
 1. With this app you can choose a specfic day, time and month to input your task<br>
 2. There's mutiple detailed descriptions you can choose from<br>
-3. You can repeat a task daily,weekly, and monthly<br>
+3. You can repeat a task every Sunday-Saturday and 1st-31st within a picked timeframe<br>
 4. You can cancel or edit your task<br>
 5. When you're done with your task there is a "done" check box you can choose to show that the task is complete. If you accidently hit the "done" button you can deselect at any time <br>
-6. You can cancel your task if you don't need it anymore<br>
+6. You can delete a task if you don't need it anymore<br>
 7. The task will display on the landing page once complete <br>
 8. You can click on any date to see if there's a task, the cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates to see what task is coming up <br>
+9. All tasks shown are ordered by priority. If the task priority is the same, the task with the earlier start time will be shown first <br>
 
 
 

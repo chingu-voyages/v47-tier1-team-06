@@ -8,6 +8,7 @@ window.onbeforeunload = function(event) {
     taskContainer.save();
 }
 
+let currentTaskClicked; // task user clicked on/clicked edit on
 
 // date logic------------------------------------------------------------
 
@@ -472,16 +473,15 @@ function editTask(taskDelete) {
     // if task includes numbered days, check numbered days checkbox
     if (daycheckBox.value != "") {
         document.getElementById("edit-monthlyDays").checked = true;
-    }
+    } 
 
-    // add functionality to save button
-    document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
-        this.removeEventListener('click', editEventHandler);
-        saveEditsMade(taskDelete)
-    });
-
-    
+    currentTaskClicked = taskDelete;
 }
+
+ // add functionality to save button
+document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
+    saveEditsMade(currentTaskClicked)
+});
 
 // edit save button
 function saveEditsMade(taskDelete) {

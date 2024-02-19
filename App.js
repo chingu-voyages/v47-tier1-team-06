@@ -201,7 +201,10 @@ function displayMonth() {
         let dayButtonDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), i);
         let tasksOnDayButton = taskContainer.getTasks(dayButtonDate);
         if (tasksOnDayButton.length > 0) {
+            let indicator = document.createElement("div");
             dayButton.classList.add("event-marker");
+            indicator.classList.add("indicator");
+            dayButton.appendChild(indicator);
         }
 
 

@@ -266,7 +266,7 @@ footer {
   position: relative;
 }
 
-.event-marker::after {
+.indicator {
   content: '';
   display: block;
   width: 6px;

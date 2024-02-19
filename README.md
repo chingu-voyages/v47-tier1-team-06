@@ -17,6 +17,8 @@
 7. The task will display on the landing page once complete <br>
 8. You can click on any date to see if there's a task, the cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates to see what task is coming up <br>
 9. All tasks shown are ordered by priority. If the task priority is the same, the task with the earlier start time will be shown first <br>
+10. For first time users, example tasks will be loaded from the example JSON file <br>
+11. All tasks are saved and stored within local storage <br>
 
 
 
@@ -30,7 +32,7 @@ Add-on packages include:
 [Figma](https://www.figma.com/)
 
 # Running the project #
-
+Run the project using [this link](https://chingu-voyages.github.io/v47-tier1-team-06/) or by following these steps: <br>
 
 1. Clone project<br>
 2. Install bootstrap npm install bootstrap (check in package-json in the dependencies section to see if it downloaded properly) <br>
@@ -47,7 +49,7 @@ Peaches created this fimga as a blueprint for the app. We used this model to cre
 
 # Contributors #
 Karolina Reichmann karolina@reichmann.pl (Proctor)<br>
-Amy Vier <br>
+[Amy Vier](https://github.com/AmyVier)<br>
 Peaches Stitts [LinkedIn](https://www.linkedin.com/in/chawntel-stitts-143780157/) <br>
 Maya Powers <br>
 Ki discord username- kiki2551

@@ -1,279 +1,540 @@
-/* task class to store task information
-Parameters:
-title (string): title of task
-description (string): description of task
-startTime (integer): when the task starts. Please use military time (12:01 am = 0001, 
-    2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
-endTime (integer): when the task ends. Please use military time (12:01 am = 0001, 
-    2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
-*/
-class task {
-    // constructor
-    constructor(title, description, startTime, endTime) {
-        this.title = title;
-        this.description = description;
-        this.startTime = startTime;
-        this.endTime = endTime;
+/** Task class
+ * task that can repeated by week (every sunday, monday, etc)
+ * or by month (every 15th) from a certain range of start Date to end Date.
+ * Additionally, the task records which days it was completed.
+ */
+class Task {
+    #category;
+    #type;
+    #title;
+    #description;
+    #priority;
+    #start;
+    #end;
+    #finished;
+    #days;
+
+    /** task constructor
+     * @param category string category of task
+     * @param type string type of task
+     * @param title string title of task
+     * @param description string description of task
+     * @param priority string priority of task
+     * @param start Date start date of task
+     * @param end Date end date of task
+     * @param days Array of days when the task will repeated. takes int 
+     * days (1 - 31) and string weekdays (sunday - saturday)
+     */
+    constructor(category, type, title, description, priority, start, end, days) {
+        this.#category = category;
+        this.#type = type;
+        this.#title = title;
+        this.#description = description;
+        this.#priority = priority;
+        this.#start = start;
+        this.#end = end;
+        this.#finished = new Array();
+        this.#days = new Set();
+
+        for (let i = 0; i < days.length; i++) {
+            if (isNaN(parseInt(days[i]))) {
+                this.#days.add(days[i]);
+            } else {
+                this.#days.add(parseInt(days[i]));
+            }
+        }
     }
 
-    // getStartTime: returns string of start time in 12 hour notation
-    getStartTime() {
-        return this.#convertTime(this.startTime);
+    /** get category
+     * @return string category of task
+     */
+    get category() {
+        return this.#category;
     }
 
-    // getEndTime: returns string of end time in 12 hour notation
-    getEndTime() {
-        return this.#convertTime(this.endTime);
+    /** get type
+     * @return string type of task
+     */
+    get type() {
+        return this.#type;
     }
 
-        // convertTime: private method of converting military time into 
-        // 12 hour notation
-        // returns string in format: 12:00 am
-    #convertTime(militaryTime) {
-        let time = militaryTime; // new time
-        let am = true; // whether the time is am or pm
+    /** get title
+     * @return string title of task
+     */
+    get title() {
+        return this.#title;
+    }
 
-        // change military time into 12 our notation
-        if (time >= 1300) {
-            time = time - 1200;
-            am = false;
-        } else if (time >= 1200) {
-            am = false;
-        } else if (time < 100) {
-            time = time + 1200;
+    /** get description
+     * @return string description of task
+     */
+    get description() {
+        return this.#description;
+    }
+
+    /** get priority
+     * @return string priority of task
+     */
+    get priority() {
+        return this.#priority;
+    }
+
+    /** get start date
+     * @return Date start date of task
+     */
+    get start() {
+        return this.#start;
+    }
+
+    /** get end date
+     * @return Date end date of task
+     */
+    get end() {
+        return this.#end;
+    }
+
+    /** get startTime
+     * @return string start time of task (00:00 ampm format)
+     */
+    get startTime() {
+        return this.#convertTime(this.#start);
+    }
+
+    /** get endTime
+     * @return string end time of task (00:00 ampm format)
+     */
+    get endTime() {
+        return this.#convertTime(this.#end);
+    }
+
+    /** get days
+     * @return Set of days when the task will repeated. days 
+     * (1 - 31) and string weekdays (sunday - saturday)
+     */
+    get days() {
+        return this.#days;
+    }
+
+    /** get finished
+     * @return Array of Dates when task is completed
+     */
+    get finished() {
+        return this.#finished;
+    }
+
+    /** adds completion date
+     * @param newDate Date when task is completed
+     */
+    addFinished(newDate) {
+        this.#finished.push(new Date(newDate));
+        this.#finished.sort(compareDates);
+    }
+
+     /** removes completion date
+     * @param removeDate Date when task was completed
+     */
+    removeFinished(removeDate){
+        for (let i = 0; i < this.#finished.length; i++) {
+            if (compareDates(this.#finished[i], removeDate) === 0) {
+                this.#finished.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+     /** checks whether the task was finished on the date or not
+     * @param findDate Date to check completion
+     * @return whether the task was finished on the date or not
+     */
+    isFinished(findDate) {
+        for (let i = 0; i < this.#finished.length; i++) {
+            if (compareDates(this.#finished[i], findDate) === 0) {
+                return true;
+            }
         }
 
-        // add :
-        if (("" + time).length == 3) {
-            time = ("" + time).slice(0, 1) + ":" + ("" + time).slice(1);
+        return false;
+    }
+
+     /** checks whether the task repeats on the day
+     * @param day string weekday or int day
+     * @return whether the task repeats on the day
+     */
+    includesDay(day) {
+        return this.#days.has(day);
+    }
+
+     /** get string time (12:00 am - 11:59 pm) from (00:00 - 23:59)
+     * @param date Date with time information
+     * @return string time (12:00 am - 11:59 pm)
+     */
+    #convertTime(date) {
+        let timeString;
+        let isAm;
+        let hour = date.getHours();
+        let minutes = date.getMinutes();
+
+        if (hour > 12) {
+            hour = hour - 12;
+            isAm = false;
+        } else if (hour === 12) {
+            isAm = false;
+        } else if (hour === 0) {
+            hour = 12;
+            isAm = true;
         } else {
-            time = ("" + time).slice(0, 2) + ":" + ("" + time).slice(2);
+            isAm = true;
         }
 
-        // add am/pm
-        if (am) {
-            time = time + " am";
-        } else {
-            time = time + " pm";
+        if (("" + minutes).length === 1) {
+            minutes = "0" + ("" + minutes);
         }
 
-        return time;
+        timeString = ("" + hour) + ":" + ("" + minutes);
+        timeString = isAm ? timeString + " am" : timeString + " pm";
+
+        return timeString;
     }
 }
 
-/* compareTasks: function to compare two tasks for sorting based on start time (1: task1 > task 2, 
-    1: task1 < task 2, 0: task1 == task 2). Note that this only compares in hours and minutes. 
-    Make sure that they are on the same day, month, and year first
+/** AllTasks class
+ * task container that saves and gets task data from local storage/JSON example file.
+ * It can get an array of tasks on a certain day, create and add a new task, and remove
+ * a task.
+ */
+class AllTasks {
+    #allTasks;
 
-Parameters:
-    task1 (task): task being compared
-    task2 (task): task being compared
-
-*/
-function compareTasks( task1, task2 ) { 
-    if ( task1.startTime < task2.startTime ){
-        return -1;
-    } else if (task1.startTime > task2.startTime) {
-        return 1;
-    } else {
-        return 0;
-    }
-} 
-
-// sameTask: checks for equality
-function sameTask(task1, task2) {
-    return task1.title === task2.title && task1.description === task2.description &&
-    task1.year === task2.year && task1.month === task2.month && task1.day ===
-    task2.day && task1.startTime === task2.startTime && task1.endTime === task2.endTime;
-}
-
-/* class containing all tasks. Contains a map of years as the key value. Each year contains 
-    a map of months as the key value. Each month contains a map of days as the key value. Each day
-    contains an array of tasks. yearMap[2024] = 2024Map. 2024Map[7] = julyOf2024Map. 
-    julyOf2024Map[9] = 9nth-OfJuly-In2024-Array. 9nth-OfJuly-In2024-Array[0] = FirstTaskOfTheDay;
-    Parameters:
-        title (string): title of task
-        description (string): description of task
-        year (integer): year of task (2024)
-        month (integer): month of task (use 7 for July)
-        day (integer): day of task
-        startTime (integer): when the task starts. Please use military time (12:01 am = 0001, 
-            2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
-        endTime (integer): when the task ends. Please use military time (12:01 am = 0001, 
-            2:00 am = 0200, 11:00 am = 1100, 4:00 pm = 1600)
-    */
-class allTasks {
-    // constructor
+    /** AllTasks constructor
+     */
     constructor() {
-        this.taskYear = new Map();
-
+        this.#allTasks = new Array();
     }
 
-    // addTask: add task
-    addTask(title, description, year, month, day, startTime, endTime) {
-        this.#addTaskYear(this.taskYear, title, description, year, month, day, startTime, endTime);
-        this.#organizeTasks(year, month, day);
-    }
-
-    // removeTask: removes a task
-    // taskRemove parameter: task to be removed
-    removeTask(taskRemove, year, month, day) {
-        // gets the list of tasks based
-        let taskList = this.getTasks(year, month, day);
-        let index = this.findTask(taskList, taskRemove); // index of the task
-
-        // if found, remove task
-        if (index >= 0) {
-            taskList.splice(index, 1);
-        }
-    }
-
-    // findTask: finds task in array using binary search
-    findTask(taskList, taskFind) {
-        let low = 0; // lowest index
-        let high = (taskList.length - 1); // highest index
-
-        while (low <= high) {
-            let middle = (low + high) / 2; // finds middle index
-            middle = middle | 0; // round down
-
-            // if task occurs earlier
-            if (compareTasks(taskFind, taskList[middle]) == -1) {
-                high = middle - 1;
-            } 
-            // if task occurs later
-            else if (compareTasks(taskFind, taskList[middle]) == 1) {
-                low = middle + 1;
-            } 
-            // the start time is the dame
-            else {
-                let index = middle;
-
-                // search left
-                while (index >=  0 && compareTasks(taskList[index], taskFind) == 0) {
-                    if (sameTask(taskList[index], taskFind)) {
-                        return index;
-                    } 
-                    index--;
-                }
-
-                index = middle; // go back to middle
-
-                // search right
-                while (index <= (taskList.length - 1) && compareTasks(taskList[index], taskFind) == 0) {
-                    if (sameTask(taskList[index], taskFind)) {
-                        return index;
-                    }
-
-                    index++;
-                }
-
-            }
-        }
-
-        return -1; // nothing found
-    }
-
-    // getTasks: get all tasks on a given day
-    // return value: an array of task objects
-    getTasks(year, month, day) {
-        if (this.taskYear.has(year) && this.taskYear.get(year).has(month) && 
-        this.taskYear.get(year).get(month).has(day)) {
-            return this.taskYear.get(year).get(month).get(day);
-        } else {
-            return null;
-        }
-    }
-
-    // initialize: get saved tasks 
-    initialize() {
-        let savedTasksString = localStorage.getItem("allTasks");
-
-        // if the data exists
-        if (savedTasksString !== null) {
-            let savedTasks = JSON.parse(savedTasksString);
-
-            // the local storage cannot retrieve the
-            // data types so new objects is needed to be created
-            for (let savedTask of savedTasks) {
-                this.addTask(savedTask.title, savedTask.description, savedTask.year,
-                    savedTask.month, savedTask.day, savedTask.startTime, savedTask.endTime);
-            }
-        } 
-
-        
-    }
-
-    // save: save tasks
+    /** saves task data and stores into local storage with name everyTask
+     */
     save() {
         let allTaskSave = new Array();
 
-        // store all task data in an array (the local storage only stores in string format.
-        // Additionally, JSON.stringify cannot stringify hashmaps)
-        for (let [yearKey, monthMap] of this.taskYear) {
-            for (let [monthKey, dayMap] of monthMap) {
-                for (let [dayKey, taskArray] of dayMap) {
-                    for (let taskSave of taskArray) {
-                        allTaskSave.push(this.#createSavableObject(yearKey, monthKey, dayKey, taskSave));
-                    }
-                }
-            }
+        for (let task of this.#allTasks) {
+            allTaskSave.push(this.#createSavableObject(task));
         }
 
-        localStorage.setItem("allTasks", JSON.stringify(allTaskSave));
+        localStorage.setItem("everyTask", JSON.stringify(allTaskSave));
     }
 
-    // store all task data into an object
-    #createSavableObject(year, month, day, taskObject) {
+    /** turns task data into a task object
+     * @param task Task to be saved
+     * @return task object
+     */
+    #createSavableObject(task) {
         let savableTask = {
-            year: year,
-            month: month,
-            day: day, 
-            title: taskObject.title,
-            description: taskObject.description,
-            startTime: taskObject.startTime,
-            endTime: taskObject.endTime
+            category: task.category,
+            type: task.type,
+            title: task.title, 
+            description: task.description,
+            priority: task.priority,
+            start: this.#createSavableDate(task.start),
+            end: this.#createSavableDate(task.end),
+            finished: this.#createSavableFinished(task.finished),
+            days: this.#createSavableDays(task.days)
         };
 
         return savableTask;
     }
 
-    // organizes tasks based on start time, the earlier the task, the closer it is to the start
-    // of the array
-    #organizeTasks(year, month, day) {
-        let taskList = this.taskYear.get(year).get(month).get(day);
-        taskList.sort(compareTasks);
-    }
+    /** turns a set of repeated days into a savable array
+     * @param days set of repeated days
+     * @return savable array 
+     */
+    #createSavableDays(days) {
+        let savableDays = new Array();
 
-    // addTask-: private methods for adding a task, helping method addTask
-    #addTaskYear(taskYear, title, description, year, month, day, startTime, endTime) {
-        if (!(taskYear.has(year))) {
-            taskYear.set(year, new Map());
+        for (let day of days) {
+            savableDays.push(day);
         }
 
-        this.#addTaskMonth(taskYear.get(year), title, description, month, day, startTime, endTime);
+        return savableDays;
     }
 
-    #addTaskMonth (year, title, description, month, day, startTime, endTime) {
-        if (!(year.has(month))) {
-            year.set(month, new Map());
+    /** creates a list of Dates into a list of Date objects
+     * @param dates list of Dates
+     * @return list of Date objects
+     */
+    #createSavableFinished(dates) {
+        let finishedArray = new Array();
+
+        for (let date of dates) {
+            finishedArray.push(this.#createSavableDate(date));
         }
 
-        this.#addTaskDay(year.get(month), title, description, day, startTime, endTime);
+        return finishedArray;
     }
 
-    #addTaskDay(month, title, description, day, startTime, endTime) {
-        if (!(month.has(day))) {
-            month.set(day, new Array());
+    /** turn Date into date object
+     * @param date Date to be saved
+     * @return date object
+     */
+    #createSavableDate(date) {
+        let savableDate = {
+            year: date.getFullYear(),
+            month: date.getMonth(),
+            day: date.getDate(),
+            hour: date.getHours(),
+            minute: date.getMinutes()
         }
-        this.#addTaskTime(month.get(day), title, description, startTime, endTime);
+
+        return savableDate;
     }
 
-    #addTaskTime(day, title, description, startTime, endTime) {
-        let newTask = new task(title, description, startTime, endTime);
+    /** get saved task data. If no task data found, use the JSON file example
+     */
+    initialize() {
+        let savedTasksString = localStorage.getItem("everyTask");
 
-        day.push(newTask);
+        // if the data exists
+        if (savedTasksString !== null) {
+            let savedTasks = JSON.parse(savedTasksString);
+
+            for (let savedTask of savedTasks) {
+                this.#allTasks.push(this.getTaskData(savedTask));
+            }
+            
+        } 
+        // if the everyTask item does not exist, load data from example JSON file
+        else {
+            fetch("./tasks-example.json").then((response) => 
+            response.json()).then((data) => {
+                this.#getExampleData(data);
+            })
+        }
+    }
+
+    /** create Task from task data
+     * @param task task data
+     * @return Task
+     */
+    getTaskData(task) {
+        let taskCategory = task.category;
+        let taskType = task.type;
+        let taskTitle = task.title;
+        let taskDescription = task.description;
+        let taskPriority = task.priority;
+        let startObj = task.start;
+        let endObj = task.end;
+        let finishedObjs = task.finished;
+        let taskDays = task.days;
+
+        let taskObject = new Task(taskCategory, taskType, taskTitle, taskDescription, taskPriority, 
+        this.getDate(startObj), this.getDate(endObj), taskDays);
+        
+        for (let finished of finishedObjs) {
+            taskObject.addFinished(this.getDate(finished));
+        }
+
+        return taskObject;
+    }
+
+    /** create Date from date data
+     * @param date date data
+     * @return Date
+     */
+    getDate(date) {
+        let dateObject = new Date(date.year, date.month, date.day, date.hour, date.minute);
+
+        return dateObject;
+    }
+
+    /** Create and add tasks from JSON file. All tasks created will span two months.
+     * @param data JSON file
+     */
+    #getExampleData(data) {
+        for (let taskCategory of data) {
+            let categoryName = taskCategory.categoryName;
+
+            for (let taskType of taskCategory.activityTypes) {
+                let typeName = taskType.activityName;
+
+                for (let task of taskType.Tasks) {
+                    let taskName = task.taskName;
+                    let taskDescription = task.taskDescription;
+                    let days = new Array();
+                    let startTask = new Date();
+                    let endTask = new Date();
+
+                    // set start date to start of current month
+                    startTask.setDate(1);
+                    startTask.setMinutes(0);
+                    startTask.setHours(0);
+
+                    // set end date to end of current month
+                    endTask.setDate(1);
+                    endTask.setMonth(endTask.getMonth() + 3);
+                    endTask.setDate(0);
+                    endTask.setHours(23);
+                    endTask.setMinutes(59);
+                    
+                    for (let day of task.days) {
+                        if (isNaN(parseInt(day))) {
+                            days.push(day);
+                        } else {
+                            days.push(parseInt(day));
+                        }
+                    }
+
+                    this.newTask(categoryName, typeName, taskName, taskDescription, "Needs Focus Time",
+                    startTask, endTask, days);
+                }
+            }
+        }
+    }
+
+    /** create and add new Task
+     * @param category string category of task
+     * @param type string type of task
+     * @param title string title of task
+     * @param description string description of task
+     * @param priority string priority of task
+     * @param start Date start date of task
+     * @param end Date end date of task
+     * @param days Array of days when the task will repeated. takes int 
+     */
+    newTask(category, type, title, description, priority, start, end, days) {
+        let newTask = new Task(category, type, title, description, priority, start, end, days);
+        this.#allTasks.push(newTask);
+    }
+
+    /** remove task
+     * @param taskRemove Task to be removed
+     */
+    removeTask(taskRemove) {
+        for (let i = 0; i < this.#allTasks.length; i++) {
+            if (sameTask(taskRemove, this.#allTasks[i])) {
+                this.#allTasks.splice(i, 1);
+                break;
+            }
+        }
+    }
+
+    /** get tasks on a particular date
+     * @param date Date to get tasks
+     * @return Array of tasks
+     */
+    getTasks(date) {
+        let tasksOnDate = new Array();
+
+        for (let i = 0; i < this.#allTasks.length; i++) {
+            if (this.#allTasks[i].start <= date && this.#allTasks[i].end >= date &&
+               (this.#allTasks[i].includesDay(getWeekString(date.getDay())) || 
+               this.#allTasks[i].includesDay(date.getDate()))) {
+                tasksOnDate.push(this.#allTasks[i]);
+            } 
+        }
+
+        tasksOnDate.sort(comparePriority);
+
+        return tasksOnDate;
     }
 }
 
-export {allTasks, task};
+/** compare tasks for equality
+ * @param task1 Task
+ * @param task2 Task
+ * @return boolean whether the tasks are equal
+ */
+function sameTask(task1, task2) {
+    return task1.category === task2.category && task1.type === task2.type && 
+    task1.title === task2.title && task1.description === task2.description 
+    && task1.priority === task2.priority && compareDates(task1.start, task2.start) === 0 && 
+    compareDates(task1.end, task2.end) === 0;
+}
+
+/**compare dates
+ * @param date1 Date
+ * @param date2 Date
+ * @return int how dates compare (return 1 if date1 > date2, return -1
+ * if date1 < date2, return 0 if (date1 === date2)) it terms of entire dates.
+ */
+function compareDates(date1, date2) {
+    if (date1.getFullYear() === date2.getFullYear() && 
+    date1.getMonth() === date2.getMonth() && date1.getDate() === date2.getDate()) {
+        return 0;
+    } else if (date1 < date2){
+        return -1;
+    } else  {
+        return 1;
+    } 
+}
+
+/** compare tasks
+ * @param task1 Task
+ * @param task2 Task
+ * @return int how tasks compare (return 1 if task1 > task2, return -1
+ * if task1 < task2, return 0 if (task1 == task2)). Compare priority then compare
+ * start times.
+ */
+function comparePriority(task1, task2) {
+    if (getPriorityValue(task1.priority) < getPriorityValue(task2.priority)){
+        return -1;
+    } else if (getPriorityValue(task1.priority) > getPriorityValue(task2.priority)) {
+        return 1;
+    } else {
+        return compareStartTimes(task1.start, task2.start);
+    }
+}
+
+/** compare start times
+ * @param date1 Date
+ * @param date2 Date
+ * @return int how dates compare (return 1 if date1 > date2, return -1
+ * if date1 < date2, return 0 if (date1 == date2)) when it comes to start times
+ */
+function compareStartTimes(date1, date2) {
+    if (date1.getHours() > date2.getHours()) {
+        return 1;
+    } else if (date1.getHours() < date2.getHours()) {
+        return -1;
+    } else if (date1.getMinutes() < date2.getMinutes()) {
+        return -1;
+    } else if (date1.getMinutes() > date2.getMinutes()) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+/** get weekday string equivalent of a weekday index/number
+ * @param weekDayNumber weekday index/number
+ * @return weekday string
+ */
+function getWeekString(weekDayNumber) {
+    switch (weekDayNumber) {
+        case 0: return "sunday";
+        case 1: return "monday";
+        case 2: return "tuesday";
+        case 3: return "wednesday";
+        case 4: return "thursday";
+        case 5: return "friday";
+        case 6: return "saturday";
+    }
+
+    return "";
+}
+
+/** get priority value (1 (most important) - 5 (least important))
+ * @param priority string priority
+ */
+function getPriorityValue(priority) {
+    switch (priority) {
+        case "Urgent": return 1;
+        case "Important!": return 2;
+        case "For Later": return 3;
+        case "Blocked": return 4;
+        case "Needs Focus Time": return 5;
+    }
+
+    return 0;
+}
+
+export {AllTasks, Task};

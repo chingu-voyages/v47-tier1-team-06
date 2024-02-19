@@ -387,11 +387,11 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
   
     // add task
     taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
-   
 
+
+    displayMonth();
     if (displayed) {
         displayTasks();
-        displayMonth();
     }
     
     // clear out popup and hide popup
@@ -417,8 +417,8 @@ function deleteTask(taskDelete) {
     taskContainer.removeTask(taskDelete);
 
     // show task list again with updated list
-    displayTasks();
     displayMonth();
+    displayTasks();
 }
 
 // functionality of edit button/when button clicked, show edit popup
@@ -547,8 +547,8 @@ function saveEditsMade(taskDelete) {
     taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
 
     // update task list with edits made
-    displayTasks();
     displayMonth();
+    displayTasks();
 
     // clear out popup and hide
     document.getElementById('popup_edit_container').style.display = 'none';

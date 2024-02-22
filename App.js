@@ -1,4 +1,4 @@
-import {AllTasks, Task} from "./taskLogic.js"; // import
+import {AllTasks, Task, getWeekString} from "./taskLogic.js"; // import
  
 // task initialization/save----------------------------------------------
 let taskContainer = new AllTasks(); // container for all tasks
@@ -8,6 +8,7 @@ window.onbeforeunload = function(event) {
     taskContainer.save();
 }
 
+let currentTaskClicked; // task user clicked on/clicked edit on
 
 // date logic------------------------------------------------------------
 
@@ -26,6 +27,7 @@ const todayYear = baseDate.getFullYear();
 const monthString = ["January","February","March","April","May","June","July",
 "August","September","October","November","December"];
 const weekString = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const weekFullString = new Set(["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"]);
 
 
 // get number of days in a given month
@@ -101,45 +103,27 @@ function setTime(date, hour, minute, amPm) {
 }
 
 // get hour from string time
-function getHour(time12HourFormat) {
+function getTimeDetails(time12HourFormat) {
     let hour = "";
-
-    if (time12HourFormat.length == 7) {
-        hour = time12HourFormat.slice(0,1);
-    } else {
-        hour = time12HourFormat.slice(0,2);
-    }
-
-    return hour;
-}
-
-
-// get minutes from string time
-function getMinutes(time12HourFormat) {
     let minutes = "";
-
-    if (time12HourFormat.length == 7) {
-        minutes = time12HourFormat.slice(2,4);
-    } else {
-        minutes = time12HourFormat.slice(3,5);
-    }
-
-    return minutes;
-}
-
-// get am/pm from string time
-function getAmPm(time12HourFormat) {
     let amPm = "";
 
-    if (time12HourFormat.length == 7) {
+    if (time12HourFormat.length === 7) {
+        hour = time12HourFormat.slice(0, 1);
+        minutes = time12HourFormat.slice(2, 4);
         amPm = time12HourFormat.slice(5);
     } else {
+        hour = time12HourFormat.slice(0, 2);
+        minutes = time12HourFormat.slice(3, 5);
         amPm = time12HourFormat.slice(6);
     }
 
-    return amPm;
+    return {
+        hour: hour,
+        minutes: minutes,
+        amPm: amPm
+    };
 }
-
 
 // display---------------------------------------------------------------------------
 
@@ -194,6 +178,8 @@ function displayMonth() {
     document.getElementById("currentMonthYear").innerHTML = monthString[baseDate.getMonth()] 
     + " " + baseDate.getFullYear();
 
+    
+
     // user cannot see past months
     if (baseDate.getMonth() === todayMonth && baseDate.getFullYear() === todayYear) {
         document.getElementById("previous_month").style.display = "none";
@@ -201,14 +187,27 @@ function displayMonth() {
         document.getElementById("previous_month").style.display = "block";
     }
 
+   
+
     // show all days
     for (let i = 1; i <= dayCount; i++) {
         let dayButton = document.createElement("button");
         let dayString = ('' + i) + "\n" + getDayString(i);
-
+        
         dayButton.className = "btn btn-lg calendar-day";
         dayButton.type = "button";
         dayButton.textContent = dayString;
+
+        let dayButtonDate = new Date(baseDate.getFullYear(), baseDate.getMonth(), i);
+        let tasksOnDayButton = taskContainer.getTasks(dayButtonDate);
+        if (tasksOnDayButton.length > 0) {
+            let indicator = document.createElement("div");
+            dayButton.classList.add("event-marker");
+            indicator.classList.add("indicator");
+            dayButton.appendChild(indicator);
+        }
+
+
 
         // functionality when clicked/show all tasks when clicked
         dayButton.addEventListener("click", () => {
@@ -217,12 +216,19 @@ function displayMonth() {
             baseDate.setMonth(baseDate.getMonth());
             baseDate.setDate(i);
             displayTasks();
+
+            
         })
 
+       
+    
         container.appendChild(dayButton);
     }
 }
 
+
+
+  
 // display tasks
 function displayTasks () {
     // user has picked a day, so the current date is displayed
@@ -235,7 +241,7 @@ function displayTasks () {
     let tasksOnAGivenDay = taskContainer.getTasks(baseDate);
 
     // show current month, day, and year
-    document.getElementById("task_list").innerHTML = `<h2 class="fs-3">Tasks for 
+    document.getElementById("task_list").innerHTML = `<h2 class="fs-3 mb-4">Tasks for 
     ${monthString[baseDate.getMonth()]} ${baseDate.getDate()}${getOrdinalSuffix(baseDate.getDate())}, 
     ${baseDate.getFullYear()}</h2>`;
 
@@ -314,6 +320,7 @@ function createTaskDisplay(task) {
 }
 
 
+
 // new task---------------------------------------------------------------------------
 
 // popup save btn
@@ -337,6 +344,7 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     let checkboxes = document.getElementsByName('weekday'); // get all weekday checkboxes
     let dayList = new Array(); // get days where the task will be repeated
 
+    
     // if checkbox for numbered days is checked, get all days in textbox seperated by spaces
     if (document.getElementById("monthlyDays").checked) {
         dayList = document.getElementById("task_monthDays").value.split(" ");
@@ -372,7 +380,7 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
     // check time/dates
-    if (!(checkDateTime(startTask, endTask))) {
+    if (!(checkDateTime(startTask, endTask, dayList))) {
         return;
     } else {
         for (let element of document.getElementsByClassName("hideContainer")){
@@ -380,9 +388,12 @@ document.querySelector("#add_task_button").addEventListener("click", function(ev
         }
     }
 
+  
     // add task
     taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
 
+
+    displayMonth();
     if (displayed) {
         displayTasks();
     }
@@ -400,7 +411,6 @@ document.querySelector("#cancel_task_button").addEventListener("click", function
     document.getElementById('popup_main_container').style.display = 'none';
     document.getElementById('addTask_container').style.display = 'flex';
     document.getElementById('calender_container').style.display = 'flex';
-    document.getElementById('task_container').style.display = 'flex';
 });
 
 // edit task-------------------------------------------------------------
@@ -411,6 +421,7 @@ function deleteTask(taskDelete) {
     taskContainer.removeTask(taskDelete);
 
     // show task list again with updated list
+    displayMonth();
     displayTasks();
 }
 
@@ -425,14 +436,22 @@ function editTask(taskDelete) {
     document.getElementById("edit-description").value = taskDelete.description;
     document.getElementById("edit-selectPriority").value = taskDelete.priority;
     document.getElementById("edit-startDatePicker").value = turnIntoDate(taskDelete.start);
-    document.getElementById("edit-task_start_time_hour").value = getHour(taskDelete.startTime);
-    document.getElementById("edit-task_start_time_minute").value = getMinutes(taskDelete.startTime);
-    document.getElementById("edit-task_start_time_ampm").value = getAmPm(taskDelete.startTime);
-    document.getElementById("edit-endDatePicker").value = turnIntoDate(taskDelete.end);
-    document.getElementById("edit-task_end_time_hour").value = getHour(taskDelete.endTime);
-    document.getElementById("edit-task_end_time_minute").value = getMinutes(taskDelete.endTime);
-    document.getElementById("edit-task_end_time_ampm").value = getAmPm(taskDelete.endTime);
 
+    let startTimeDetails = getTimeDetails(taskDelete.startTime);
+
+    document.getElementById("edit-task_start_time_hour").value = startTimeDetails.hour;
+    document.getElementById("edit-task_start_time_minute").value = startTimeDetails.minutes;
+    document.getElementById("edit-task_start_time_ampm").value = startTimeDetails.amPm;
+
+    document.getElementById("edit-endDatePicker").value = turnIntoDate(taskDelete.end);
+
+    let endTimeDetails = getTimeDetails(taskDelete.startTime);
+
+    document.getElementById("edit-task_end_time_hour").value = endTimeDetails.hour;
+    document.getElementById("edit-task_end_time_minute").value = endTimeDetails.minutes;
+    document.getElementById("edit-task_end_time_ampm").value = endTimeDetails.amPm;
+
+   
     // get all weekday checkboxes
     let checkboxes = document.getElementsByName('edit-weekday');
 
@@ -457,14 +476,15 @@ function editTask(taskDelete) {
     // if task includes numbered days, check numbered days checkbox
     if (daycheckBox.value != "") {
         document.getElementById("edit-monthlyDays").checked = true;
-    }
+    } 
 
-    // add functionality to save button
-    document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
-        saveEditsMade(taskDelete)
-        this.removeEventListener('click', editEventHandler);
-    });
+    currentTaskClicked = taskDelete;
 }
+
+ // add functionality to save button
+document.querySelector("#save_edit_task_button").addEventListener("click", function editEventHandler() { 
+    saveEditsMade(currentTaskClicked)
+});
 
 // edit save button
 function saveEditsMade(taskDelete) {
@@ -521,7 +541,7 @@ function saveEditsMade(taskDelete) {
     setTime(endTask, endTimeHour, endTimeMinute, endTimeAmPm);
 
     // check dates/times
-    if (!(checkDateTime(startTask, endTask))) {
+    if (!(checkDateTime(startTask, endTask, dayList))) {
         return editTask(taskDelete);
     } 
 
@@ -530,6 +550,7 @@ function saveEditsMade(taskDelete) {
     taskContainer.newTask(category, type, title, description, priority, startTask, endTask, dayList);
 
     // update task list with edits made
+    displayMonth();
     displayTasks();
 
     // clear out popup and hide
@@ -542,6 +563,9 @@ document.querySelector("#cancel_edit_task_button").addEventListener("click", fun
     clearOutEdit();
     document.getElementById('popup_edit_container').style.display = 'none';
 });
+
+
+
 
 
 // helper functions--------------------------------------------------------------------------
@@ -605,15 +629,33 @@ function clearOutEdit() {
 // check for input validity (return false if the inputs are not valid)
 function checkValidInputs(category, type, title, description, priority, startDates, 
     endDates, startHour, startMinute, startAmPm, endHour, endMinute, endAmPM, days) {
+    let validDays = new Array(); // store all valid inputs
+    
+    // find all valid inputs
+    for (let day of days) {
+        if (isNaN(parseInt(day)) && weekFullString.has(day)) {
+            validDays.push(day);
+        } else if (parseInt(day) >= 1 && parseInt(day) <= 31) {
+            validDays.push(parseInt(day));
+        }
+    }
 
-    // in progress: check days
+    // remove all invalid inputs from repeat days array
+    for (let i = 0; i < validDays.length; i ++) {
+        days[i] = validDays[i];
+    }
+    days.length = validDays.length;
 
-    // check if not everything is filled in
+    // check if anything was not filled out
     if (category === "" || type === "" || title === '' || description === '' || priority === ''
     || startDates === '' ||  endDates === '' || startHour === '' || startMinute === '' || 
     startAmPm === '' || endHour === '' || endMinute === '' || endAmPM === '') {
         alert('You need to fill out everything.');
     } 
+    // check if there are any valid repeats left
+    else if (days.length === 0) {
+        alert('You need to have at least valid one day to repeat.');
+    }
     // check if hours and minutes are not within range
     else if (parseInt(startHour) < 1 || parseInt(startHour) > 12
         || parseInt(startMinute) < 0 || parseInt(startMinute) > 59
@@ -627,14 +669,15 @@ function checkValidInputs(category, type, title, description, priority, startDat
     return false;
 }
 
-function checkDateTime(start, end) {
+// checks if the dates/times are valid and whether the days repeats within the dates/times
+function checkDateTime(start, end, days) {
     let currentDate = new Date();
     let futureLimit = new Date();
     futureLimit.setFullYear(futureLimit.getFullYear() + 5);
 
     // check if start date takes place after end date
     if (start > end) {
-        alert('please enter valid start and end times/dates');
+        alert('please enter valid start and end dates');
     } 
     // check if task is in the past
     else if (end < currentDate) {
@@ -643,11 +686,134 @@ function checkDateTime(start, end) {
     // check is task is too far in the future
     else if (end > futureLimit) {
         alert('please enter a reasonable date');
+    } else if (end.getHours() < start.getHours() || (end.getHours() === start.getHours() 
+    && end.getMinutes() < start.getMinutes())) {
+        alert("please enter valid start and end times")
     } else {
+        // checks whether the days repeats within the dates/times
+        checkDayRepitition(start, end, days);
+
+        if (days.length === 0) {
+            alert("You need to have at least valid one day to repeat")
+            return false;
+        }
+
         return true;
     }
 
     return false;
+}
+
+// checks all repeated days
+function checkDayRepitition(start, end, days) {
+    let allowableWeekDays = new Set(); // week days that are found within the start to end dates
+
+    // if the end month is one month away from the start month, signifies when the start month
+    // starts and when the start month ends
+    let dayRange1Start; // the lowest day number 
+    let dayRange1End; // the highest day number 
+
+    // use when the end month is one month away from the start month as there is an interval
+    // of days where the days isn't found within the start to end dates. when the end month
+    // start and when the end month end
+    let dayRange2Start; // the lowest day number
+    let dayRange2End; // the highest day number 
+
+    // date iterated to find all week days that are found within the start to end dates
+    let findWeekDays = new Date(start); 
+
+    // date iterated to find the day with the largest value when the end date is more than
+    // one month away from the start date
+    let findMaxRange = new Date(start);
+
+    // date to find day ranges of the month after the start date
+    let findNextMonth = new Date(start);
+    findNextMonth.setDate(1);
+    findNextMonth.setMonth(findNextMonth.getMonth() + 1);
+
+    // if end date month is same as start date month
+    if (start.getFullYear() === end.getFullYear() && 
+    start.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        dayRange1End = end.getDate();
+
+    } 
+    // if start date month is one month away from end date month
+    else if (findNextMonth.getFullYear() === end.getFullYear() 
+    && findNextMonth.getMonth() === end.getMonth()) {
+        dayRange1Start = start.getDate();
+        findNextMonth.setDate(0);
+        dayRange1End = findNextMonth.getDate();
+        dayRange2Start = 1;
+        dayRange2End = end.getDate();
+    } 
+    // if start date month is more than one month away from end date month
+    else {
+        dayRange1Start = 1;
+
+        findMaxRange.setDate(1);
+        findMaxRange.setMonth(findMaxRange.getMonth() + 1);
+        findMaxRange.setDate(0);
+
+        dayRange1End = findMaxRange.getDate()
+
+        // find largest day number of every month
+        while (findMaxRange.getFullYear() != end.getFullYear() || findMaxRange.getMonth() != end.getMonth()) {
+
+            if (dayRange1End < findMaxRange.getDate()) {
+                dayRange1End = findMaxRange.getDate();
+            } else if (dayRange1End === 31) {
+                break;
+            }
+
+            findMaxRange.setDate(1);
+            findMaxRange.setMonth(findMaxRange.getMonth() + 2);
+            findMaxRange.setDate(0);
+        }
+    }
+
+    // find all week days that are found within the start to end dates
+    allowableWeekDays.add(getWeekString(findWeekDays.getDay()));
+    while (findWeekDays.getFullYear() != end.getFullYear() 
+    || findWeekDays.getMonth() != end.getMonth() || findWeekDays.getDate() != end.getDate()) {
+        findWeekDays.setDate(findWeekDays.getDate() + 1);
+        if (!(allowableWeekDays.has(getWeekString(findWeekDays.getDay())))) {
+            allowableWeekDays.add(getWeekString(findWeekDays.getDay()));
+        } else {
+            break;
+        }
+    }
+
+    checkDayRange(days, allowableWeekDays, dayRange1Start, dayRange1End, dayRange2Start, dayRange2End);
+
+}
+
+// filter out any days that don't fall within the start and end month
+function checkDayRange(days, allowableWeekDays, range1Start, range1End, range2Start, range2End) {
+    let validDays = new Array(); // all days that were found to be between the start and end month
+
+    for (let day of days) {
+        // check week days (sun - sat)
+        if (isNaN(parseInt(day)) && allowableWeekDays.has(day)) {
+            validDays.push(day);
+        } 
+        // check day range
+        else if (!(isNaN(parseInt(day))) && day >= range1Start && day <= range1End) {
+            validDays.push(parseInt(day));
+        } 
+        // check day range if the end date is one month away from start date
+        else if (!(isNaN(parseInt(day))) && range2Start != undefined && 
+        day >= range2Start && day <= range2End) {
+            validDays.push(parseInt(day));
+        }
+    }
+
+    // remove all invalid inputs from repeat days array
+    for (let i = 0; i < validDays.length; i ++) {
+        days[i] = validDays[i];
+    }
+
+    days.length = validDays.length;
 }
 
 // display current month when page loads------------------------------------------------

@@ -78,46 +78,15 @@
       </div>
 
       <!--Peaches Catergory Section-->
-      <div class="mb-3">
-        <select
-          class="form-select form-select-md mb-3"
-          aria-label="Large select example"
-          id="task_category"
-        >
-          <option value="" selected>Categories</option>
-          <option value="Appointments">Appointments</option>
-          <option value="Dinner">Dinner</option>
-          <option value="Pay Bills">Pay Bills</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Studying">Studying</option>
-          <option value="Workout">Workout</option>
-          <option value="Work">Work</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <select
-          class="form-select form-select-md"
-          aria-label="Small select example"
-          id="task_type"
-        >
-          <option value="" selected>Types</option>
-          <option value="Doctor/other">Doctor/other</option>
-          <option value="Rent due">Rent due</option>
-          <option value="Phone bill">Phone bill</option>
-          <option value="Groceries/Necessities">Groceries/Necessities</option>
-          <option value="Projects/Homework">Projects/Homework</option>
-          <option value="Run">Run</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
+      <div class="mb-4">
+        <label for="task_description_input" class="form-label text-white"
+        >Priority</label
+      >
         <select
           class="form-select form-select-md md-3"
           aria-label="Small select example"
-          id="selectPriority"
-        >
-          <option value="" selected>Priority</option>
+          id="selectPriority">
+          <option value="" selected>-</option>
           <option value="Urgent">Urgent</option>
           <option value="Important!">Important!</option>
           <option value="For Later">For Later</option>
@@ -125,13 +94,61 @@
           <option value="Needs Focus Time">Needs Focus Time</option>
         </select>
       </div>
-      <!-- END OF CATERGORY -->
+
+      <div class="text-center">
+        <div class="row">
+          <div class="col">
+            <select
+            class="form-select form-select-md mb-3"
+            aria-label="Large select example"
+            id="task_category"
+          >
+            <option value="" selected>Categories</option>
+            <option value="Appointments">Appointments</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Pay Bills">Pay Bills</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Studying">Studying</option>
+            <option value="Workout">Workout</option>
+            <option value="Work">Work</option>
+          </select>
+          </div>
+          <div class="col">
+            <select
+            class="form-select form-select-md"
+            aria-label="Small select example"
+            id="task_type"
+          >
+            <option value="" selected>Types</option>
+            <option value="Doctor/other">Doctor/other</option>
+            <option value="Rent due">Rent due</option>
+            <option value="Phone bill">Phone bill</option>
+            <option value="Groceries/Necessities">Groceries/Necessities</option>
+            <option value="Projects/Homework">Projects/Homework</option>
+            <option value="Run">Run</option>
+          </select>
+          </div>
+        </div>
+      </div>
+
+
+<!-- END OF PEACHES CATERGORY -->
 
       <div class="mb-3">
-        <label for="startDatePicker" class="form-label text-white"
-          >Start Date</label
-        >
-        <input type="date" class="form-control" id="startDatePicker" />
+        <div class="row">
+          <div class="col">
+            <label for="startDatePicker" class="form-label text-white">
+              Start Date
+            </label>
+            <input type="date" class="form-control" id="startDatePicker" />
+          </div>
+          <div class="col">
+            <label for="endDatePicker" class="form-label text-white">
+              End Date
+            </label>
+            <input type="date" class="form-control" id="endDatePicker" />
+          </div>
+        </div>
       </div>
 
       <div class="row times" id="popup_time_container">
@@ -175,13 +192,6 @@
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="endDatePicker" class="form-label text-white"
-            >End Date</label
-          >
-          <input type="date" class="form-control" id="endDatePicker" />
-        </div>
-
         <div class="row time_container" id="endTime_container">
           <label class="text-white time_labels">End Time</label>
           <div class="col">
@@ -223,99 +233,110 @@
         </div>
       </div>
 
-      <fieldset>
-        <legend>Repeat Every:</legend>
-
-        <div>
-          <input
-            type="checkbox"
-            value="sunday"
-            name="weekday"
-            id="sunday"
-            checked
-          />
-          <label for="sunday">Sunday</label>
+      <div class="accordion accordion-flush" id="accordion-repeat-interval">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#repeat-interval" aria-expanded="false" aria-controls="repeat-interval">
+              Repeat Every:
+            </button>
+          </h2>
+          <div id="repeat-interval" class="accordion-collapse collapse" data-bs-parent="accordion-repeat-interval">
+            <div class="accordion-body">
+              <fieldset>
+                <!-- <legend>Repeat Every:</legend> -->
+                <div class="checkbox-container">
+                  <input
+                    type="checkbox"
+                    value="sunday"
+                    name="weekday"
+                    id="sunday"
+                    checked
+                  />
+                  <label for="sunday">Sunday</label>
+                </div>     
+                <div>
+                  <input
+                    type="checkbox"
+                    value="monday"
+                    name="weekday"
+                    id="monday"
+                    checked
+                  />
+                  <label for="monday">Monday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="tuesday"
+                    name="weekday"
+                    id="tuesday"
+                    checked
+                  />
+                  <label for="tuesday">Tuesday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="wednesday"
+                    name="weekday"
+                    id="wednesday"
+                    checked
+                  />
+                  <label for="wednesday">Wednesday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="thursday"
+                    name="weekday"
+                    id="thursday"
+                    checked
+                  />
+                  <label for="thursday">Thursday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="friday"
+                    name="weekday"
+                    id="friday"
+                    checked
+                  />
+                  <label for="friday">Friday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="saturday"
+                    name="weekday"
+                    id="saturday"
+                    checked
+                  />
+                  <label for="saturday">Saturday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="days"
+                    name="monthlyDays"
+                    id="monthlyDays"
+                  />
+                  <label for="monthlyDays"
+                    >Day (put spaces in between every day):
+                    <input type="text" class="form-control" id="task_monthDays" />
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="monday"
-            name="weekday"
-            id="monday"
-            checked
-          />
-          <label for="monday">Monday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="tuesday"
-            name="weekday"
-            id="tuesday"
-            checked
-          />
-          <label for="tuesday">Tuesday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="wednesday"
-            name="weekday"
-            id="wednesday"
-            checked
-          />
-          <label for="wednesday">Wednesday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="thursday"
-            name="weekday"
-            id="thursday"
-            checked
-          />
-          <label for="thursday">Thursday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="friday"
-            name="weekday"
-            id="friday"
-            checked
-          />
-          <label for="friday">Friday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="saturday"
-            name="weekday"
-            id="saturday"
-            checked
-          />
-          <label for="saturday">Saturday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="days"
-            name="monthlyDays"
-            id="monthlyDays"
-          />
-          <label for="monthlyDays"
-            >Day (put spaces in between every day):
-            <input type="text" class="form-control" id="task_monthDays" />
-          </label>
-        </div>
-      </fieldset>
+      </div>
 
       <div class="row" class="task_button_container" id="task_button_container">
         <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
@@ -337,10 +358,7 @@
 
     <!-------------------- EDIT TASK POPUP SECTION ------------------>
 
-    <div
-      class="container-fluid text-left popupContainer"
-      id="popup_edit_container"
-    >
+    <div class="container-fluid text-left popupContainer" id="popup_edit_container">
       <div class="row top_menu text-center" id="top_menu">
         <div class="col p-3 text-white fs-1" id="monthYear">Edit Task</div>
       </div>
@@ -356,54 +374,22 @@
           aria-describedby="TaskTitle"
         />
       </div>
+
       <div class="mb-3">
-        <label for="task_description_input" class="form-label text-white"
-          >Description</label
-        >
+        <label for="task_description_input" class="form-label text-white">
+          Description
+        </label>
         <input type="text" class="form-control" id="edit-description" />
       </div>
-
-      <!--Peaches Catergory Section-->
-      <div class="mb-3">
-        <select
-          class="form-select form-select-md mb-3"
-          aria-label="Large select example"
-          id="edit-task_category"
-        >
-          <option value="" selected>Categories</option>
-          <option value="Appointments">Appointments</option>
-          <option value="Dinner">Dinner</option>
-          <option value="Pay Bills">Pay Bills</option>
-          <option value="Shopping">Shopping</option>
-          <option value="Studying">Studying</option>
-          <option value="Workout">Workout</option>
-          <option value="Work">Work</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
-        <select
-          class="form-select form-select-md"
-          aria-label="Small select example"
-          id="edit-task_type"
-        >
-          <option value="" selected>Types</option>
-          <option value="Doctor/other">Doctor/other</option>
-          <option value="Rent due">Rent due</option>
-          <option value="Phone bill">Phone bill</option>
-          <option value="Groceries/Necessities">Groceries/Necessities</option>
-          <option value="Projects/Homework">Projects/Homework</option>
-          <option value="Run">Run</option>
-        </select>
-      </div>
-
-      <div class="mb-3">
+      <div class="mb-4">
+        <label for="task_edit_priority_select" class="form-label text-white">
+          Priority
+        </label>
         <select
           class="form-select form-select-md md-3"
           aria-label="Small select example"
-          id="edit-selectPriority"
-        >
-          <option value="" selected>Priority</option>
+          id="edit-selectPriority" >
+          <option value="" selected>-</option>
           <option value="Urgent">Urgent</option>
           <option value="Important!">Important!</option>
           <option value="For Later">For Later</option>
@@ -411,13 +397,61 @@
           <option value="Needs Focus Time">Needs Focus Time</option>
         </select>
       </div>
-      <!-- END OF CATERGORY -->
 
+      <!--Peaches Catergory Section-->
+
+      <div class="text-center">
+        <div class="row">
+          <div class="col">
+            <select
+            class="form-select form-select-md mb-3"
+            aria-label="Large select example"
+            id="edit-task_category"
+          >
+            <option value="" selected>Categories</option>
+            <option value="Appointments">Appointments</option>
+            <option value="Dinner">Dinner</option>
+            <option value="Pay Bills">Pay Bills</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Studying">Studying</option>
+            <option value="Workout">Workout</option>
+            <option value="Work">Work</option>
+          </select>
+          </div>
+          <div class="col">
+            <select
+            class="form-select form-select-md"
+            aria-label="Small select example"
+            id="edit-task_type"
+          >
+            <option value="" selected>Types</option>
+            <option value="Doctor/other">Doctor/other</option>
+            <option value="Rent due">Rent due</option>
+            <option value="Phone bill">Phone bill</option>
+            <option value="Groceries/Necessities">Groceries/Necessities</option>
+            <option value="Projects/Homework">Projects/Homework</option>
+            <option value="Run">Run</option>
+          </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- END OF CATERGORY -->
       <div class="mb-3">
-        <label for="edit-startDatePicker" class="form-label text-white"
-          >Start Date</label
-        >
-        <input type="date" class="form-control" id="edit-startDatePicker" />
+        <div class="row">
+          <div class="col">
+            <label for="edit-startDatePicker" class="form-label text-white"
+            >Start Date</label
+          >
+          <input type="date" class="form-control" id="edit-startDatePicker" />
+          </div>
+          <div class="col">
+            <label for="edit-endDatePicker" class="form-label text-white"
+            >End Date</label
+          >
+          <input type="date" class="form-control" id="edit-endDatePicker" />
+          </div>
+        </div>
       </div>
 
       <div class="row times" id="popup_time_container">
@@ -463,13 +497,6 @@
               <option value="pm">PM</option>
             </select>
           </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="edit-endDatePicker" class="form-label text-white"
-            >End Date</label
-          >
-          <input type="date" class="form-control" id="edit-endDatePicker" />
         </div>
 
         <div class="row time_container" id="endTime_container">
@@ -518,99 +545,112 @@
         </div>
       </div>
 
-      <fieldset>
-        <legend>Repeat Every:</legend>
-
-        <div>
-          <input
-            type="checkbox"
-            value="sunday"
-            name="edit-weekday"
-            id="edit-sunday"
-            checked
-          />
-          <label for="edit-sunday">Sunday</label>
+      <div class="accordion accordion-flush" id="accordion-edit-repeat-interval">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#edit-repeat-interval" aria-expanded="false" aria-controls="edit-repeat-interval">
+              Repeat Every:
+            </button>
+          </h2>
+          <div id="edit-repeat-interval" class="accordion-collapse collapse" data-bs-parent="accordion-edit-repeat-interval">
+            <div class="accordion-body">
+              <fieldset>
+                <!-- <legend>Repeat Every:</legend> -->
+                <div>
+                  <input
+                    type="checkbox"
+                    value="sunday"
+                    name="edit-weekday"
+                    id="edit-sunday"
+                    checked
+                  />
+                  <label for="edit-sunday">Sunday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="monday"
+                    name="edit-weekday"
+                    id="edit-monday"
+                    checked
+                  />
+                  <label for="edit-monday">Monday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="tuesday"
+                    name="edit-weekday"
+                    id="edit-tuesday"
+                    checked
+                  />
+                  <label for="edit-tuesday">Tuesday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="wednesday"
+                    name="edit-weekday"
+                    id="edit-wednesday"
+                    checked
+                  />
+                  <label for="edit-wednesday">Wednesday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="thursday"
+                    name="edit-weekday"
+                    id="edit-thursday"
+                    checked
+                  />
+                  <label for="edit-thursday">Thursday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="friday"
+                    name="edit-weekday"
+                    id="edit-friday"
+                    checked
+                  />
+                  <label for="edit-friday">Friday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="saturday"
+                    name="edit-weekday"
+                    id="edit-saturday"
+                    checked
+                  />
+                  <label for="edit-saturday">Saturday</label>
+                </div>
+        
+                <div>
+                  <input
+                    type="checkbox"
+                    value="days"
+                    name="edit-monthlyDays"
+                    id="edit-monthlyDays"
+                  />
+                  <label for="edit-monthlyDays"
+                    >Day (put spaces in between every day):
+                    <input type="text" class="form-control" id="edit-task_monthDays" />
+                  </label>
+                </div>
+              </fieldset>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <div>
-          <input
-            type="checkbox"
-            value="monday"
-            name="edit-weekday"
-            id="edit-monday"
-            checked
-          />
-          <label for="edit-monday">Monday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="tuesday"
-            name="edit-weekday"
-            id="edit-tuesday"
-            checked
-          />
-          <label for="edit-tuesday">Tuesday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="wednesday"
-            name="edit-weekday"
-            id="edit-wednesday"
-            checked
-          />
-          <label for="edit-wednesday">Wednesday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="thursday"
-            name="edit-weekday"
-            id="edit-thursday"
-            checked
-          />
-          <label for="edit-thursday">Thursday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="friday"
-            name="edit-weekday"
-            id="edit-friday"
-            checked
-          />
-          <label for="edit-friday">Friday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="saturday"
-            name="edit-weekday"
-            id="edit-saturday"
-            checked
-          />
-          <label for="edit-saturday">Saturday</label>
-        </div>
-
-        <div>
-          <input
-            type="checkbox"
-            value="days"
-            name="edit-monthlyDays"
-            id="edit-monthlyDays"
-          />
-          <label for="edit-monthlyDays"
-            >Day (put spaces in between every day):
-            <input type="text" class="form-control" id="edit-task_monthDays" />
-          </label>
-        </div>
-      </fieldset>
 
       <div class="row" class="task_button_container" id="task_button_container">
         <div class="col-sm-12 task_button_container" id="task_add_cancel_group">
@@ -665,16 +705,13 @@
 
       <!-- TASK SECTION -->
       <div class="col text-black text-center" id="task_list"></div>
+    </div>
+    <!---END MAIN WRAPPER --->
 
-
-  </div>
-  <!---END MAIN WRAPPER --->
-
-  <footer class="footer">
-    <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
-      Created by Chingu Voyage😃
-    </a>
-  </footer>
-</body>
-
+    <footer class="footer">
+      <a href="https://github.com/chingu-voyages/v47-tier1-team-06">
+        Created by Chingu Voyage😃
+      </a>
+    </footer>
+  </body>
 </html>

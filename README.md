@@ -10,12 +10,15 @@
 
 1. With this app you can choose a specfic day, time and month to input your task<br>
 2. There's mutiple detailed descriptions you can choose from<br>
-3. You can repeat a task daily,weekly, and monthly<br>
+3. You can repeat a task every Sunday-Saturday and 1st-31st within a picked timeframe<br>
 4. You can cancel or edit your task<br>
 5. When you're done with your task there is a "done" check box you can choose to show that the task is complete. If you accidently hit the "done" button you can deselect at any time <br>
-6. You can cancel your task if you don't need it anymore<br>
+6. You can delete a task if you don't need it anymore<br>
 7. The task will display on the landing page once complete <br>
 8. You can click on any date to see if there's a task, the cool thing about this is that a dot shows up on the days you have something to do so you don't have to scroll through all the dates to see what task is coming up <br>
+9. All tasks shown are ordered by priority. If the task priority is the same, the task with the earlier start time will be shown first <br>
+10. For first time users, example tasks will be loaded from the example JSON file <br>
+11. All tasks are saved and stored within local storage <br>
 
 
 
@@ -29,7 +32,7 @@ Add-on packages include:
 [Figma](https://www.figma.com/)
 
 # Running the project #
-
+Run the project using [this link](https://chingu-voyages.github.io/v47-tier1-team-06/) or by following these steps: <br>
 
 1. Clone project<br>
 2. Install bootstrap npm install bootstrap (check in package-json in the dependencies section to see if it downloaded properly) <br>
@@ -42,11 +45,11 @@ Add-on packages include:
 
 ![Figma prototype](Image/figma.png)
 
-Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a repeat option because that's what the instructions asked for it to make the app more cohesive and fluid. 
+Peaches created this fimga as a blueprint for the app. We used this model to create everything we needed to display on this app. We added extra features like subcategories, a priorites list and a repeat option because that's what the instructions asked for to make the app more cohesive and fluid. 
 
 # Contributors #
 Karolina Reichmann karolina@reichmann.pl (Proctor)<br>
-Amy Vier <br>
+[Amy Vier](https://github.com/AmyVier)<br>
 Peaches Stitts [LinkedIn](https://www.linkedin.com/in/chawntel-stitts-143780157/) <br>
 Maya Powers <br>
 Ki discord username- kiki2551
